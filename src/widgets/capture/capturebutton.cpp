@@ -30,6 +30,7 @@
 #include <QGraphicsDropShadowEffect>
 #include <QApplication>
 #include <QMenu>
+#include <QDebug>
 
 // Button represents a single button of the capture widget, it can enable
 // multiple functionality.
@@ -43,7 +44,7 @@ CaptureButton::CaptureButton(const ButtonType t, QWidget *parent) : QPushButton(
         setFont(QFont(f.family(), 7, QFont::Bold));
     } else if (t == TYPE_SAVEOPTION) {
         this->setText("选项");
-        this->setFixedSize(50,30);
+        this->setFixedSize(60,30);
         QFont f("NotoSansCJKSC-Regular");
         this->setFont(f);
 
@@ -184,15 +185,16 @@ static std::map<CaptureButton::ButtonType, int> buttonTypeOrder {
     { CaptureButton::TYPE_BLUR,               8 },
     //{ CaptureButton::TYPE_SELECTIONINDICATOR, 9 },
     //{ CaptureButton::TYPE_MOVESELECTION,     10 },
-    //{ CaptureButton::TYPE_UNDO,              11 },
-    //{ CaptureButton::TYPE_REDO,              12 },
+    { CaptureButton::TYPE_UNDO,              11 },
+    { CaptureButton::TYPE_REDO,              12 },
    // { CaptureButton::TYPE_COPY,              13 },
-    { CaptureButton::TYPE_SAVE,              13 },
-   /* { CaptureButton::TYPE_EXIT,              15 },
-    { CaptureButton::TYPE_IMAGEUPLOADER,     16 },
-    { CaptureButton::TYPE_OPEN_APP,          17 },
-    { CaptureButton::TYPE_PIN,               18 },*/
-    { CaptureButton::TYPE_SAVEOPTION,              19 },
+    { CaptureButton::TYPE_SAVEOPTION,              13 },
+    { CaptureButton::TYPE_EXIT,              14 },
+    { CaptureButton::TYPE_SAVE,              15 },
+//    { CaptureButton::TYPE_IMAGEUPLOADER,     16 },
+//    { CaptureButton::TYPE_OPEN_APP,          17 },
+//    { CaptureButton::TYPE_PIN,               18 },
+
 };
 
 int CaptureButton::getPriorityByButton(CaptureButton::ButtonType b) {
@@ -212,13 +214,20 @@ QVector<CaptureButton::ButtonType> CaptureButton::iterableButtonTypes = {
     CaptureButton::TYPE_BLUR,
     //CaptureButton::TYPE_SELECTIONINDICATOR,
     //CaptureButton::TYPE_MOVESELECTION,
-    //CaptureButton::TYPE_UNDO,
-    //CaptureButton::TYPE_REDO,
+    CaptureButton::TYPE_UNDO,
+    CaptureButton::TYPE_REDO,
     //CaptureButton::TYPE_COPY,
-    CaptureButton::TYPE_SAVE,
-   /* CaptureButton::TYPE_EXIT,
-    CaptureButton::TYPE_IMAGEUPLOADER,
-    CaptureButton::TYPE_OPEN_APP,
-    CaptureButton::TYPE_PIN,*/
     CaptureButton::TYPE_SAVEOPTION,
+    CaptureButton::TYPE_EXIT,
+    CaptureButton::TYPE_SAVE,
+//    CaptureButton::TYPE_IMAGEUPLOADER,
+//    CaptureButton::TYPE_OPEN_APP,
+//    CaptureButton::TYPE_PIN,s
 };
+
+void CaptureButton::getRect()
+{
+
+qDebug() << this->geometry().x();
+qDebug() << this->geometry().y();
+}

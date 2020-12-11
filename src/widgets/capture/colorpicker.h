@@ -24,11 +24,13 @@
 #include "src/tools/rectbutton.h"
 #include "src/tools/toolbutton.h"
 #include "textbutton.h"
+#include "toowidget.h"
+#include "thicknesswidget.h"
 
 class ColorPicker : public QWidget {
     Q_OBJECT
 public:
-    explicit ColorPicker(int m_thickness, QColor m_color, QWidget *parent = nullptr);
+    explicit ColorPicker(int thickness, QColor m_color, QWidget *parent = nullptr);
 
     QColor drawColor();
 
@@ -43,7 +45,8 @@ public:
 
 public slots:
     void updateColor(QColor color);
-    void updateThickness(int thickness);
+    void updateThickness_tool(int thickness);
+    void updateThickness_font(int thickness);
     void updateStyle(int m_style);
     void updateLine(int m_line);
     void thicknessChanged(int thickness);
@@ -53,12 +56,11 @@ signals:
     void thicknessSelected(int thickness);
     void styleSelected(int m_style);
     void lineSelected(int m_line);
+    void thicknessCh_tool(int thickness);
+
 
 protected:
-    void paintEvent(QPaintEvent *);
-    void mouseMoveEvent(QMouseEvent *);
-
-    //QVector<QRect> handleMask() const;
+    void thicknessCh_font(int thickness);
 
 private:
     int m_colorAreaSize;
@@ -66,15 +68,16 @@ private:
     QVector<QColor> m_colorList;
 
     QColor m_uiColor, m_drawColor;
+    int m_thickness;
 
     QWidget* m_rectLabel;
     QWidget* m_colorLabel;
     QWidget* m_thicknessLabel;
 
     //QLabel* m_rectLabel;
-    QWidget* m_arrowLabel;
-    QWidget* m_lineLabel;
-    QWidget* m_textLabel;
+//    QWidget* m_arrowLabel;
+//    QWidget* m_lineLabel;
+   //QWidget* m_textLabel;
     //QLabel* m_colorLabel;
     QWidget* m_saveLabel;
 
@@ -88,4 +91,10 @@ private:
     ToolButton* mediumLine;
     ToolButton* thickLine;
     TextButton* textButton;
+
+    QLabel *label;
+    QLabel *m_textLabel;
+
+    Toowidget *tWidget;
+    ThicknessWidget *thicknessWidget;
 };

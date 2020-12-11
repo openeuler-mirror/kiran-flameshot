@@ -180,7 +180,10 @@ SOURCES += src/main.cpp \
     configsettings.cpp \
     savetips.cpp \
     src/tools/saveoption.cpp \
-    src/utils/win_manager.cpp
+    src/utils/win_manager.cpp \
+    src/widgets/capture/toowidget.cpp \
+    src/widgets/capture/thicknesswidget.cpp \
+    src/widgets/capture/formtip.cpp
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/infowindow.h \
@@ -266,7 +269,10 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     textbutton.h \
     src/tools/saveoption.h \
     src/tools/toolbutton.h \
-    src/utils/win_manager.h
+    src/utils/win_manager.h \
+    src/widgets/capture/toowidget.h \
+    src/widgets/capture/thicknesswidget.h \
+    src/widgets/capture/formtip.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \

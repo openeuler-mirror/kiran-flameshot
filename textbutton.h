@@ -35,7 +35,14 @@ public:
          addItem(tr("small"));
          addItem(tr("medium"));
          addItem(tr("large"));
-         this->setCurrentIndex(1);
+
+         if(m_thickness = SMALL_SIZE)
+             this->setCurrentIndex(0);
+         else if(m_thickness = MEDIUM_SIZE)
+             this->setCurrentIndex(1);
+         else if(m_thickness = LARGE_SIZE)
+             this->setCurrentIndex(2);
+
 
          setFixedSize(24, 26);
 
@@ -62,8 +69,8 @@ public slots:
             m_thickness = MEDIUM_SIZE;
         else if(this->currentIndex() == 2)
             m_thickness = LARGE_SIZE;
-        printf("index:%d\n",this->currentIndex());
-        printf("dididi:%d\n",m_thickness);
+//        printf("index:%d\n",this->currentIndex());
+//        printf("dididi:%d\n",m_thickness);
         emit updateThickness(m_thickness);
     }
 
