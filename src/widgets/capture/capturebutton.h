@@ -76,6 +76,7 @@ public:
 
     void setColor(const QColor &c);
     void animatedShow();
+    void getRect();
 
 protected:
     virtual void mousePressEvent(QMouseEvent *);

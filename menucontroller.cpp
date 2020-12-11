@@ -39,7 +39,8 @@ MenuController::MenuController(QObject *parent)
                            "border-radius: 20px; "
                            "}"
                            "QMenu::item { background-color: transparent;"
-                           "padding:3px 20px;"
+                           "border-radius: 20px; "
+                           "padding:3px 20px 3px 24px;"
                            "margin:5px 10px;"
                            "}"
                            "QMenu::item:selected { background-color: gray; }";

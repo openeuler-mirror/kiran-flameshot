@@ -24,6 +24,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QImageWriter>
+#include <QDebug>
 
 ScreenshotSaver::ScreenshotSaver() {
 }

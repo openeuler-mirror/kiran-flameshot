@@ -57,7 +57,6 @@
 
 #include <X11/Xlib.h>
 
-
 namespace {
 const int RECORD_MIN_SIZE = 10;
 const int SPACING = 10;
@@ -66,6 +65,8 @@ const int CURSOR_WIDTH = 8;
 const int CURSOR_HEIGHT = 18;
 const int INDICATOR_WIDTH =  99;
 const qreal RESIZEPOINT_WIDTH = 15;
+const int BAR_WIDTH = 530;
+const int BAR_HEIGHT = 30;
 }
 
 // CaptureWidget is the main component used to capture the screen. It contains an
@@ -91,11 +92,11 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     m_opacity = m_config.contrastOpacityValue();
 
     m_bar = new QWidget(this);
-    m_bar->resize(420,30);
+    m_bar->resize(BAR_WIDTH,BAR_HEIGHT);
     m_bar->setMouseTracking(true);
     m_bar->setStyleSheet("QWidget{border-radius:4px;padding:2px 4px;background-color:white;}");
+    m_bar->move(-500,-500);
     m_bar->hide();
-
 
     setMouseTracking(true);
     initContext(savePath, fullScreen);
@@ -165,16 +166,21 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     initOriginUI();
     initSecondUI();
 
+    m_formtip = new FormTip(this);
+    makeChild(m_formtip);
+    m_formtip->move(-500,-500);
+    m_formtip->hide();
+
     // Init color picker
     m_colorPicker = new ColorPicker(m_context.thickness,m_context.color,this);
     connect(m_colorPicker, &ColorPicker::colorSelected,
             this, &CaptureWidget::setDrawColor);
     connect(m_colorPicker, &ColorPicker::thicknessSelected,
             this, &CaptureWidget::setDrawThickness);
-    connect(m_colorPicker, &ColorPicker::styleSelected,
-            this, &CaptureWidget::setDrawRectStyle);
-    connect(m_colorPicker, &ColorPicker::lineSelected,
-            this, &CaptureWidget::setDrawLineStyle);
+//    connect(m_colorPicker, &ColorPicker::styleSelected,
+//            this, &CaptureWidget::setDrawRectStyle);
+//    connect(m_colorPicker, &ColorPicker::lineSelected,
+//            this, &CaptureWidget::setDrawLineStyle);
     connect(this,&CaptureWidget::thicknessCh,
             m_colorPicker, &ColorPicker::thicknessChanged);
     /*QLabel* m_hSeparatorLine = new QLabel(this);
@@ -187,6 +193,7 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     vLayout->addWidget(m_colorPicker, 0, Qt::AlignVCenter);
     setLayout(vLayout);*/
     makeChild(m_colorPicker);
+    m_colorPicker->move(-500,-500);
     m_colorPicker->hide();
 
     // Init notification widget
@@ -266,7 +273,7 @@ void CaptureWidget::initOriginUI()
 void CaptureWidget::initSecondUI()
 {
     //m_menuController = new MenuController(this);
-
+        return;
     /*m_toolBar = new ToolBar(this);
     m_toolBar->hide();*/
 }
@@ -317,6 +324,14 @@ void CaptureWidget::updateButtons() {
         }
         else if(t == CaptureButton::TYPE_SAVEOPTION)
         {
+
+            QLabel* SeparatorLine = new QLabel();
+            SeparatorLine->setFixedSize(1, 20);
+            SeparatorLine->setStyleSheet("QLabel{border: 1px solid rgb(199,199,199);}");
+
+            rectLayout->addSpacing(9);
+            rectLayout->addWidget(SeparatorLine);
+
             m_menuController =  new MenuController(this);
             QMenu* m_menu = m_menuController->getMenu();
 
@@ -350,6 +365,7 @@ void CaptureWidget::updateButtons() {
 
     m_bar->setLayout(rectLayout);
     m_bar->hide();
+    makeChild(m_bar);
 
     m_buttonHandler->setButtons(vectorButtons);
 
@@ -379,6 +395,11 @@ void CaptureWidget::deleteToolwidgetOrClose() {
 void CaptureWidget::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     painter.drawPixmap(0, 0, m_context.screenshot);
+    if(m_flag)
+    {
+        //painter.fillPath(path,QBrush(Qt::black));
+        m_flag = false;
+    }
     if (m_activeTool && m_mouseIsClicked) {
         painter.save();
         m_activeTool->process(painter, m_context.screenshot);
@@ -455,6 +476,11 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
                 m_isFirstReleaseButton = true;
     }
 
+    if(m_selection->geometry().contains(this->mapFromGlobal(QCursor::pos())))
+        m_inselection = true;
+    else
+        m_inselection = false;
+
     if (e->button() == Qt::RightButton) {
         m_rightClick = true;
         /*if(m_selection->x() + m_selection->width() > m_context.desktop->screenGeometry().width() - 60)
@@ -469,7 +495,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         m_showInitialMsg = false;
         m_mouseIsClicked = true;
         // Click using a tool
-        if (m_activeButton) {
+        if (m_activeButton && m_inselection) {
             if (m_activeTool) {
                 if (m_activeTool->isValid() && m_toolWidget) {
                     pushToolToStack();
@@ -491,12 +517,15 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
                     m_activeTool, &CaptureTool::thicknessChanged);
             connect(m_activeTool, &CaptureTool::requestAction,
                     this, &CaptureWidget::handleButtonSignal);
+
             m_activeTool->drawStart(m_context);
             return;
         }
+        else if(m_activeButton)
+            return;
+
         if(m_bar->geometry().contains(this->mapFromGlobal(QCursor::pos())))
             return ;
-
 
         m_dragStartPoint = e->pos();
         m_selection->saveGeometry();
@@ -658,7 +687,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
             m_selection->setGeometry(r.intersected(rect()).normalized());
             update();
         }
-    } else if (m_mouseIsClicked && m_activeTool) {
+    } else if (m_mouseIsClicked && m_activeTool && m_inselection) {
 
         if(e->pos().x() < m_selection->x() && e->pos().y() < m_selection->y()){
             if (m_adjustmentButtonPressed) {
@@ -757,6 +786,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
 void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
     if (e->button() == Qt::RightButton) {
         m_colorPicker->hide();
+        m_formtip->hide();
         m_rightClick = false;
     // when we end the drawing we have to register the last  point and
     //add the temp modification to the list of modifications
@@ -792,29 +822,29 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
         m_context.selection = extendedRect(&newGeometry);
         updateSizeIndicator();
 
-        if((m_selection->x() + m_selection->width()/2 <= 200 )&& (m_selection->width() <= 400))
+        if((m_selection->x() + m_selection->width()/2 <= 220 )&& (m_selection->width() <= 440))
         {
-            if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100 )&& (m_selection->height() <= 200))
+            if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100 )&& (m_selection->height() <= 220))
                 m_bar->move(m_selection->x(), m_selection->y() - 35);
-            else if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100 )&& (m_selection->height() > 200))
+            else if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100 )&& (m_selection->height() > 220))
                 m_bar->move(m_selection->x(), m_selection->y() + m_selection->height() - 35);
             else
                 m_bar->move(m_selection->x() , m_selection->y() + m_selection->height() + 2);
         }
-        else if((m_selection->x() + m_selection->width()/2 >= m_context.desktop->screenGeometry().width() - 200 )&& (m_selection->width() <= 400))
+        else if((m_selection->x() + m_selection->width()/2 >= m_context.desktop->screenGeometry().width() - 200 )&& (m_selection->width() <= 440))
         {
-            if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100) && (m_selection->height() <= 200))
-                m_bar->move(m_selection->x() + m_selection->width() - 400, m_selection->y() - 35);
-            else if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100 )&& (m_selection->height() > 200))
-                m_bar->move(m_selection->x() + m_selection->width() - 400, m_selection->y() + m_selection->height() - 35);
+            if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100) && (m_selection->height() <= 220))
+                m_bar->move(m_selection->x() + m_selection->width() - 440, m_selection->y() - 35);
+            else if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100 )&& (m_selection->height() > 220))
+                m_bar->move(m_selection->x() + m_selection->width() - 440, m_selection->y() + m_selection->height() - 35);
             else
-                m_bar->move(m_selection->x() + m_selection->width() - 400, m_selection->y() + m_selection->height() + 2);
+                m_bar->move(m_selection->x() + m_selection->width() - 440, m_selection->y() + m_selection->height() + 2);
         }
         else
         {
-            if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100) && (m_selection->height() <= 200))
+            if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100) && (m_selection->height() <= 220))
                 m_bar->move(m_selection->x() + m_selection->width()/2 - 175, m_selection->y() - 35);
-            else if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100 )&& (m_selection->height() > 200))
+            else if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100 )&& (m_selection->height() > 220))
                 m_bar->move(m_selection->x() + m_selection->width()/2 - 175, m_selection->y() + m_selection->height() - 35);
             else
                 m_bar->move(m_selection->x() + m_selection->width()/2 - 175 , m_selection->y() + m_selection->height() + 2);
@@ -886,6 +916,7 @@ void CaptureWidget::wheelEvent(QWheelEvent *e) {
         update();
     }
     emit thicknessChanged(m_context.thickness);
+    emit thicknessCh(m_context.thickness);
 }
 
 void CaptureWidget::resizeEvent(QResizeEvent *e) {
@@ -991,19 +1022,24 @@ void CaptureWidget::setState(CaptureButton *b) {
             //m_activeButton->setColor(QColor (87, 250 , 255, 255));
             m_activeButton->setColor(Qt::gray);
            // qDebug() << b->tool()->name();
-            updateToolBar(b->tool()->name());
+
             if(b->tool()->name() == "选项")
             {
                 m_menuController->showMenu(b->pos());
                 m_colorPicker->hide();
+                m_formtip->hide();
+            }
+            else
+            {
+                updateToolBar(b->tool()->name());
             }
             //m_menuController->showMenu(m_selection->getPoint());
         } else if (m_activeButton) {
-
             m_panel->clearToolWidget();
             m_activeButton->setColor(m_uiColor);
             m_activeButton = nullptr;
             m_colorPicker->hide();
+            m_formtip->hide();
         }
         update(); // clear mouse preview
     }
@@ -1171,7 +1207,7 @@ void CaptureWidget::initShortcuts() {
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Down), this, SLOT(downResize()));
     new QShortcut(Qt::Key_Space, this, SLOT(togglePanel()));
     new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolwidgetOrClose()));
-    new QShortcut(Qt::Key_Return, this, SLOT(copyScreenshot()));
+    new QShortcut(Qt::Key_Return, this, SLOT(saveScreenshot()));
     new QShortcut(Qt::Key_Enter, this, SLOT(saveScreenshot()));
 }
 
@@ -1217,7 +1253,7 @@ void CaptureWidget::updateCursor() {
             setCursor(Qt::CrossCursor);
         }
     } else {
-        setCursor(Qt::CrossCursor);
+        setCursor(Qt::ArrowCursor);
     }
 }
 
@@ -1266,6 +1302,7 @@ void CaptureWidget::saveScreenshot() {
     hide();
     //huoqu xitongcanshu
     //QString strDir = QDir::homePath();
+
     if(m_context.savetip == "desktip")
     {
         QString strDir = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
@@ -1355,19 +1392,34 @@ void CaptureWidget::menuHide()
 
 void CaptureWidget::updateToolBar(QString toolName)
 {
-    if(m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 200)
-        m_colorPicker->move(m_bar->x(),m_bar->y() - m_colorPicker->height() - 1);
+    if(m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100)
+    {
+        m_colorPicker->move(m_bar->x() + m_activeButton->geometry().x() - 18, m_bar->y() - m_colorPicker->height() - 9);
+        m_formtip->move(m_bar->x(),m_bar->y() - 9);
+        isReverse = true;
+    }
     else
-        m_colorPicker->move(m_bar->x(),m_bar->y() + m_bar->height() + 1);
-    //qDebug() << toolName;
+    {
+        m_colorPicker->move(m_bar->x() + m_activeButton->geometry().x() - 18, m_bar->y() + m_bar->height() + 9);
+        m_formtip->move(m_bar->x(),m_bar->y() + m_bar->height());
+        isReverse = false;
+    }
+
+
+    m_flag = true;
+    //qDebug() << m_activeButton->mapToGlobal(*p);
+
+    //m_activeButton->getRect();
+    m_formtip->show(QPoint(m_activeButton->x() + m_activeButton->width()/2,m_activeButton->y()),isReverse);
+
     m_colorPicker->show(toolName);
+    update();
 }
 
 void CaptureWidget::setDrawRectStyle(const int &s)
 {
     m_context.graphic_style = s;
 }
-
 
 void CaptureWidget::setDrawLineStyle(const int &l)
 {

@@ -52,10 +52,10 @@ QVector<CaptureButton::ButtonType> ConfigHandler::getButtons() {
                 //<< CaptureButton::TYPE_SELECTIONINDICATOR
                 //<< CaptureButton::TYPE_MOVESELECTION
                 //<< CaptureButton::TYPE_UNDO
-//                << CaptureButton::TYPE_REDO
+                << CaptureButton::TYPE_REDO
 //                << CaptureButton::TYPE_COPY
                 << CaptureButton::TYPE_SAVE
-//                << CaptureButton::TYPE_EXIT
+                << CaptureButton::TYPE_EXIT
 //                << CaptureButton::TYPE_IMAGEUPLOADER
 //                << CaptureButton::TYPE_OPEN_APP
 //                << CaptureButton::TYPE_PIN
@@ -81,15 +81,15 @@ void ConfigHandler::setButtons(const QVector<CaptureButton::ButtonType> &buttons
 QVector<QColor> ConfigHandler::getUserColors() {
     QVector<QColor> colors;
     const QVector<QColor> &defaultColors = {
-        Qt::darkRed,
         Qt::red,
-        Qt::yellow,
-        Qt::green,
-        Qt::darkGreen,
-        Qt::cyan,
-        Qt::blue,
-        Qt::magenta,
-        Qt::darkMagenta
+        QColor(250,204,0),
+        //Qt::cyan,
+        QColor(0,255,255),
+        //Qt::blue,
+        Qt::black,
+        Qt::white
+        //Qt::magenta,
+        //Qt::darkMagenta
     };
 
     if (m_settings.contains(QStringLiteral("userColors"))) {

@@ -21,6 +21,8 @@
 #include <locale>
 #include <QStandardPaths>
 #include <QDir>
+#include <QTime>
+#include <QDebug>
 
 FileNameHandler::FileNameHandler(QObject *parent) : QObject(parent) {
     std::locale::global(std::locale(""));
@@ -41,7 +43,9 @@ QString FileNameHandler::parseFilename(const QString &name) {
     char data[MAX_CHARACTERS] = {0};
     std::strftime(data, sizeof(data),
                   tempData, std::localtime(&t));
-    res = QString::fromLocal8Bit(data, (int)strlen(data));
+    res = QDateTime::currentDateTime().toString("yyyy-MM-dd-hh:mm:ss:zzz");
+
+    //res = QString::fromLocal8Bit(data, (int)strlen(data));
     free(tempData);
 
     // add the parsed pattern in a correct format for the filesystem

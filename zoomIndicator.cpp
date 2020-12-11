@@ -34,10 +34,10 @@
 #include <QPixmap>
 
 namespace {
-const QSize BACKGROUND_SIZE = QSize(120, 120);
+const QSize BACKGROUND_SIZE = QSize(99, 99);
 const int SCALE_VALUE = 4;
-const int IMG_WIDTH =  55;
-const int INDICATOR_WIDTH = 110;
+const int IMG_WIDTH =  46;
+const int INDICATOR_WIDTH = 89;
 const int CENTER_RECT_WIDTH = 12;
 const int BOTTOM_RECT_HEIGHT = 14;
 }

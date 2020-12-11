@@ -25,7 +25,7 @@
 
 #include "menucontroller.h"
 #include "toptips.h"
-
+#include "formtip.h"
 #include "zoomIndicator.h"
 #include "baseutils.h"
 #include "capturewidget.h"
@@ -152,6 +152,7 @@ protected:
     bool m_previewEnabled;
     bool m_adjustmentButtonPressed;
     bool m_inselection = true;
+    bool m_flag = false;
 
 private:
     void initSecondUI();
@@ -198,6 +199,7 @@ private:
     QPixmap m_backgroundPixmap;
 
     bool m_isFirstReleaseButton;
+    bool isReverse=false;
 
     MenuController* m_menuController;
 
@@ -214,6 +216,9 @@ private:
     QLabel *m_toolbar;
 
     QWidget *toolwidget;
+    QPainterPath path;
+
+    FormTip *m_formtip;
 
    // Kwindowmanager *test;
 };

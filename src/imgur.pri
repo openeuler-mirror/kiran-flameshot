@@ -11,8 +11,8 @@ HEADERS += \
     $$PWD/tools/colorbutton.h \
     $$PWD/tools/rectbutton.h \
     $$PWD/tools/linebutton.h \
-    $$PWD/utils/win_manager.h
+    $$PWD/utils/win_manager.h \
 
 SOURCES += \
     $$PWD/tools/colorbutton.cpp \
-    $$PWD/utils/win_manager.cpp
+    $$PWD/utils/win_manager.cpp \
