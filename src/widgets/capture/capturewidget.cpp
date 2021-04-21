@@ -822,7 +822,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
         m_context.selection = extendedRect(&newGeometry);
         updateSizeIndicator();
 
-        if((m_selection->x() + m_selection->width()/2 <= 220 )&& (m_selection->width() <= 440))
+        if((m_selection->x() + m_selection->width()/2 <= 265 )&& (m_selection->width() <= 530))
         {
             if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100 )&& (m_selection->height() <= 220))
                 m_bar->move(m_selection->x(), m_selection->y() - 35);
@@ -831,23 +831,23 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
             else
                 m_bar->move(m_selection->x() , m_selection->y() + m_selection->height() + 2);
         }
-        else if((m_selection->x() + m_selection->width()/2 >= m_context.desktop->screenGeometry().width() - 200 )&& (m_selection->width() <= 440))
+        else if((m_selection->x() + m_selection->width()/2 >= m_context.desktop->screenGeometry().width() - 265 )&& (m_selection->width() <= 530))
         {
-            if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100) && (m_selection->height() <= 220))
-                m_bar->move(m_selection->x() + m_selection->width() - 440, m_selection->y() - 35);
-            else if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100 )&& (m_selection->height() > 220))
-                m_bar->move(m_selection->x() + m_selection->width() - 440, m_selection->y() + m_selection->height() - 35);
+            if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100) && (m_selection->height() <= 265))
+                m_bar->move(m_selection->x() + m_selection->width() - 530, m_selection->y() - 35);
+            else if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100 )&& (m_selection->height() > 265))
+                m_bar->move(m_selection->x() + m_selection->width() - 530, m_selection->y() + m_selection->height() - 35);
             else
-                m_bar->move(m_selection->x() + m_selection->width() - 440, m_selection->y() + m_selection->height() + 2);
+                m_bar->move(m_selection->x() + m_selection->width() - 530, m_selection->y() + m_selection->height() + 2);
         }
         else
         {
             if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100) && (m_selection->height() <= 220))
-                m_bar->move(m_selection->x() + m_selection->width()/2 - 175, m_selection->y() - 35);
+                m_bar->move(m_selection->x() + m_selection->width()/2 - 265, m_selection->y() - 35);
             else if((m_selection->y() + m_selection->height() >= m_context.desktop->screenGeometry().height() - 100 )&& (m_selection->height() > 220))
-                m_bar->move(m_selection->x() + m_selection->width()/2 - 175, m_selection->y() + m_selection->height() - 35);
+                m_bar->move(m_selection->x() + m_selection->width()/2 - 265, m_selection->y() + m_selection->height() - 35);
             else
-                m_bar->move(m_selection->x() + m_selection->width()/2 - 175 , m_selection->y() + m_selection->height() + 2);
+                m_bar->move(m_selection->x() + m_selection->width()/2 - 265 , m_selection->y() + m_selection->height() + 2);
         }
 
         m_buttonHandler->updatePosition(newGeometry);

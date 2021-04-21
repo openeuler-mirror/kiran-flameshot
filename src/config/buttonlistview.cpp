@@ -91,7 +91,7 @@ void ButtonListView::reverseItemCheck(QListWidgetItem *item){
 void ButtonListView::selectAll() {
     ConfigHandler().setAllTheButtons();
     for(int i = 0; i < this->count(); ++i) {
-        if((i>=9&&i<=10)||i>15)
+        if(i>12)
             continue;
         QListWidgetItem* item = this->item(i);
         item->setCheckState(Qt::Checked);
