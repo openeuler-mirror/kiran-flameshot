@@ -125,20 +125,22 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="114"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="116"/>
         <source>Unable to capture screen</source>
         <translatorcomment>无法捕获屏幕</translatorcomment>
         <translation>无法捕获屏幕</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="411"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="433"/>
         <source>Press Enter to capture the screen.
-Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Use ctrl+c to save the picture to the clipboard.
 Use ctrl+s to save the picture to the set location.</source>
+        <translatorcomment>按 Enter 键捕捉屏幕。
+使用鼠标滚轮来改变绘画工具的宽度。
+使用ctrl+c将图片保存到剪贴板。
+使用ctrl+s将图片保存至设定位置。</translatorcomment>
         <translation>按 Enter 键捕捉屏幕。
-按住鼠标右键显示颜色选择器。
 使用鼠标滚轮来改变绘画工具的宽度。
 使用ctrl+c将图片保存到剪贴板。
 使用ctrl+s将图片保存至设定位置。</translation>
@@ -183,33 +185,33 @@ Use ctrl+s to save the picture to the set location.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="175"/>
+        <location filename="../src/core/controller.cpp" line="212"/>
         <source>&amp;Take Screenshot</source>
         <translation>进行截图(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="180"/>
+        <location filename="../src/core/controller.cpp" line="217"/>
         <source>&amp;Open Launcher</source>
         <translation>打开启动器(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="183"/>
+        <location filename="../src/core/controller.cpp" line="220"/>
         <source>&amp;Configuration</source>
         <translatorcomment>配置文件</translatorcomment>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="186"/>
+        <location filename="../src/core/controller.cpp" line="223"/>
         <source>&amp;Information</source>
         <translation>信息(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="189"/>
+        <location filename="../src/core/controller.cpp" line="226"/>
         <source>&amp;Quit</source>
         <translation>退出(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="203"/>
+        <location filename="../src/core/controller.cpp" line="240"/>
         <source>click to take screenshot</source>
         <translatorcomment>点击进行截图</translatorcomment>
         <translation>点击进行截图</translation>
@@ -632,49 +634,49 @@ Use ctrl+s to save the picture to the set location.</source>
         <translation type="vanished">自定义保存位置</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="48"/>
+        <location filename="../menucontroller.cpp" line="49"/>
         <source>save to</source>
         <translatorcomment>存储到</translatorcomment>
         <translation>存储到</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="49"/>
+        <location filename="../menucontroller.cpp" line="50"/>
         <source>desktop</source>
         <translatorcomment>桌面</translatorcomment>
         <translation>桌面</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="50"/>
+        <location filename="../menucontroller.cpp" line="51"/>
         <source>cilickborad</source>
         <translatorcomment>剪切板</translatorcomment>
         <translation>剪切板</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="51"/>
+        <location filename="../menucontroller.cpp" line="52"/>
         <source>Custom save location</source>
         <translatorcomment>自定义保存位置</translatorcomment>
         <translation>自定义保存位置</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="62"/>
+        <location filename="../menucontroller.cpp" line="63"/>
         <source>保存格式</source>
         <translatorcomment>保存格式</translatorcomment>
         <translation>保存格式</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="63"/>
+        <location filename="../menucontroller.cpp" line="64"/>
         <source>JPG</source>
         <translatorcomment>JPG</translatorcomment>
         <translation>JPG</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="64"/>
+        <location filename="../menucontroller.cpp" line="65"/>
         <source>PNG</source>
         <translatorcomment>PNG</translatorcomment>
         <translation>PNG</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="65"/>
+        <location filename="../menucontroller.cpp" line="66"/>
         <source>BMP</source>
         <translatorcomment>BMP</translatorcomment>
         <translation>BMP</translation>
@@ -722,29 +724,29 @@ Use ctrl+s to save the picture to the set location.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="104"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="166"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="105"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="167"/>
         <source>Save Error</source>
         <translation>保存错误</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="56"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="98"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="124"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="160"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="57"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="99"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="125"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="161"/>
         <source>Capture saved as </source>
         <translation>捕获已保存为 </translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="34"/>
         <source>Capture saved to clipboard</source>
         <translation>捕获已保存至剪贴板</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="58"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="101"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="126"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="163"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="59"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="102"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="127"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="164"/>
         <source>Error trying to save as </source>
         <translation>尝试另存为时出错 </translation>
     </message>
