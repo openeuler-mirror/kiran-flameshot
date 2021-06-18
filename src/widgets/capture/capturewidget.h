@@ -89,6 +89,7 @@ public slots:
     void setPformat(QString format);
     void setSaveTip(QString saveTip);
     void menuHide();
+    void saveFullScreen();
 
 signals:
     void captureTaken(uint id, QPixmap p);

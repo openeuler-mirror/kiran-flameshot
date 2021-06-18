@@ -147,6 +147,43 @@ void Controller::startScreenGrab(const uint id, const int screenNumber) {
     }
 }
 
+void Controller::startFullscreenCapture(const uint id) {
+    /*bool ok = true;
+    QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
+    if (ok) {
+        emit captureTaken(id, p);
+    } else {
+        emit captureFailed(id);
+    }*/
+    if (!m_fullcaptureWindow) {
+        QWidget *modalWidget = nullptr;
+        do {
+            modalWidget = qApp->activeModalWidget();
+            if (modalWidget) {
+                modalWidget->close();
+                modalWidget->deleteLater();
+            }
+        } while (modalWidget);
+
+        m_fullcaptureWindow = new CaptureWidget(id);
+        //m_captureWindow = new CaptureWidget(id, forcedSavePath, false); // debug
+        connect(m_fullcaptureWindow, &CaptureWidget::captureFailed,
+                this, &Controller::captureFailed);
+        connect(m_fullcaptureWindow, &CaptureWidget::captureTaken,
+                this, &Controller::captureTaken);
+
+#ifdef Q_OS_WIN
+        m_captureWindow->show();
+#else
+        m_fullcaptureWindow->showFullScreen();
+        m_fullcaptureWindow->saveFullScreen();
+        //m_captureWindow->show(); // Debug
+#endif
+    } else {
+        emit captureFailed(id);
+    }
+}
+
 // creation of the configuration window
 void Controller::openConfigWindow() {
     if (!m_configWindow) {
@@ -245,16 +282,6 @@ void Controller::sendTrayNotification(
 void Controller::updateConfigComponents() {
     if (m_configWindow) {
         m_configWindow->updateChildren();
-    }
-}
-
-void Controller::startFullscreenCapture(const uint id) {
-    bool ok = true;
-    QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
-    if (ok) {
-        emit captureTaken(id, p);
-    } else {
-        emit captureFailed(id);
     }
 }
 

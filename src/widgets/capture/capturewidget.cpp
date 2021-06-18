@@ -110,6 +110,7 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     if (fullScreen) {
         // Grab Screenshot
         bool ok = true;
+
         m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
         if(!ok) {
             SystemNotification().sendMessage(tr("Unable to capture screen"));
@@ -430,7 +431,6 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
 
         QString helpTxt = tr("Press Enter to capture the screen."
-                             "\nPress Right Click to show the color picker."
                              "\nUse the Mouse Wheel to change the thickness of your tool."
                              "\nUse ctrl+c to save the picture to the clipboard."
                              "\nUse ctrl+s to save the picture to the set location.");
@@ -1424,4 +1424,9 @@ void CaptureWidget::setDrawRectStyle(const int &s)
 void CaptureWidget::setDrawLineStyle(const int &l)
 {
     m_context.line_style = l;
+}
+
+void CaptureWidget::saveFullScreen()
+{
+    saveScreenshot();
 }
