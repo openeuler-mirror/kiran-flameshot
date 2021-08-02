@@ -802,6 +802,15 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     </message>
 </context>
 <context>
+    <name>ScreenshotSaver</name>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="143"/>
+        <source>Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SelectionTool</name>
     <message>
         <location filename="../src/tools/selection/selectiontool.cpp" line="38"/>

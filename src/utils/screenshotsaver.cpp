@@ -72,7 +72,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap &capture,const QString &
                     nullptr,
                     QString(),
                     FileNameHandler().absoluteSavePath() + "." + picture_format,
-					QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)"));
+                    QLatin1String(tr("Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)")));
 
         if (savePath.isNull()) {
             break;
@@ -140,7 +140,7 @@ bool ScreenshotSaver::saveToGUI(const QPixmap &capture) {
                     nullptr,
                     QString(),
                     FileNameHandler().absoluteSavePath() + ".png",
-                    QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)"));
+                    QLatin1String(tr("Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)")));
 
         if (savePath.isNull()) {
             break;
