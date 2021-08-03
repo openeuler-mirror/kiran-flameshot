@@ -690,16 +690,16 @@ Press Space to open the side panel.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="105"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="167"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="104"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="166"/>
         <source>Save Error</source>
         <translation>Помилка збереження</translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="57"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="99"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="125"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="161"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="98"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="124"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="160"/>
         <source>Capture saved as </source>
         <translation>Знімок збережено як </translation>
     </message>
@@ -710,11 +710,17 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="59"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="102"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="127"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="164"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="101"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="126"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="163"/>
         <source>Error trying to save as </source>
         <translation>Помилка під час збереження як </translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="142"/>
+        <source>Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="78"/>
@@ -799,15 +805,6 @@ Press Space to open the side panel.</source>
         <location filename="../src/utils/screengrabber.cpp" line="76"/>
         <source>Unable to capture screen</source>
         <translation>Не вдалось захопити екран</translation>
-    </message>
-</context>
-<context>
-    <name>ScreenshotSaver</name>
-    <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="143"/>
-        <source>Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
