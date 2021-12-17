@@ -18,8 +18,7 @@
  */
 
 #include "menucontroller.h"
-#include "configsettings.h"
-#include "saveutils.h"
+#include "src/utils/saveutils.h"
 
 #include <QApplication>
 #include <QStyleFactory>

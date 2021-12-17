@@ -16,9 +16,9 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "colorpicker.h"
-#include "baseutils.h"
-#include "textbutton.h"
+#include "src/tools/text/textbutton.h"
 
+#include "src/utils/baseutils.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 #include "src/tools/toolbutton.h"
@@ -63,7 +63,7 @@ ColorPicker::ColorPicker(int thickness,QColor m_color, QWidget *parent) : QWidge
     m_drawColor = config.drawColorValue();
     m_thickness = thickness;
 
-    setStyleSheet(getFileContent(":/subtoolbar.qss"));
+    setStyleSheet(getFileContent(":/qss/subtoolbar.qss"));
     setFixedSize(TOOLBAR_WIDTH, TOOLBAR_HEIGHT);
     setStyleSheet("QWidget{border-radius:4px;background-color:white;}");
 

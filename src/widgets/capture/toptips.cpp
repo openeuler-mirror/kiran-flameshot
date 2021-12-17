@@ -26,7 +26,7 @@ TopTips::TopTips(QWidget *parent)
     : QLabel(parent) {
     setFixedSize(75, 20);
     this->setStyleSheet(" TopTips { background-color: transparent;"
-                        "border-image: url(:/sizetip.png)  no-repeat;"
+                        "border-image: url(:/img/action/sizetip.png)  no-repeat;"
                         "color: #ffffff;"
                         "font: NotoSansCJKsc-Light;"
                         "font-size: 12px;}");

@@ -171,14 +171,13 @@ SOURCES += src/main.cpp \
     src/core/capturerequest.cpp \
     src/tools/text/textconfig.cpp \
     src/widgets/panel/sidepanelwidget.cpp \
-    zoomIndicator.cpp \
-    screenutils.cpp \
-    baseutils.cpp \
-    toptips.cpp \
+    src/widgets/capture/zoomIndicator.cpp \
+    src/utils/screenutils.cpp \
+    src/utils/baseutils.cpp \
+    src/widgets/capture/toptips.cpp \
     src/widgets/panel/buttonpanel.cpp \
-    menucontroller.cpp \
-    configsettings.cpp \
-    savetips.cpp \
+    src/widgets/capture/menucontroller.cpp \
+    src/widgets/capture/savetips.cpp \
     src/tools/saveoption.cpp \
     src/utils/win_manager.cpp \
     src/widgets/capture/toowidget.cpp \
@@ -257,16 +256,15 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/core/capturerequest.h \
     src/tools/text/textconfig.h \
     src/widgets/panel/sidepanelwidget.h \
-    zoomIndicator.h \
-    screenutils.h \
-    baseutils.h \
-    toptips.h \
+    src/widgets/capture/zoomIndicator.h \
+    src/utils/screenutils.h \
+    src/utils/baseutils.h \
+    src/widgets/capture/toptips.h \
     src/widgets/panel/buttonpanel.h \
-    saveutils.h \
-    menucontroller.h \
-    configsettings.h \
-    savetips.h \
-    textbutton.h \
+    src/utils/saveutils.h \
+    src/widgets/capture/menucontroller.h \
+    src/widgets/capture/savetips.h \
+    src/tools/text/textbutton.h \
     src/tools/saveoption.h \
     src/tools/toolbutton.h \
     src/utils/win_manager.h \
@@ -345,16 +343,8 @@ unix:!macx {
 include(src/imgur.pri)
 
 DISTFILES += \
-    resize_handle_big.png \
-    magnifier.png \
-    center_rect.png \
-    resize_handle_big.svg \
-    zoomindicator.qss \
-    sizetip.png \
     img/material/black/content-save.png \
     img/material/black/content-save.svg \
-    majtoolbar.qss \
-    toolbar.qss \
     img/action/text_normal@2x.png \
     img/action/text_normal.png \
     img/action/text_hover@2x.png \
@@ -412,8 +402,6 @@ DISTFILES += \
     img/action/colors_normal.svg \
     img/action/colors_hover.svg \
     img/action/colors_checked.svg \
-    subtoolbar.qss \
-    colors_normal.svg \
     img/menu_icons/undo-menu-press.svg \
     img/menu_icons/undo-menu-normal.svg \
     img/menu_icons/undo-menu-hover.svg \
@@ -438,18 +426,8 @@ DISTFILES += \
     img/menu_icons/arrow-menu-press.svg \
     img/menu_icons/arrow-menu-norml.svg \
     img/menu_icons/arrow-menu-hover.svg \
-    textbutton.qss \
-    colorbtn.qss \
-    toolsavebutton.qss \
-    zoomindicator.qss \
-    toolsavebutton.qss \
-    toolbar.qss \
-    textbutton.qss \
-    subtoolbar.qss \
-    savetips.qss \
-    majtoolbar.qss \
-    colorbtn.qss \
+    qss/zoomindicator.qss \
+    qss/subtoolbar.qss \
+    qss/savetips.qss \
     docs/appdata/kiran-flameshot.appdata.xml \
-    colorbtn.qss \
-    img/thicknessbutton.qss \
-    thicknessbutton.qss
+    qss/colorbtn.qss \

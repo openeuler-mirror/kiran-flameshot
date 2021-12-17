@@ -75,6 +75,22 @@
     </message>
 </context>
 <context>
+    <name>CaptureButton</name>
+    <message>
+        <source>选项</source>
+        <translation type="obsolete">选项</translation>
+    </message>
+    <message>
+        <source>option</source>
+        <translation type="vanished">选项</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/capturebutton.cpp" line="46"/>
+        <source>Option</source>
+        <translation>选项</translation>
+    </message>
+</context>
+<context>
     <name>CaptureLauncher</name>
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="59"/>
@@ -125,13 +141,13 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="116"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="115"/>
         <source>Unable to capture screen</source>
         <translatorcomment>无法捕获屏幕</translatorcomment>
         <translation>无法捕获屏幕</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="433"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="407"/>
         <source>Press Enter to capture the screen.
 Use the Mouse Wheel to change the thickness of your tool.
 Use ctrl+c to save the picture to the clipboard.
@@ -144,6 +160,28 @@ Use ctrl+s to save the picture to the set location.</source>
 使用鼠标滚轮来改变绘画工具的宽度。
 使用ctrl+c将图片保存到剪贴板。
 使用ctrl+s将图片保存至设定位置。</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="1001"/>
+        <source>Option</source>
+        <translation>选项</translation>
+    </message>
+    <message>
+        <source>option</source>
+        <translation type="vanished">选项</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="1007"/>
+        <source>Blur</source>
+        <translation>模糊</translation>
+    </message>
+    <message>
+        <source>选项</source>
+        <translation type="obsolete">选项</translation>
+    </message>
+    <message>
+        <source>Marker</source>
+        <translation type="obsolete">标记</translation>
     </message>
 </context>
 <context>
@@ -197,8 +235,7 @@ Use ctrl+s to save the picture to the set location.</source>
     <message>
         <location filename="../src/core/controller.cpp" line="220"/>
         <source>&amp;Configuration</source>
-        <translatorcomment>配置文件</translatorcomment>
-        <translation>配置文件</translation>
+        <translation>配置文件(&amp;C)</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="223"/>
@@ -634,49 +671,49 @@ Use ctrl+s to save the picture to the set location.</source>
         <translation type="vanished">自定义保存位置</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="49"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="48"/>
         <source>save to</source>
         <translatorcomment>存储到</translatorcomment>
         <translation>存储到</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="50"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="49"/>
         <source>desktop</source>
         <translatorcomment>桌面</translatorcomment>
         <translation>桌面</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="51"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="50"/>
         <source>cilickborad</source>
         <translatorcomment>剪切板</translatorcomment>
         <translation>剪切板</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="52"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="51"/>
         <source>Custom save location</source>
         <translatorcomment>自定义保存位置</translatorcomment>
         <translation>自定义保存位置</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="63"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="62"/>
         <source>保存格式</source>
         <translatorcomment>保存格式</translatorcomment>
         <translation>保存格式</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="64"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="63"/>
         <source>JPG</source>
         <translatorcomment>JPG</translatorcomment>
         <translation>JPG</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="65"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="64"/>
         <source>PNG</source>
         <translatorcomment>PNG</translatorcomment>
         <translation>PNG</translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="66"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="65"/>
         <source>BMP</source>
         <translatorcomment>BMP</translatorcomment>
         <translation>BMP</translation>
@@ -811,9 +848,13 @@ Use ctrl+s to save the picture to the set location.</source>
 <context>
     <name>SaveOption</name>
     <message>
-        <location filename="../src/tools/saveoption.cpp" line="42"/>
         <source>选项</source>
         <translatorcomment>选项</translatorcomment>
+        <translation type="vanished">选项</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/saveoption.cpp" line="42"/>
+        <source>Option</source>
         <translation>选项</translation>
     </message>
     <message>
@@ -1026,19 +1067,19 @@ Use ctrl+s to save the picture to the set location.</source>
 <context>
     <name>TextButton</name>
     <message>
-        <location filename="../textbutton.h" line="35"/>
+        <location filename="../src/tools/text/textbutton.h" line="36"/>
         <source>small</source>
         <translatorcomment>小</translatorcomment>
         <translation>小</translation>
     </message>
     <message>
-        <location filename="../textbutton.h" line="36"/>
+        <location filename="../src/tools/text/textbutton.h" line="37"/>
         <source>medium</source>
         <translatorcomment>中</translatorcomment>
         <translation>中</translation>
     </message>
     <message>
-        <location filename="../textbutton.h" line="37"/>
+        <location filename="../src/tools/text/textbutton.h" line="38"/>
         <source>large</source>
         <translatorcomment>大</translatorcomment>
         <translation>大</translation>

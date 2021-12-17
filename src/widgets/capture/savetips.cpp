@@ -18,13 +18,13 @@
  */
 
 #include "savetips.h"
-#include "baseutils.h"
+#include "src/utils/baseutils.h"
 
 #include <QDebug>
 
 SaveTips::SaveTips(QWidget *parent)
     : QLabel(parent) {
-    setStyleSheet(getFileContent(":/savetips.qss"));
+    setStyleSheet(getFileContent(":/qss/savetips.qss"));
     setTipWidth(0);
     setFixedWidth(0);
     m_startAni = new QPropertyAnimation(this, "tipWidth");

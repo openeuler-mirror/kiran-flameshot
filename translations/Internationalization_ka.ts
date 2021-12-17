@@ -75,6 +75,14 @@
     </message>
 </context>
 <context>
+    <name>CaptureButton</name>
+    <message>
+        <location filename="../src/widgets/capture/capturebutton.cpp" line="46"/>
+        <source>Option</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CaptureLauncher</name>
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="59"/>
@@ -125,17 +133,31 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="116"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="115"/>
         <source>Unable to capture screen</source>
         <translation>ეკრანის გადაღება ვერ მოხერხდა</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="433"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="407"/>
         <source>Press Enter to capture the screen.
 Use the Mouse Wheel to change the thickness of your tool.
 Use ctrl+c to save the picture to the clipboard.
 Use ctrl+s to save the picture to the set location.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="1001"/>
+        <source>Option</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="1007"/>
+        <source>Blur</source>
+        <translation type="unfinished">გაბუნდოვნება</translation>
+    </message>
+    <message>
+        <source>Marker</source>
+        <translation type="obsolete">მარკერი</translation>
     </message>
 </context>
 <context>
@@ -596,42 +618,42 @@ Use ctrl+s to save the picture to the set location.</source>
 <context>
     <name>MenuController</name>
     <message>
-        <location filename="../menucontroller.cpp" line="49"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="48"/>
         <source>save to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="50"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="49"/>
         <source>desktop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="51"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="50"/>
         <source>cilickborad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="52"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="51"/>
         <source>Custom save location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="63"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="62"/>
         <source>保存格式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="64"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="63"/>
         <source>JPG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="65"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="64"/>
         <source>PNG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../menucontroller.cpp" line="66"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="65"/>
         <source>BMP</source>
         <translation type="unfinished"></translation>
     </message>
@@ -765,7 +787,7 @@ Use ctrl+s to save the picture to the set location.</source>
     <name>SaveOption</name>
     <message>
         <location filename="../src/tools/saveoption.cpp" line="42"/>
-        <source>选项</source>
+        <source>Option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -970,17 +992,17 @@ Use ctrl+s to save the picture to the set location.</source>
 <context>
     <name>TextButton</name>
     <message>
-        <location filename="../textbutton.h" line="35"/>
+        <location filename="../src/tools/text/textbutton.h" line="36"/>
         <source>small</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../textbutton.h" line="36"/>
+        <location filename="../src/tools/text/textbutton.h" line="37"/>
         <source>medium</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../textbutton.h" line="37"/>
+        <location filename="../src/tools/text/textbutton.h" line="38"/>
         <source>large</source>
         <translation type="unfinished"></translation>
     </message>

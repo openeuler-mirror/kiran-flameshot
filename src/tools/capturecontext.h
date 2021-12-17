@@ -22,7 +22,7 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QDesktopWidget>
-#include "baseutils.h"
+#include "src/utils/baseutils.h"
 
 struct CaptureContext {
     // screenshot with modifications
