@@ -59,7 +59,6 @@ void Toowidget::paintEvent(QPaintEvent *) {
             painter.setPen(pen);
             painter.drawRect(m_colorAreaList.at(i));
             painter.setPen(Qt::NoPen);
-
         }
          //draw the highlight when we have to draw the selected color
         if (m_drawColor == QColor(m_colorList.at(i))) {

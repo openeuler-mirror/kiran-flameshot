@@ -23,7 +23,8 @@
 //#include <QPushButton>
 #include <QComboBox>
 #include <QApplication>
-#include <baseutils.h>
+
+#include "src/utils/baseutils.h"
 
 class TextButton : public QComboBox {
     Q_OBJECT
@@ -36,11 +37,11 @@ public:
          addItem(tr("medium"));
          addItem(tr("large"));
 
-         if(m_thickness = SMALL_SIZE)
+         if(m_thickness == SMALL_SIZE)
              this->setCurrentIndex(0);
-         else if(m_thickness = MEDIUM_SIZE)
+         else if(m_thickness == MEDIUM_SIZE)
              this->setCurrentIndex(1);
-         else if(m_thickness = LARGE_SIZE)
+         else if(m_thickness == LARGE_SIZE)
              this->setCurrentIndex(2);
 
 

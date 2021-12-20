@@ -18,7 +18,7 @@
  */
 
 #include "zoomIndicator.h"
-#include "baseutils.h"
+#include "src/utils/baseutils.h"
 #include "src/tools/capturecontext.h"
 //#include "tempfile.h"
 
@@ -45,7 +45,7 @@ ZoomIndicator::ZoomIndicator(QWidget *parent)
     : QLabel(parent)
 {
     setFixedSize(BACKGROUND_SIZE);
-    setStyleSheet(getFileContent(":/zoomindicator.qss"));
+    setStyleSheet(getFileContent(":/qss/zoomindicator.qss"));
     setAttribute(Qt::WA_TransparentForMouseEvents);
 
     m_centerRect = QRect((BACKGROUND_SIZE.width() - CENTER_RECT_WIDTH)/2 + 1,
@@ -167,7 +167,7 @@ void ZoomIndicator::paintEvent(QPaintEvent *) {
                IMG_WIDTH, IMG_WIDTH);*/
 
 
-    painter.drawPixmap(m_centerRect, QPixmap(":/center_rect.png"));
+    painter.drawPixmap(m_centerRect, QPixmap(":/img/action/center_rect.png"));
     m_lastCenterPosBrush = QBrush(QColor(qRed(centerRectRgb),
                                          qGreen(centerRectRgb), qBlue(centerRectRgb)));
     painter.fillRect(QRect(INDICATOR_WIDTH/2 + 2, INDICATOR_WIDTH/2 + 2,

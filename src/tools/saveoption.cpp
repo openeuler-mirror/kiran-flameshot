@@ -39,7 +39,7 @@ QIcon SaveOption::icon(const QColor &background, bool inEditor) const {
     return QIcon();
 }
 QString SaveOption::name() const {
-    return tr("选项");
+    return tr("Option");
 }
 
 QString SaveOption::nameID() {

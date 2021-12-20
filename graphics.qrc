@@ -323,17 +323,6 @@
         <file>img/color/color1_hover.png</file>
         <file>img/color/color1_checked@2x.png</file>
         <file>img/color/color1_checked.png</file>
-        <file>zoomindicator.qss</file>
-        <file>toolsavebutton.qss</file>
-        <file>toolbar.qss</file>
-        <file>textbutton.qss</file>
-        <file>subtoolbar.qss</file>
-        <file>savetips.qss</file>
-        <file>fontsizewidget.qss</file>
-        <file>colorbtn.qss</file>
-        <file>magnifier.png</file>
-        <file>center_rect.png</file>
-        <file>sizetip.png</file>
         <file>img/mouse_style/shape/text_mouse.svg</file>
         <file>img/mouse_style/shape/start_mouse@2x.svg</file>
         <file>img/mouse_style/shape/start_mouse.svg</file>
@@ -361,6 +350,15 @@
         <file>img/app/kiran.png</file>
         <file>img/app/kiran128x128.png</file>
         <file>img/app/flameshot.icon</file>
-        <file>thicknessbutton.qss</file>
+        <file>qss/colorbtn.qss</file>
+        <file>qss/fontsizewidget.qss</file>
+        <file>qss/majtoolbar.qss</file>
+        <file>qss/savetips.qss</file>
+        <file>qss/subtoolbar.qss</file>
+        <file>qss/textbutton.qss</file>
+        <file>qss/thicknessbutton.qss</file>
+        <file>qss/toolbar.qss</file>
+        <file>qss/toolsavebutton.qss</file>
+        <file>qss/zoomindicator.qss</file>
     </qresource>
 </RCC>

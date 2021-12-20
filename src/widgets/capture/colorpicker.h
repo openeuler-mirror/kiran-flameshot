@@ -23,7 +23,7 @@
 #include <QHBoxLayout>
 #include "src/tools/rectbutton.h"
 #include "src/tools/toolbutton.h"
-#include "textbutton.h"
+#include "src/tools/text/textbutton.h"
 #include "toowidget.h"
 #include "thicknesswidget.h"
 

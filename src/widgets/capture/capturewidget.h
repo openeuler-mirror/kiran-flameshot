@@ -23,13 +23,14 @@
 
 #pragma once
 
-#include "menucontroller.h"
+
 #include "toptips.h"
 #include "formtip.h"
 #include "zoomIndicator.h"
-#include "baseutils.h"
 #include "capturewidget.h"
 
+#include "menucontroller.h"
+#include "src/utils/baseutils.h"
 #include "src/widgets/panel/buttonpanel.h"
 #include "capturebutton.h"
 #include "src/tools/capturecontext.h"

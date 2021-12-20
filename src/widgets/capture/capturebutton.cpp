@@ -43,7 +43,7 @@ CaptureButton::CaptureButton(const ButtonType t, QWidget *parent) : QPushButton(
         QFont f = this->font();
         setFont(QFont(f.family(), 7, QFont::Bold));
     } else if (t == TYPE_SAVEOPTION) {
-        this->setText("选项");
+        this->setText(tr("Option"));
         this->setFixedSize(60,30);
         QFont f("NotoSansCJKSC-Regular");
         this->setFont(f);

@@ -24,7 +24,7 @@
 
 #include "src/widgets/panel/buttonpanel.h"
 #include "zoomIndicator.h"
-#include "baseutils.h"
+#include "src/utils/baseutils.h"
 
 #include <QDir>
 #include "capturewidget.h"
@@ -243,31 +243,6 @@ void CaptureWidget::initOriginUI()
     m_zoomIndicator->hide();
 
     m_isFirstReleaseButton = false;
-/*
-    m_isFirstDrag = false;
-    m_isFirstMove = false;
-    m_isFirstPressButton = false;
-    m_isFirstReleaseButton = false;
-
-    m_recordX = 0;
-    m_recordY = 0;
-    m_recordWidth = 0;
-    m_recordHeight = 0;
-
-    qreal ration =  this->devicePixelRatioF();
-    QIcon icon(":/resize_handle_big.svg");
-    m_resizeBigPix = icon.pixmap(QSize(RESIZEPOINT_WIDTH,RESIZEPOINT_WIDTH));
-    m_resizeBigPix.setDevicePixelRatio(ration);
-
-    m_dragRecordX = -1;
-    m_dragRecordY = -1;
-
-    m_needDrawSelectedPoint = false;
-    m_mouseStatus = ShotMouseStatus::Shoting;
-
-    m_selectAreaName = "";
-
-    m_isShapesWidgetExist = false;*/
 }
 
 
@@ -1023,9 +998,14 @@ void CaptureWidget::setState(CaptureButton *b) {
             m_activeButton->setColor(Qt::gray);
            // qDebug() << b->tool()->name();
 
-            if(b->tool()->name() == "选项")
+            if(b->tool()->name() == tr("Option"))
             {
                 m_menuController->showMenu(b->pos());
+                m_colorPicker->hide();
+                m_formtip->hide();
+            }
+            else if(b->tool()->name() == tr("Blur"))
+            {
                 m_colorPicker->hide();
                 m_formtip->hide();
             }
@@ -1058,7 +1038,6 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
     case CaptureTool::REQ_OPTION:
         setState(m_activeButton);
         saveScreenshot();
-        //qDebug("111");
         break;
     case CaptureTool::REQ_CLEAR_MODIFICATIONS:
         m_undoStack.setIndex(0);
