@@ -102,7 +102,6 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     initContext(savePath, fullScreen);
     initShortcuts();
 
-
 #ifdef Q_OS_WIN
     // Top left of the whole set of screens
     QPoint topLeft(0,0);
@@ -324,15 +323,14 @@ void CaptureWidget::updateButtons() {
         rectLayout->addSpacing(9);
         rectLayout->addWidget(b);
 
-
         b->setColor(m_uiColor);
         makeChild(b);
 
-
-
-        connect(b, &CaptureButton::pressedButton, this, &CaptureWidget::setState);
-        connect(b->tool(), &CaptureTool::requestAction,
-                this, &CaptureWidget::handleButtonSignal);
+//        connect(b, &CaptureButton::pressedButton, this, &CaptureWidget::setState);
+//        connect(b->tool(), &CaptureTool::requestAction,
+//                this, &CaptureWidget::handleButtonSignal);
+        connect(b , SIGNAL(pressedButton(CaptureButton*)), this, SLOT(setState(CaptureButton*)));
+        connect(b->tool(), SIGNAL(requestAction(CaptureTool::Request)), this, SLOT(handleButtonSignal(CaptureTool::Request)));
         vectorButtons << b;
     }
 
@@ -486,12 +484,22 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
             m_activeTool = m_activeButton->tool()->copy(this);
 
 
-            connect(this, &CaptureWidget::colorChanged,
-                    m_activeTool, &CaptureTool::colorChanged);
-            connect(this, &CaptureWidget::thicknessChanged,
-                    m_activeTool, &CaptureTool::thicknessChanged);
-            connect(m_activeTool, &CaptureTool::requestAction,
-                    this, &CaptureWidget::handleButtonSignal);
+//            connect(this, &CaptureWidget::colorChanged,
+//                    m_activeTool, &CaptureTool::colorChanged);
+//            connect(this, &CaptureWidget::thicknessChanged,
+//                    m_activeTool, &CaptureTool::thicknessChanged);
+//            connect(m_activeTool, &CaptureTool::requestAction,
+//                    this, &CaptureWidget::handleButtonSignal);
+
+            connect(this, SIGNAL(colorChanged(const QColor)),
+                    m_activeTool, SLOT(colorChanged(const QColor)));
+
+            connect(this, SIGNAL(thicknessChanged(const int)),
+                    m_activeTool, SLOT(thicknessChanged(const int)));
+
+            connect(m_activeTool, SIGNAL(requestAction(CaptureTool::Request)),
+                    this, SLOT(handleButtonSignal(CaptureTool::Request)));
+
 
             m_activeTool->drawStart(m_context);
             return;
@@ -1239,10 +1247,12 @@ void CaptureWidget::updateCursor() {
 void CaptureWidget::pushToolToStack() {
     auto mod = new ModificationCommand(
                 &m_context.screenshot, m_activeTool);
-    disconnect(this, &CaptureWidget::colorChanged,
-               m_activeTool, &CaptureTool::colorChanged);
-    disconnect(this, &CaptureWidget::thicknessChanged,
-               m_activeTool, &CaptureTool::thicknessChanged);
+//    disconnect(this, &CaptureWidget::colorChanged,
+//               m_activeTool, &CaptureTool::colorChanged);
+//    disconnect(this, &CaptureWidget::thicknessChanged,
+//               m_activeTool, &CaptureTool::thicknessChanged);
+    disconnect(this, SIGNAL(colorChanged(QColor)), m_activeTool, SLOT(colorChanged(QColor)));
+    disconnect(this, SIGNAL(thicknessChanged(int)), m_activeTool, SLOT(thicknessChanged(int)));
     if (m_panel->toolWidget()) {
         disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
     }
