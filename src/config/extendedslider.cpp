@@ -20,13 +20,16 @@
 ExtendedSlider::ExtendedSlider(QWidget *parent)
     : QSlider(parent)
 {
-    connect(this, &ExtendedSlider::valueChanged,
-            this, &ExtendedSlider::updateTooltip);
-    connect(this, &ExtendedSlider::sliderMoved,
-            this, &ExtendedSlider::fireTimer);
+//    connect(this, &ExtendedSlider::valueChanged,
+//            this, &ExtendedSlider::updateTooltip);
+//    connect(this, &ExtendedSlider::sliderMoved,
+//            this, &ExtendedSlider::fireTimer);
+    connect(this, SIGNAL(valueChanged(int)), this, SLOT(updateTooltip()));
+    connect(this, SIGNAL(sliderMoved(int)), this, SLOT(fireTimer()));
     m_timer.setSingleShot(true);
-    connect(&m_timer, &QTimer::timeout,
-            this, &ExtendedSlider::modificationsEnded);
+//    connect(&m_timer, &QTimer::timeout,
+//            this, &ExtendedSlider::modificationsEnded);
+    connect(&m_timer, SIGNAL(timeout()), this, SIGNAL(modificationsEnded()));
 }
 
 int ExtendedSlider::mappedValue(int min, int max) {

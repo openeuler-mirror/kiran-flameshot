@@ -115,10 +115,12 @@ void Controller::startVisualCapture(const uint id, const QString &forcedSavePath
 
         m_captureWindow = new CaptureWidget(id, forcedSavePath);
         //m_captureWindow = new CaptureWidget(id, forcedSavePath, false); // debug
-        connect(m_captureWindow, &CaptureWidget::captureFailed,
-                this, &Controller::captureFailed);
-        connect(m_captureWindow, &CaptureWidget::captureTaken,
-                this, &Controller::captureTaken);
+//        connect(m_captureWindow, &CaptureWidget::captureFailed,
+//                this, &Controller::captureFailed);
+//        connect(m_captureWindow, &CaptureWidget::captureTaken,
+//                this, &Controller::captureTaken);
+        connect(m_captureWindow, SIGNAL(captureFailed(uint)), this, SLOT(handleCaptureFailed(uint)));
+        connect(m_captureWindow, SIGNAL(captureTaken(uint, QPixmap)), this, SLOT(handleCaptureTaken(uint,QPixmap)));
 
 #ifdef Q_OS_WIN
         m_captureWindow->show();
@@ -167,10 +169,12 @@ void Controller::startFullscreenCapture(const uint id) {
 
         m_fullcaptureWindow = new CaptureWidget(id);
         //m_captureWindow = new CaptureWidget(id, forcedSavePath, false); // debug
-        connect(m_fullcaptureWindow, &CaptureWidget::captureFailed,
-                this, &Controller::captureFailed);
-        connect(m_fullcaptureWindow, &CaptureWidget::captureTaken,
-                this, &Controller::captureTaken);
+//        connect(m_fullcaptureWindow, &CaptureWidget::captureFailed,
+//                this, &Controller::captureFailed);
+//        connect(m_fullcaptureWindow, &CaptureWidget::captureTaken,
+//                this, &Controller::captureTaken);
+        connect(m_fullcaptureWindow, SIGNAL(captureFailed(uint)), this, SLOT(handleCaptureFailed(uint)));
+        connect(m_fullcaptureWindow, SIGNAL(captureTaken(uint, QPixmap)), this, SLOT(handleCaptureTaken(uint,QPixmap)));
 
 #ifdef Q_OS_WIN
         m_captureWindow->show();
@@ -242,16 +246,16 @@ void Controller::enableTrayIcon() {
     QIcon trayicon = QIcon::fromTheme("flameshot-tray", QIcon(":img/app/kiran128x128.png"));
     m_trayIcon->setIcon(trayicon);
 
-    auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r){
-            if (r == QSystemTrayIcon::Trigger) {
-                startVisualCapture();
-            }
-    };
-
-
-    //connect(m_trayIcon,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
-    connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
+    connect(m_trayIcon,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
+    //connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
     m_trayIcon->show();
+}
+
+void Controller::trayIconActivated(QSystemTrayIcon::ActivationReason r)
+{
+    if (r == QSystemTrayIcon::Trigger) {
+        startVisualCapture();
+    }
 }
 
 void Controller::disableTrayIcon() {

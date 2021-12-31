@@ -72,6 +72,7 @@ private slots:
 
     void handleCaptureTaken(uint id, QPixmap p);
     void handleCaptureFailed(uint id);
+    void trayIconActivated(QSystemTrayIcon::ActivationReason r);
 
 private:
     Controller();

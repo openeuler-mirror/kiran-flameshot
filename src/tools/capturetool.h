@@ -129,7 +129,7 @@ public:
     virtual void paintMousePreview(QPainter &painter, const CaptureContext &context) = 0;
 
 signals:
-    void requestAction(Request r);
+    void requestAction(CaptureTool::Request r);
 
 protected:
     QString iconPath(const QColor &c) const {
