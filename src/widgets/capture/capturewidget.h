@@ -47,6 +47,7 @@
 #include <QHBoxLayout>
 #include <QStackedWidget>
 #include <QLabel>
+#include <QPainterPath>
 
 
 

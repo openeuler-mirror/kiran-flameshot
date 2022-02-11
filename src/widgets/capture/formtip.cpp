@@ -2,6 +2,7 @@
 
 #include <QPainter>
 #include <QMouseEvent>
+#include <QPainterPath>
 
 FormTip::FormTip(QWidget *parent) : QWidget(parent)
 {

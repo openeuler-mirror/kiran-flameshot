@@ -28,6 +28,7 @@
 #include <QDragEnterEvent>
 #include <QMimeData>
 #include "color_utils.hpp"
+#include <QPainterPath>
 
 namespace color_widgets {
 
