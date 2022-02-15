@@ -17,6 +17,7 @@
 
 #include "arrowtool.h"
 #include <QDebug>
+#include <QPainterPath>
 
 namespace {
 
