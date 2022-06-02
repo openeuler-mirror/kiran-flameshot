@@ -1,0 +1,227 @@
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
+//
+// This file is part of Flameshot.
+//
+//     Flameshot is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, either version 3 of the License, or
+//     (at your option) any later version.
+//
+//     Flameshot is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//     GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+
+// Based on Lightscreen areadialog.h, Copyright 2017  Christian Kaiser <info@ckaiser.com.ar>
+// released under the GNU GPL2  <https://www.gnu.org/licenses/gpl-2.0.txt>
+
+// Based on KDE's KSnapshot regiongrabber.cpp, revision 796531, Copyright 2007 Luca Gugelmann <lucag@student.ethz.ch>
+// released under the GNU LGPL  <http://www.gnu.org/licenses/old-licenses/library.txt>
+
+#pragma once
+
+
+#include "toptips.h"
+#include "formtip.h"
+#include "zoomIndicator.h"
+#include "capturewidget.h"
+
+#include "menucontroller.h"
+#include "src/utils/baseutils.h"
+#include "src/widgets/panel/buttonpanel.h"
+#include "capturebutton.h"
+#include "src/tools/capturecontext.h"
+#include "src/tools/capturetool.h"
+#include "src/utils/confighandler.h"
+#include "src/widgets/capture/selectionwidget.h"
+#include "src/widgets/panel/utilitypanel.h"
+#include "buttonhandler.h"
+#include <QWidget>
+#include <QUndoStack>
+#include <QPointer>
+#include <QMenu>
+
+#include <QHBoxLayout>
+#include <QStackedWidget>
+#include <QLabel>
+#include <QPainterPath>
+
+
+
+
+class QPaintEvent;
+class QResizeEvent;
+class QMouseEvent;
+class CaptureModification;
+class QNetworkAccessManager;
+class QNetworkReply;
+class ColorPicker;
+class Screenshot;
+class NotifierBox;
+class HoverEventFilter;
+
+
+class CaptureWidget : public QWidget {
+    Q_OBJECT
+
+public:
+
+    explicit CaptureWidget(const uint id = 0,
+                           const QString &savePath = QString(),
+                           bool fullScreen = true,
+                           QWidget *parent = nullptr);
+    ~CaptureWidget();
+
+
+    void updateButtons();
+    QPixmap pixmap();
+
+    void initBackground();
+    QPixmap getPixmapofRect(const QRect &rect);
+
+    void updateToolBarPos();
+
+    QList<QRect> windowsRect() const;
+
+public slots:
+    void deleteToolwidgetOrClose();
+    void setPformat(QString format);
+    void setSaveTip(QString saveTip);
+    void menuHide();
+    void saveFullScreen();
+
+signals:
+    void captureTaken(uint id, QPixmap p);
+    void captureFailed(uint id);
+    void colorChanged(const QColor &c);
+    void thicknessChanged(const int thickness);
+    void thicknessCh(const int thickness);
+
+private slots:
+
+    // TODO replace with tools
+    void copyScreenshot();
+    void saveScreenshot();
+    void undo();
+    void redo();
+    void togglePanel();
+    void childEnter();
+    void childLeave();
+
+    void leftResize();
+    void rightResize();
+    void upResize();
+    void downResize();
+
+    void setState(CaptureButton *b);
+    void processTool(CaptureTool *t);
+    void handleButtonSignal(CaptureTool::Request r);
+    void setDrawColor(const QColor &c);
+    void setDrawThickness(const int &t);
+    void setDrawRectStyle(const int &s);
+    void setDrawLineStyle(const int &l);
+
+protected:
+    void paintEvent(QPaintEvent *);
+    void mousePressEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
+    void mouseReleaseEvent(QMouseEvent *);
+    void keyPressEvent(QKeyEvent *);
+    void keyReleaseEvent(QKeyEvent *);
+    void wheelEvent(QWheelEvent *);
+    void resizeEvent(QResizeEvent *);
+    void moveEvent(QMoveEvent *);
+
+    // Context information
+    CaptureContext m_context;
+
+    // Main ui color
+    QColor m_uiColor;
+    // Secondary ui color
+    QColor m_contrastUiColor;
+
+    // Outside selection opacity
+    int m_opacity;
+    // utility flags
+    bool m_mouseIsClicked;
+    bool m_rightClick;
+    bool m_newSelection;
+    bool m_grabbing;
+    bool m_showInitialMsg;
+    bool m_captureDone;
+    bool m_previewEnabled;
+    bool m_adjustmentButtonPressed;
+    bool m_inselection = true;
+    bool m_flag = false;
+
+private:
+    void initSecondUI();
+    void initOriginUI();
+    void initContext(const QString &savePath, bool fullscreen);
+    void initPanel();
+    void initSelection();
+    void initShortcuts();
+    void updateSizeIndicator();
+    void updateCursor();
+    void pushToolToStack();
+    void makeChild(QWidget *w);
+    void updateToolBar(QString toolName);
+
+    QRect extendedSelection() const;
+    QRect extendedRect(QRect *r) const;
+
+    QUndoStack m_undoStack;
+    QPointer<CaptureButton> m_sizeIndButton;
+    // Last pressed button
+    QPointer<CaptureButton> m_activeButton;
+    QPointer<CaptureTool> m_activeTool;
+    QPointer<QWidget> m_toolWidget;
+
+    ButtonHandler *m_buttonHandler;
+    UtilityPanel *m_panel;
+    ButtonPanel *b_panel;
+    ColorPicker *m_colorPicker;
+    ConfigHandler m_config;
+    NotifierBox *m_notifierBox;
+    HoverEventFilter *m_eventFilter;
+    SelectionWidget *m_selection;
+
+    QPoint m_dragStartPoint;
+    SelectionWidget::SideType m_mouseOverHandle;
+    uint m_id;
+
+
+    ZoomIndicator* m_zoomIndicator;
+    TopTips* m_toptips;
+
+    QRect m_backgroundRect;
+    QPixmap m_resultPixmap;
+    QPixmap m_backgroundPixmap;
+
+    bool m_isFirstReleaseButton;
+    bool isReverse=false;
+
+    MenuController* m_menuController;
+
+    //ToolBar* m_toolBar;
+
+    QMenu *option_menu;
+
+    QAction *save;
+    QAction *png;
+    QAction *jpg;
+    QAction *bmp;
+
+    QWidget *m_bar;
+    QLabel *m_toolbar;
+
+    QWidget *toolwidget;
+    QPainterPath path;
+
+    FormTip *m_formtip;
+
+   // Kwindowmanager *test;
+};
