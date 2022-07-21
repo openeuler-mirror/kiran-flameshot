@@ -36,6 +36,7 @@ MenuController::MenuController(QObject *parent)
     m_menu->setStyle(QStyleFactory::create("dlight"));
     QString qss = "QMenu{background-color: rgb(255, 255, 255);"
                            "border-radius: 20px; "
+                           "color:#222222;"
                            "}"
                            "QMenu::item { background-color: transparent;"
                            "border-radius: 20px; "
@@ -71,6 +72,8 @@ MenuController::MenuController(QObject *parent)
     pathtip->setEnabled(false);
     //savetip->setEnabled(false);
     formattip->setEnabled(false);
+
+
 
     m_menu->addAction(pathtip);
     m_menu->addAction(desktip);

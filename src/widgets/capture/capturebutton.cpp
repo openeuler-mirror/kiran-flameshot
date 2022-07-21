@@ -108,7 +108,10 @@ QString CaptureButton::globalStyleSheet() {
                         "background-color: %1; color: %4 }"
                         "CaptureButton:hover { background-color: %2; }"
                         "CaptureButton:pressed:!hover { "
-                        "background-color: %1; }";
+                        "background-color: %1; }"
+                        "CaptureButton::menu-indicator{image:url(:/img/save/save_list_normal.png);"
+                        "subcontrol-position: right center;"
+                        "left: -2px;}";
     // define color when mouse is hovering
     QColor contrast = ColorUtils::contrastColor(m_mainColor);
 
@@ -126,7 +129,11 @@ QString CaptureButton::styleSheet() const {
                         "background-color: %1; color: %4 }"
                         "CaptureButton:hover { background-color: %2; }"
                         "CaptureButton:pressed:!hover { "
-                        "background-color: %1; }";
+                        "background-color: %1; }"
+                        "CaptureButton::menu-indicator{"
+                        "image:url(:/img/save/save_list_normal.png);"
+                        "subcontrol-position: right center;"
+                        "left: -2px;}";
     // define color when mouse is hovering
     QColor contrast = ColorUtils::contrastColor(m_mainColor);
     // foreground color
