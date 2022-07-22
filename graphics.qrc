@@ -350,6 +350,8 @@
         <file>img/app/kiran.png</file>
         <file>img/app/kiran128x128.png</file>
         <file>img/app/flameshot.icon</file>
+        <file>img/save/save_list_normal@2x.png</file>
+        <file>img/save/save_list_normal.png</file>
         <file>qss/colorbtn.qss</file>
         <file>qss/fontsizewidget.qss</file>
         <file>qss/majtoolbar.qss</file>
