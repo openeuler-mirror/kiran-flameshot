@@ -21,8 +21,6 @@
 #include <QListWidgetItem>
 #include <algorithm>
 
-#include <QDebug>
-
 ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
     setMouseTracking(true);
     setFlow(QListWidget::TopToBottom);
@@ -31,6 +29,7 @@ ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
 //    connect(this, &QListWidget::itemClicked, this,
 //            &ButtonListView::reverseItemCheck);
     connect(this, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(reverseItemCheck(QListWidgetItem*)));
+    connect(Kiran::StylePalette::instance(),&Kiran::StylePalette::themeChanged,this,&ButtonListView::handleThemeChanged);
 }
 
 //初始化按键列表
@@ -60,6 +59,11 @@ void ButtonListView::initButtonList() {
         m_buttonItem->setToolTip(tool->description());
         tool->deleteLater();
     }
+}
+
+void ButtonListView::handleThemeChanged(Kiran::PaletteType paletteType)
+{
+
 }
 
 //更新按钮配置
@@ -113,3 +117,5 @@ void ButtonListView::updateComponents() {
         }
     }
 }
+
+

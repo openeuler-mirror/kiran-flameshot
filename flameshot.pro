@@ -13,6 +13,8 @@ isEmpty(TAG_VERSION){
 DEFINES += APP_VERSION=\\\"$$TAG_VERSION\\\"
 DEFINES += WNCK_I_KNOW_THIS_IS_UNSTABLE
 
+CONFIG += console
+
 QT  += core gui widgets network svg
 
 unix:!macx {
@@ -20,6 +22,8 @@ unix:!macx {
 }
 
 CONFIG += c++11 link_pkgconfig
+unix: PKGCONFIG += klog-qt5
+unix: PKGCONFIG += kiran-style-helper
 
 #CONFIG += packaging   # Enables "make install" for packaging paths
 #LIBS += /usr/lib64/glibmm-2.4
@@ -48,6 +52,7 @@ INCLUDEPATH += /usr/lib64/giomm-2.4/include
 INCLUDEPATH += /usr/lib64/cairomm-1.0/include
 
 TARGET = kiran-flameshot
+
 TEMPLATE = app
 
 win32:RC_ICONS += img/app/flameshot.ico
@@ -431,3 +436,7 @@ DISTFILES += \
     qss/savetips.qss \
     docs/appdata/kiran-flameshot.appdata.xml \
     qss/colorbtn.qss \
+
+
+
+
