@@ -22,8 +22,8 @@ unix:!macx {
 }
 
 CONFIG += c++11 link_pkgconfig
-unix: PKGCONFIG += klog-qt5
-unix: PKGCONFIG += kiran-style-helper
+PKGCONFIG += klog-qt5
+PKGCONFIG += kiran-style-helper
 
 #CONFIG += packaging   # Enables "make install" for packaging paths
 #LIBS += /usr/lib64/glibmm-2.4

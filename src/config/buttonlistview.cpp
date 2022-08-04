@@ -20,6 +20,7 @@
 #include "src/utils/confighandler.h"
 #include <QListWidgetItem>
 #include <algorithm>
+#include <qt5-log-i.h>
 
 ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
     setMouseTracking(true);
@@ -106,6 +107,8 @@ void ButtonListView::selectAll() {
 //更新组件
 void ButtonListView::updateComponents() {
     m_listButtons = ConfigHandler().getButtons();
+    KLOG_DEBUG() << "update button lists: " << m_listButtons;
+
     auto listTypes = CaptureButton::getIterableButtonTypes();
     for(int i = 0; i < this->count(); ++i) {
         QListWidgetItem* item = this->item(i);
