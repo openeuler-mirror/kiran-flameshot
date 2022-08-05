@@ -31,6 +31,8 @@
 #include <QMenu>
 #include <QDesktopWidget>
 
+#include <qt5-log-i.h>
+
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
 #endif
@@ -58,7 +60,11 @@ Controller::Controller() : m_captureWindow(nullptr) {
 #endif
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
-    qApp->setStyleSheet(StyleSheet);
+//    qApp->setStyleSheet(StyleSheet);
+
+    connect(qApp,&QApplication::paletteChanged,[this](const QPalette &pal){
+        KLOG_DEBUG() << "QApplication::paletteChanged";
+    });
 }
 
 Controller *Controller::getInstance() {
@@ -204,8 +210,13 @@ void Controller::openInfoWindow() {
 }
 
 void Controller::openLauncherWindow() {
-    CaptureLauncher *w = new CaptureLauncher();
-    w->show();
+//    CaptureLauncher *w = new CaptureLauncher();
+//    KLOG_DEBUG()<<"w->styleSheet():" << w->styleSheet();
+//    KLOG_DEBUG()<<"w->style():" << w->style();
+//    w->show();
+
+    m_captureLauncher = new CaptureLauncher();
+    m_captureLauncher->show();
 }
 
 void Controller::enableTrayIcon() {

@@ -19,6 +19,7 @@
 
 #include "src/widgets/capture/capturebutton.h"
 #include <QListWidget>
+#include <style-palette.h>
 
 class ButtonListView : public QListWidget {
 public:
@@ -27,6 +28,7 @@ public:
 public slots:
     void selectAll();
     void updateComponents();
+    void handleThemeChanged(Kiran::PaletteType paletteType);
 
 private slots:
     void reverseItemCheck(QListWidgetItem *);

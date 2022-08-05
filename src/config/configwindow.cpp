@@ -31,6 +31,7 @@
 #include <QKeyEvent>
 #include <QFileSystemWatcher>
 
+#include <qt5-log-i.h>
 // ConfigWindow contains the menus where you can configure the application
 
 ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
@@ -58,7 +59,6 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     bool isDark = ColorUtils::colorIsDark(background);
     QString modifier = isDark ? PathInfo::whiteIconPath() :
                                 PathInfo::blackIconPath();
-
     // visuals
     m_visuals = new VisualsEditor();
     addTab(m_visuals, QIcon(modifier + "graphics.svg"),
@@ -75,16 +75,23 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
            tr("General"));
 
     // connect update sigslots
-//    connect(this, &ConfigWindow::updateChildren,
-//            m_filenameEditor, &FileNameEditor::updateComponents);
-//    connect(this, &ConfigWindow::updateChildren,
-//            m_visuals, &VisualsEditor::updateComponents);
-//    connect(this, &ConfigWindow::updateChildren,
-//            m_generalConfig, &GeneneralConf::updateComponents);
-
     connect(this, SIGNAL(updateChildren()), m_filenameEditor, SLOT(updateComponents()));
     connect(this, SIGNAL(updateChildren()), m_visuals, SLOT(updateComponents()));
     connect(this, SIGNAL(updateChildren()), m_generalConfig, SLOT(updateComponents()));
+
+    connect(Kiran::StylePalette::instance(),&Kiran::StylePalette::themeChanged,this,&ConfigWindow::handleThemeChanged);
+}
+
+void ConfigWindow::handleThemeChanged(Kiran::PaletteType paletteType)
+{
+    bool isDark = (paletteType == Kiran::PALETTE_DARK) ?  true : false;
+    KLOG_DEBUG()  << "isDark:" << isDark;
+    QString modifier = isDark ? PathInfo::whiteIconPath() :
+                                PathInfo::blackIconPath();
+
+    setTabIcon(0,QIcon(modifier + "graphics.svg"));
+    setTabIcon(1,QIcon(modifier + "name_edition.svg"));
+    setTabIcon(2,QIcon(modifier + "config.svg"));
 }
 
 void ConfigWindow::keyPressEvent(QKeyEvent *e) {

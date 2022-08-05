@@ -31,6 +31,7 @@ class CaptureWidget;
 class ConfigWindow;
 class InfoWindow;
 class QSystemTrayIcon;
+class CaptureLauncher;
 
 using lambda = std::function<void(void)>;
 
@@ -87,4 +88,6 @@ private:
     QPointer<InfoWindow> m_infoWindow;
     QPointer<ConfigWindow> m_configWindow;
     QPointer<QSystemTrayIcon> m_trayIcon;
+
+    QPointer<CaptureLauncher> m_captureLauncher;
 };

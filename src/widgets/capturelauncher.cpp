@@ -37,6 +37,9 @@
 CaptureLauncher::CaptureLauncher(QWidget *parent) :
     QWidget(parent), m_id(0)
 {
+    setWindowIcon(QIcon(":img/app/kiran128x128.png"));
+    setWindowTitle(tr("Launcher"));
+
     setAttribute(Qt::WA_DeleteOnClose);
     connect(Controller::getInstance(), &Controller::captureTaken,
             this, &CaptureLauncher::captureTaken);

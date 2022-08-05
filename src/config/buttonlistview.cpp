@@ -20,8 +20,7 @@
 #include "src/utils/confighandler.h"
 #include <QListWidgetItem>
 #include <algorithm>
-
-#include <QDebug>
+#include <qt5-log-i.h>
 
 ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
     setMouseTracking(true);
@@ -31,6 +30,7 @@ ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
 //    connect(this, &QListWidget::itemClicked, this,
 //            &ButtonListView::reverseItemCheck);
     connect(this, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(reverseItemCheck(QListWidgetItem*)));
+    connect(Kiran::StylePalette::instance(),&Kiran::StylePalette::themeChanged,this,&ButtonListView::handleThemeChanged);
 }
 
 //初始化按键列表
@@ -60,6 +60,11 @@ void ButtonListView::initButtonList() {
         m_buttonItem->setToolTip(tool->description());
         tool->deleteLater();
     }
+}
+
+void ButtonListView::handleThemeChanged(Kiran::PaletteType paletteType)
+{
+
 }
 
 //更新按钮配置
@@ -102,6 +107,8 @@ void ButtonListView::selectAll() {
 //更新组件
 void ButtonListView::updateComponents() {
     m_listButtons = ConfigHandler().getButtons();
+    KLOG_DEBUG() << "update button lists: " << m_listButtons;
+
     auto listTypes = CaptureButton::getIterableButtonTypes();
     for(int i = 0; i < this->count(); ++i) {
         QListWidgetItem* item = this->item(i);
@@ -113,3 +120,5 @@ void ButtonListView::updateComponents() {
         }
     }
 }
+
+
