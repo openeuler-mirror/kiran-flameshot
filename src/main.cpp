@@ -38,11 +38,13 @@
 #include <QDBusConnection>
 #endif
 
+#include <qt5-log-i.h>
 int main(int argc, char *argv[]) {
     // required for the button serialization
     // TODO: change to QVector in v1.0
     qRegisterMetaTypeStreamOperators<QList<int> >("QList<int>");
     qApp->setApplicationVersion(static_cast<QString>(APP_VERSION));
+    klog_qt5_init("", "kylinsec-session", "kiran-flameshot", "flameshot");
 
     // no arguments, just launch Flameshot
     if (argc == 1) {

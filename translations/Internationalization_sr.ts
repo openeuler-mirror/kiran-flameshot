@@ -51,12 +51,12 @@
 <context>
     <name>ArrowTool</name>
     <message>
-        <location filename="../src/tools/arrow/arrowtool.cpp" line="83"/>
+        <location filename="../src/tools/arrow/arrowtool.cpp" line="84"/>
         <source>Arrow</source>
         <translation>Стрелица</translation>
     </message>
     <message>
-        <location filename="../src/tools/arrow/arrowtool.cpp" line="91"/>
+        <location filename="../src/tools/arrow/arrowtool.cpp" line="92"/>
         <source>Set the Arrow as the paint tool</source>
         <translation>Избор цртања стрелице</translation>
     </message>
@@ -85,47 +85,52 @@
 <context>
     <name>CaptureLauncher</name>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="59"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="41"/>
+        <source>Launcher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="62"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="64"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="67"/>
         <source>Rectangular Region</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="65"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="68"/>
         <source>Full Screen (All Monitors)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="72"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="75"/>
         <source>No Delay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="82"/>
         <source> second</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="82"/>
         <source> seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="83"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="86"/>
         <source>Take new screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="90"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="93"/>
         <source>Area:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="91"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="94"/>
         <source>Delay:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -138,7 +143,7 @@
         <translation>Нисам успео да снимим екран</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="407"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="406"/>
         <source>Press Enter to capture the screen.
 Use the Mouse Wheel to change the thickness of your tool.
 Use ctrl+c to save the picture to the clipboard.
@@ -146,12 +151,12 @@ Use ctrl+s to save the picture to the set location.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="1001"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="1009"/>
         <source>Option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="1007"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="1015"/>
         <source>Blur</source>
         <translation type="unfinished">Замућење</translation>
     </message>
@@ -188,22 +193,22 @@ Press Space to open the side panel.</source>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="41"/>
+        <location filename="../src/config/configwindow.cpp" line="42"/>
         <source>Configuration</source>
         <translation>Подешавања</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="63"/>
+        <location filename="../src/config/configwindow.cpp" line="65"/>
         <source>Interface</source>
         <translation>Изглед</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="68"/>
+        <location filename="../src/config/configwindow.cpp" line="70"/>
         <source>Filename Editor</source>
         <translation>Избор имена датотеке</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="73"/>
+        <location filename="../src/config/configwindow.cpp" line="75"/>
         <source>General</source>
         <translation>Опште</translation>
     </message>
@@ -211,32 +216,32 @@ Press Space to open the side panel.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="212"/>
+        <location filename="../src/core/controller.cpp" line="227"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Направи снимак екрана</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="217"/>
+        <location filename="../src/core/controller.cpp" line="232"/>
         <source>&amp;Open Launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="220"/>
+        <location filename="../src/core/controller.cpp" line="235"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Подешавања</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="223"/>
+        <location filename="../src/core/controller.cpp" line="238"/>
         <source>&amp;Information</source>
         <translation>Ин&amp;формације</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="226"/>
+        <location filename="../src/core/controller.cpp" line="241"/>
         <source>&amp;Quit</source>
         <translation>&amp;Излаз</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="240"/>
+        <location filename="../src/core/controller.cpp" line="255"/>
         <source>click to take screenshot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -293,32 +298,32 @@ Press Space to open the side panel.</source>
         <translation>Преглед:</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="78"/>
+        <location filename="../src/config/filenameeditor.cpp" line="80"/>
         <source>Save</source>
         <translation>Сачувај</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="80"/>
+        <location filename="../src/config/filenameeditor.cpp" line="83"/>
         <source>Saves the pattern</source>
         <translation>Сачувај шаблон</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="82"/>
+        <location filename="../src/config/filenameeditor.cpp" line="85"/>
         <source>Reset</source>
         <translation>Ресетуј</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="85"/>
+        <location filename="../src/config/filenameeditor.cpp" line="89"/>
         <source>Restores the saved pattern</source>
         <translation>Поврати сачувани шаблон</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="87"/>
+        <location filename="../src/config/filenameeditor.cpp" line="91"/>
         <source>Clear</source>
         <translation>Очисти</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="91"/>
+        <location filename="../src/config/filenameeditor.cpp" line="95"/>
         <source>Deletes the name</source>
         <translation>Брише име</translation>
     </message>
@@ -630,42 +635,42 @@ Press Space to open the side panel.</source>
 <context>
     <name>MenuController</name>
     <message>
-        <location filename="../src/widgets/capture/menucontroller.cpp" line="48"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="49"/>
         <source>save to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/menucontroller.cpp" line="49"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="50"/>
         <source>desktop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/menucontroller.cpp" line="50"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="51"/>
         <source>cilickborad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/menucontroller.cpp" line="51"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="52"/>
         <source>Custom save location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/menucontroller.cpp" line="62"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="63"/>
         <source>保存格式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/menucontroller.cpp" line="63"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="64"/>
         <source>JPG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/menucontroller.cpp" line="64"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="65"/>
         <source>PNG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/menucontroller.cpp" line="65"/>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="66"/>
         <source>BMP</source>
         <translation type="unfinished"></translation>
     </message>
@@ -745,11 +750,11 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="78"/>
-        <location filename="../src/main.cpp" line="228"/>
-        <location filename="../src/main.cpp" line="377"/>
-        <location filename="../src/main.cpp" line="401"/>
-        <location filename="../src/main.cpp" line="430"/>
+        <location filename="../src/main.cpp" line="82"/>
+        <location filename="../src/main.cpp" line="233"/>
+        <location filename="../src/main.cpp" line="382"/>
+        <location filename="../src/main.cpp" line="406"/>
+        <location filename="../src/main.cpp" line="435"/>
         <source>Unable to connect via DBus</source>
         <translation>Нисам успео да се повежем кроз DBus</translation>
     </message>
