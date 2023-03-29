@@ -1,0 +1,1196 @@
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="zh_CN">
+<context>
+    <name>AppLauncher</name>
+    <message>
+        <location filename="../src/tools/launcher/applaunchertool.cpp" line="34"/>
+        <source>App Launcher</source>
+        <translation>ཉེར་སྤྱོད་སྐུལ་སློང་འཕྲུལ་ཆས།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/launcher/applaunchertool.cpp" line="46"/>
+        <source>Choose an app to open the capture</source>
+        <translation>འཛིན་བཟུང་བྱས་པའི་ཉེར་སྤྱོད་གོ་རིམ་ཞིག་བདམས་པ།</translation>
+    </message>
+</context>
+<context>
+    <name>AppLauncherWidget</name>
+    <message>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="56"/>
+        <source>Open With</source>
+        <translation>སྒོ་འབྱེད་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="71"/>
+        <source>Launch in terminal</source>
+        <translation>གནམ་གྲུ་སྒུག་ས་ནས་འཕེན་</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="72"/>
+        <source>Keep open after selection</source>
+        <translation>འདེམས་སྒྲུག་བྱས་རྗེས་མུ་མཐུད་སྒོ་འབྱེད</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="99"/>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="111"/>
+        <source>Error</source>
+        <translation>ནོར་འཁྲུལ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="112"/>
+        <source>Unable to launch in terminal.</source>
+        <translation>གནམ་གྲུ་སྒུག་ས་ནས་འཕེན་གཏོང་བྱེད་ཐབས་བྲལ་བ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="99"/>
+        <source>Unable to write in</source>
+        <translation>ནང་དུ་ཡི་གེ་འབྲི་མི་ཐུབ་པ།</translation>
+    </message>
+</context>
+<context>
+    <name>ArrowTool</name>
+    <message>
+        <location filename="../src/tools/arrow/arrowtool.cpp" line="84"/>
+        <source>Arrow</source>
+        <translation>མདའ་མོ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/arrow/arrowtool.cpp" line="92"/>
+        <source>Set the Arrow as the paint tool</source>
+        <translation>མདའ་དེ་རི་མོ་འབྲི་བའི་ཡོ་བྱད་དུ་གཏན་འཁེལ་བྱས།</translation>
+    </message>
+</context>
+<context>
+    <name>BlurTool</name>
+    <message>
+        <location filename="../src/tools/blur/blurtool.cpp" line="34"/>
+        <source>Blur</source>
+        <translation>རབ་རིབ་ཏུ་གྱུར་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/blur/blurtool.cpp" line="42"/>
+        <source>Set Blur as the paint tool</source>
+        <translation>རབ་རིབ་ཏུ་གྱུར་ནས་བཀྲག་རྩི་བྱུགས་པའི་ཡོ་བྱད</translation>
+    </message>
+</context>
+<context>
+    <name>CaptureButton</name>
+    <message>
+        <source>选项</source>
+        <translation type="obsolete">རྣམ་གྲངས་འདེམས་པ།</translation>
+    </message>
+    <message>
+        <source>option</source>
+        <translation type="vanished">བསལ་འདེམས་ཀྱི་དབང</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/capturebutton.cpp" line="46"/>
+        <source>Option</source>
+        <translation>བསལ་འདེམས་ཀྱི་དབང</translation>
+    </message>
+</context>
+<context>
+    <name>CaptureLauncher</name>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="41"/>
+        <source>Launcher</source>
+        <translation>འཕེན་གཏོང་འཕྲུལ་ཆས།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="62"/>
+        <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
+        <translation>&lt;b&gt;འཛིན་བཟུང་བྱེད་སྟངས།&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="67"/>
+        <source>Rectangular Region</source>
+        <translation>ད་ལྟ་སྤྱོད་གོ་མི་དགོས་པའི་ས་ཁོངས།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="68"/>
+        <source>Full Screen (All Monitors)</source>
+        <translation>བརྙན་ཤེལ་ཧྲིལ་པོ་(ལྟ་ཞིབ་ཚད་ལེན་འཕྲུལ་ཆས་ཡོད་ཚད</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="75"/>
+        <source>No Delay</source>
+        <translation>འགོར་འགྱངས་མི་བྱེད་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="82"/>
+        <source> second</source>
+        <translation>གཉིས།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="82"/>
+        <source> seconds</source>
+        <translation>དུས་ཚོད་སྐར་ཆ་ཙམ་ཡང</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="86"/>
+        <source>Take new screenshot</source>
+        <translation>བརྙན་ཤེལ་གསར་བ་ལེན་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="93"/>
+        <source>Area:</source>
+        <translation>ས་ཁོངས་ནི།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="94"/>
+        <source>Delay:</source>
+        <translation>འགོར་འགྱངས་བྱས་པ་གཤམ་</translation>
+    </message>
+</context>
+<context>
+    <name>CaptureWidget</name>
+    <message>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="115"/>
+        <source>Unable to capture screen</source>
+        <translatorcomment>无法捕获屏幕</translatorcomment>
+        <translation>བརྙན་ཤེལ་འཛིན་མི་ཐུབ་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="406"/>
+        <source>Press Enter to capture the screen.
+Use the Mouse Wheel to change the thickness of your tool.
+Use ctrl+c to save the picture to the clipboard.
+Use ctrl+s to save the picture to the set location.</source>
+        <translatorcomment>按 Enter 键捕捉屏幕。
+使用鼠标滚轮来改变绘画工具的宽度。
+使用ctrl+c将图片保存到剪贴板。
+使用ctrl+s将图片保存至设定位置。</translatorcomment>
+        <translation>ནང་དུ་འཛུལ་ནས་བརྙན་ཤེལ་ལེན་དུ་འཇུག་དགོས།
+བྱི་བའི་འཁོར་ལོ་བཀོལ་ནས་ཁྱོད་ཀྱི་ཡོ་བྱད་ཀྱི་མཐུག་ཚད་ལ་འགྱུར་ལྡོག་གཏོང་དགོས།
+ctrl+cབཀོལ་ནས་རི་མོ་དེ་འདྲ་པར་གྱི་པང་ལེབ་ཏུ་ཉར་ཚགས་བྱེད་དགོས།
+ctrl+sབཀོལ་ནས་རི་མོ་དེ་གཏན་ཁེལ་བྱས་པའི་གནས་སུ་ཉར་ཚགས་བྱེད་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="1009"/>
+        <source>Option</source>
+        <translation>བསལ་འདེམས་ཀྱི་དབང</translation>
+    </message>
+    <message>
+        <source>option</source>
+        <translation type="vanished">བསལ་འདེམས་ཀྱི་དབང</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="1015"/>
+        <source>Blur</source>
+        <translation>རབ་རིབ་ཏུ་གྱུར་པ།</translation>
+    </message>
+    <message>
+        <source>选项</source>
+        <translation type="obsolete">རྣམ་གྲངས་འདེམས་པ།</translation>
+    </message>
+    <message>
+        <source>Marker</source>
+        <translation type="obsolete">ཚོང་རྟགས་རྒྱག་མཁན།</translation>
+    </message>
+</context>
+<context>
+    <name>CircleTool</name>
+    <message>
+        <location filename="../src/tools/circle/circletool.cpp" line="34"/>
+        <source>Circle</source>
+        <translation>སྒོར་དབྱིབས་</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/circle/circletool.cpp" line="42"/>
+        <source>Set the Circle as the paint tool</source>
+        <translation>སྒོར་དབྱིབས་དེ་རི་མོ་འབྲི་བའི་ཡོ་བྱད་དུ་གཏན་འཁེལ་</translation>
+    </message>
+</context>
+<context>
+    <name>ConfigWindow</name>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="42"/>
+        <source>Configuration</source>
+        <translation>བཀོད་སྒྲིག</translation>
+    </message>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="65"/>
+        <source>Interface</source>
+        <translation>འབྲེལ་མཐུད་བྱེད་སྟངས།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="70"/>
+        <source>Filename Editor</source>
+        <translation>ཡིག་ཆའི་མིང་རྩོམ་སྒྲིག་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="75"/>
+        <source>General</source>
+        <translation>སྤྱིར་བཏང་གི་གནས</translation>
+    </message>
+</context>
+<context>
+    <name>Controller</name>
+    <message>
+        <location filename="../src/core/controller.cpp" line="227"/>
+        <source>&amp;Take Screenshot</source>
+        <translation>-པར་ལེན་འཕྲུལ་ཆས་ཀྱི་པར་རིས་ལ་</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="232"/>
+        <source>&amp;Open Launcher</source>
+        <translation>སྒོ་འབྱེད་འཕྲུལ་ཆས།</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="235"/>
+        <source>&amp;Configuration</source>
+        <translation>&amp;བཀོད་སྒྲིག</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="238"/>
+        <source>&amp;Information</source>
+        <translation>ཆ་འཕྲིན།</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="241"/>
+        <source>&amp;Quit</source>
+        <translation>ལས་གནས་ནས་ཕྱིར་འཐེན་བྱ</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="255"/>
+        <source>click to take screenshot</source>
+        <translatorcomment>点击进行截图</translatorcomment>
+        <translation>པར་ལེན་འཕྲུལ་ཆས་ཀྱི་པར་རིས་ལེན་དགོས།</translation>
+    </message>
+    <message>
+        <source>Click to take screenshot</source>
+        <translatorcomment>点击进行截图</translatorcomment>
+        <translation type="vanished">པར་ལེན་འཕྲུལ་ཆས་ཀྱི་པར་རིས་ལེན་དགོས།</translation>
+    </message>
+</context>
+<context>
+    <name>CopyTool</name>
+    <message>
+        <location filename="../src/tools/copy/copytool.cpp" line="35"/>
+        <source>Copy</source>
+        <translation>འདྲ་བཤུས་</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/copy/copytool.cpp" line="43"/>
+        <source>Copy the selection into the clipboard</source>
+        <translation>བདམས་གསེས་དེ་འདྲ་བཤུས་བྱས་ནས་པང་ལེབ་ནང་དུ་བཅུག</translation>
+    </message>
+</context>
+<context>
+    <name>DBusUtils</name>
+    <message>
+        <location filename="../src/utils/dbusutils.cpp" line="43"/>
+        <source>Unable to connect via DBus</source>
+        <translation>DBusབརྒྱུད་ནས་འབྲེལ་མཐུད་བྱེད་ཐབས་བྲལ།</translation>
+    </message>
+</context>
+<context>
+    <name>ExitTool</name>
+    <message>
+        <location filename="../src/tools/exit/exittool.cpp" line="34"/>
+        <source>Exit</source>
+        <translation>ཕྱིར་འཐེན་བྱེད་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/exit/exittool.cpp" line="42"/>
+        <source>Leave the capture screen</source>
+        <translation>འཛིན་བཟུང་བྱས་པའི་བརྙན་ཤེལ་དང་ཁ་བྲལ</translation>
+    </message>
+</context>
+<context>
+    <name>FileNameEditor</name>
+    <message>
+        <location filename="../src/config/filenameeditor.cpp" line="35"/>
+        <source>Edit the name of your captures:</source>
+        <translation>ཁྱོད་ཀྱིས་འཛིན་བཟུང་བྱས་པའི་མིང་རྩོམ་སྒྲིག་བྱས་པ་གཤམ་གསལ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filenameeditor.cpp" line="39"/>
+        <source>Edit:</source>
+        <translation>རྩོམ་སྒྲིག་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filenameeditor.cpp" line="41"/>
+        <source>Preview:</source>
+        <translation>སྔོན་བརྡ་གཏོང་རྒྱུ་སྟེ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filenameeditor.cpp" line="80"/>
+        <source>Save</source>
+        <translation>གྲོན་ཆུང་བྱེད་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filenameeditor.cpp" line="83"/>
+        <source>Saves the pattern</source>
+        <translation>དཔེ་དབྱིབས་གྲོན་ཆུང་བྱེད་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filenameeditor.cpp" line="85"/>
+        <source>Reset</source>
+        <translation>བསྐྱར་དུ་བཀོད་སྒྲིག་བྱེད་པ</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filenameeditor.cpp" line="89"/>
+        <source>Restores the saved pattern</source>
+        <translation>ཉར་ཚགས་བྱས་པའི་དཔེ་དབྱིབས་སླར་གསོ་བྱེད་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filenameeditor.cpp" line="91"/>
+        <source>Clear</source>
+        <translation>གསལ་པོར་བཤད་ན།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filenameeditor.cpp" line="95"/>
+        <source>Deletes the name</source>
+        <translation>མིང་བསུབ་པ།</translation>
+    </message>
+</context>
+<context>
+    <name>GeneneralConf</name>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="140"/>
+        <source>Show help message</source>
+        <translation>རོགས་སྐྱོར་གྱི་ཆ་འཕྲིན་མངོན་པར</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="144"/>
+        <source>Show the help message at the beginning in the capture mode.</source>
+        <translation>འཛིན་བཟུང་བྱེད་སྟངས་ཐོག་མར་རོགས་སྐྱོར་གྱི་ཆ་འཕྲིན་མངོན་པར་བྱས་ཡོད།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="154"/>
+        <location filename="../src/config/geneneralconf.cpp" line="158"/>
+        <source>Show desktop notifications</source>
+        <translation>ཅོག་ཙེའི་སྟེང་གི་བརྡ་ཐོ་མངོན་པར་བྱས་ཡོད</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="167"/>
+        <source>Show tray icon</source>
+        <translation>སྡེར་མའི་མཚོན་རྟགས་མངོན་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="171"/>
+        <source>Show the systemtray icon</source>
+        <translation>མ་ལག་གི་མཚོན་རྟགས་མངོན་པར་བྱས་ཡོད།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="86"/>
+        <location filename="../src/config/geneneralconf.cpp" line="192"/>
+        <source>Import</source>
+        <translation>ནང་འདྲེན་</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <source>Error</source>
+        <translation>ནོར་འཁྲུལ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <source>Unable to read file.</source>
+        <translation>ཡིག་ཆ་ཀློག་མི་ཐུབ་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <source>Unable to write file.</source>
+        <translation>ཡིག་ཆ་འབྲི་མི་ཐུབ་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="109"/>
+        <source>Save File</source>
+        <translation>ཡིག་ཆ་ཉར་ཚགས་བྱེད་པ</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <source>Confirm Reset</source>
+        <translation>བསྐྱར་དུ་གཏན་འཁེལ་བྱ་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="131"/>
+        <source>Are you sure you want to reset the configuration?</source>
+        <translation>ཁྱོད་ཀྱིས་ཡང་བསྐྱར་བཀོད་སྒྲིག་བྱེད་དགོས་པ་གཏན་འཁེལ་བྱེད་ཐུབ་བམ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="182"/>
+        <source>Configuration File</source>
+        <translation>བཀོད་སྒྲིག་ཡིག་ཆ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="187"/>
+        <source>Export</source>
+        <translation>ཕྱིར་གཏོང་།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
+        <source>Reset</source>
+        <translation>བསྐྱར་དུ་བཀོད་སྒྲིག་བྱེད་པ</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="205"/>
+        <source>Launch at startup</source>
+        <translation>བྱ་གཞག་གསར་གཏོད་བྱེད་འགོ་ཚུགས་</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="209"/>
+        <source>Launch Flameshot</source>
+        <translation>མེ་ལྕེ་འབར་བཞིན་ཡོད།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="217"/>
+        <source>Close after capture</source>
+        <translation>འཛིན་བཟུང་བྱས་རྗེས་སྒོ་རྒྱག་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="221"/>
+        <source>Close after taking a screenshot</source>
+        <translation>པར་ལེན་བྱས་རྗེས་སྒོ་རྒྱག་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="230"/>
+        <source>Copy URL after upload</source>
+        <translatorcomment>上传后拷贝URL</translatorcomment>
+        <translation>ཕབ་ལེན་བྱས་རྗེས་ཀྱི་URLའདཔར་འབྲི</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="233"/>
+        <source>Copy URL and close window after upload</source>
+        <translatorcomment>上传后拷贝URL并关闭窗口</translatorcomment>
+        <translation>དྲ་ཐོག་དང་སྒོ་རྒྱག་པའི་སྒེའུ་ཁུང་བསྐྱར་དཔར་བྱས་</translation>
+    </message>
+</context>
+<context>
+    <name>ImgurUploader</name>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="47"/>
+        <source>Upload to Imgur</source>
+        <translation>དབྱི་ཀུའུ་ཨར་ལ་ཕབ་ལེན་བྱས་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="54"/>
+        <source>Uploading Image</source>
+        <translation>པར་རིས་ཕབ་ལེན་བྱེད་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="140"/>
+        <source>Copy URL</source>
+        <translation>འདྲ་བཤུས་ཀྱི་URL</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="141"/>
+        <source>Open URL</source>
+        <translation>ཁ་ཕྱེ་བའི་URL</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="142"/>
+        <source>Delete image</source>
+        <translation>པར་རིས་བསུབ་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="143"/>
+        <source>Image to Clipboard.</source>
+        <translation>པར་རིས་དེ་འདྲུད་པང་དུ་ཕབ་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
+        <source>Unable to open the URL.</source>
+        <translation>དྲ་ཚིགས་ཀྱི་ཁ་ཕྱེ་མི་ཐུབ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
+        <source>URL copied to clipboard.</source>
+        <translation>དྲ་ཚིགས་དེ་འདྲ་བཤུས་བྱས་ནས་པང་ལེབ་ཏུ་ཕབ་</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="181"/>
+        <source>Screenshot copied to clipboard.</source>
+        <translation>འདྲ་བཤུས་བྱས་པའི་བརྙན་རིས་དེ་འདྲ་བཤུས་བྱས་པ་རེད།</translation>
+    </message>
+</context>
+<context>
+    <name>ImgurUploaderTool</name>
+    <message>
+        <location filename="../src/tools/imgur/imguruploadertool.cpp" line="35"/>
+        <source>Image Uploader</source>
+        <translation>པར་རིས་ཕབ་ལེན་འཕྲུལ་ཆས།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
+        <source>Upload the selection to Imgur</source>
+        <translation>གདམ་གསེས་དེ་དབྱི་ཀུའུ་ལ་སྤྲད་པ་རེད།</translation>
+    </message>
+</context>
+<context>
+    <name>InfoWindow</name>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="38"/>
+        <source>About</source>
+        <translation>འབྲེལ་ཡོད་ཀྱི་སྐོར།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="63"/>
+        <source>SPACEBAR</source>
+        <translation>འཇིག་རྟེན་འཕུར་སྐྱོད་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="64"/>
+        <source>Right Click</source>
+        <translation>གཡས་ཕྱོགས་ཀྱི་མཐེབ་</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="65"/>
+        <source>Mouse Wheel</source>
+        <translation>བྱི་བའི་འཁོར་ལོ།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="69"/>
+        <source>Move selection 1px</source>
+        <translation>བདམས་ཐོན་པ་1pxགནས་སྤོ་བྱ་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="70"/>
+        <source>Resize selection 1px</source>
+        <translation>གདམ་གསེས་བྱས་པའི་1pxལ་ཆེ་ཆུང་།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="71"/>
+        <source>Quit capture</source>
+        <translation>འཛིན་བཟུང་བྱེད་མཚམས་བཞག་པ</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="72"/>
+        <source>Copy to clipboard</source>
+        <translation>འདྲ་བཤུས་བྱས་ནས་པང་ལེབ་ཏུ་ཕབ</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="73"/>
+        <source>Save selection as a file</source>
+        <translation>ཡིག་ཆ་ཞིག་ཏུ་བརྩིས་ནས་གདམ་གསེས་གྲོན་ཆུང</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="74"/>
+        <source>Undo the last modification</source>
+        <translation>ཆེས་མཐའ་མཇུག་གི་བཟོ་བཅོས་རྒྱག་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="75"/>
+        <source>Start to capturescreen</source>
+        <translatorcomment>开始捕捉屏幕</translatorcomment>
+        <translation>བརྙན་ཤེལ་འཛིན་འགོ་བརྩམས།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <source>Toggle visibility of sidebar with options of the selected tool</source>
+        <translation>བདམས་ཟིན་པའི་ཡོ་བྱད་ཀྱི་བསལ་འདེམས་ཀྱིས་གཞོགས་ངོས་ཀྱི་མཐོང་ཚད་ཇེ་དམའ་རུ་གཏོང་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="77"/>
+        <source>Show color picker</source>
+        <translation>ཁ་དོག་འཐུ་མཁན་མངོན་པར་བྱས་ཡོད།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="78"/>
+        <source>Change the tool's thickness</source>
+        <translation>ཡོ་བྱད་ཀྱི་མཐུག་ཚད་ལ་འགྱུར་ལྡོག་གཏོང་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="94"/>
+        <source>Key</source>
+        <translation>ལྡེ་མིག</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="94"/>
+        <source>Description</source>
+        <translation>གསལ་བཤད།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="125"/>
+        <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
+        <translation>&lt;u&gt;&lt;b&gt;འཁྲོལ་འཛིན།&lt;/b&gt;&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="133"/>
+        <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
+        <translation>&lt;u&gt;&lt;b&gt;པར་གཞི།&lt;/b&gt;&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="143"/>
+        <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
+        <translation>&lt;u&gt;&lt;b&gt;མྱུར་བགྲོད་གཞུང་ལམ།&lt;/b&gt;&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="83"/>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation>བརྙན་ཤེལ་འཛིན་བཟུང་བྱེད་སྟངས་ཁྲོད་དུ་སྤྱོད་ཆོག་པའི་མྱུར་ལམ་ཞིག་ཡོད།</translation>
+    </message>
+</context>
+<context>
+    <name>LineTool</name>
+    <message>
+        <location filename="../src/tools/line/linetool.cpp" line="37"/>
+        <source>Line</source>
+        <translation>ལམ་ཐིག</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/line/linetool.cpp" line="45"/>
+        <source>Set the Line as the paint tool</source>
+        <translation>ཐིག་དེ་རི་མོ་འབྲི་བའི་ཡོ་བྱད་དུ་གཏན་འཁེལ་བྱས།</translation>
+    </message>
+</context>
+<context>
+    <name>MarkerTool</name>
+    <message>
+        <location filename="../src/tools/marker/markertool.cpp" line="37"/>
+        <source>Marker</source>
+        <translation>ཚོང་རྟགས་རྒྱག་མཁན།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/marker/markertool.cpp" line="45"/>
+        <source>Set the Marker as the paint tool</source>
+        <translation>མཚོན་རྟགས་དེ་རི་མོ་འབྲི་བའི་ཡོ་བྱད་དུ་གཏན་འཁེལ་བྱས།</translation>
+    </message>
+</context>
+<context>
+    <name>MenuController</name>
+    <message>
+        <source>存储到</source>
+        <translatorcomment>存储到</translatorcomment>
+        <translation type="vanished">གསོག་ཉར་བྱས་ནས་ཐོན་པ།</translation>
+    </message>
+    <message>
+        <source>桌面</source>
+        <translatorcomment>桌面</translatorcomment>
+        <translation type="vanished">ཅོག་ཙེའི་ངོས།</translation>
+    </message>
+    <message>
+        <source>剪切板</source>
+        <translatorcomment>剪切板</translatorcomment>
+        <translation type="vanished">ཤིང་ལེབ་གཅོད་པ།</translation>
+    </message>
+    <message>
+        <source>自定义保存位置</source>
+        <translatorcomment>自定义保存位置</translatorcomment>
+        <translation type="vanished">རང་གི་མཚན་ཉིད་ཀྱིས་གནས་ས་ཉར་འཛིན་བྱེད་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="49"/>
+        <source>save to</source>
+        <translatorcomment>存储到</translatorcomment>
+        <translation>གྲོན་ཆུང་བྱེད་ཐུབ་པ</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="50"/>
+        <source>desktop</source>
+        <translatorcomment>桌面</translatorcomment>
+        <translation>ཅོག་ཙེའི་སྟེང་གི</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="51"/>
+        <source>cilickborad</source>
+        <translatorcomment>剪切板</translatorcomment>
+        <translation>cilickborad</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="52"/>
+        <source>Custom save location</source>
+        <translatorcomment>自定义保存位置</translatorcomment>
+        <translation>ཡུལ་སྲོལ་གོམས་གཤིས་ཀྱི་གྲོན་</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="63"/>
+        <source>保存格式</source>
+        <translatorcomment>保存格式</translatorcomment>
+        <translation>རྣམ་གཞག་ཉར་ཚགས་བྱ་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="64"/>
+        <source>JPG</source>
+        <translatorcomment>JPG</translatorcomment>
+        <translation>.JPG</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="65"/>
+        <source>PNG</source>
+        <translatorcomment>PNG</translatorcomment>
+        <translation>.PNG</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/menucontroller.cpp" line="66"/>
+        <source>BMP</source>
+        <translatorcomment>BMP</translatorcomment>
+        <translation>.BMP</translation>
+    </message>
+</context>
+<context>
+    <name>MoveTool</name>
+    <message>
+        <location filename="../src/tools/move/movetool.cpp" line="34"/>
+        <source>Move</source>
+        <translation>གནས་སྤོ་བྱ་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/move/movetool.cpp" line="46"/>
+        <source>Move the selection area</source>
+        <translation>འདེམས་སྒྲུག་ཁུལ་སྤོ་སྒྱུར་བྱ་དགོས།</translation>
+    </message>
+</context>
+<context>
+    <name>PencilTool</name>
+    <message>
+        <location filename="../src/tools/pencil/penciltool.cpp" line="30"/>
+        <source>Pencil</source>
+        <translation>ཞ་སྨྱུག</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/pencil/penciltool.cpp" line="38"/>
+        <source>Set the Pencil as the paint tool</source>
+        <translation>ཞ་སྨྱུག་དེ་བཀྲག་རྩི་བྱུགས་པའི་ཡོ་བྱད་དུ་གཏན་འཁེལ་བྱས།</translation>
+    </message>
+</context>
+<context>
+    <name>PinTool</name>
+    <message>
+        <location filename="../src/tools/pin/pintool.cpp" line="34"/>
+        <source>Pin Tool</source>
+        <translation>ཁབ་སྐུད་ཡོ་བྱད།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/pin/pintool.cpp" line="46"/>
+        <source>Pin image on the desktop</source>
+        <translation>ཅོག་ཙེའི་སྟེང་གི་ཁབ་ཀྱི་པར་རིས།</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="104"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="166"/>
+        <source>Save Error</source>
+        <translation>ནོར་འཁྲུལ་གྲོན་ཆུང་བྱེད་</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="57"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="98"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="124"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="160"/>
+        <source>Capture saved as </source>
+        <translation>ཉར་ཚགས་བྱས་པའི་འཛིན་བཟུང་བྱས་པ</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="34"/>
+        <source>Capture saved to clipboard</source>
+        <translation>ཉར་ཚགས་བྱས་པའི་འཛིན་བཟུང་བྱས་ནས་པང་ལེབ་</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="59"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="101"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="126"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="163"/>
+        <source>Error trying to save as </source>
+        <translation>ནོར་འཁྲུལ་གྱི་སྒོ་ནས་གྲོན་ཆུང་བྱེད་རྩིས་ཡོད།</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="142"/>
+        <source>Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)</source>
+        <translation>ལག་འཁྱེར་ཁ་པར་གྱི་དྲ་རྒྱའི་རི་མོའི་ཡིག་ཆ་(PNG)(*.png); BMP ཡིག་ཆ་(*.bmp); JPEG ཡིག་ཆ་(*.jpg)</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="82"/>
+        <location filename="../src/main.cpp" line="233"/>
+        <location filename="../src/main.cpp" line="382"/>
+        <location filename="../src/main.cpp" line="406"/>
+        <location filename="../src/main.cpp" line="435"/>
+        <source>Unable to connect via DBus</source>
+        <translation>DBusབརྒྱུད་ནས་འབྲེལ་མཐུད་བྱེད་ཐབས་བྲལ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/launcher/openwithprogram.cpp" line="39"/>
+        <source>Error</source>
+        <translation>ནོར་འཁྲུལ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/launcher/openwithprogram.cpp" line="40"/>
+        <source>Unable to write in</source>
+        <translation>ནང་དུ་ཡི་གེ་འབྲི་མི་ཐུབ་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
+        <source>URL copied to clipboard.</source>
+        <translatorcomment>复制链接到剪贴板。</translatorcomment>
+        <translation>དྲ་ཚིགས་དེ་འདྲ་བཤུས་བྱས་ནས་པང་ལེབ་ཏུ་ཕབ་</translation>
+    </message>
+</context>
+<context>
+    <name>RectangleTool</name>
+    <message>
+        <location filename="../src/tools/rectangle/rectangletool.cpp" line="34"/>
+        <source>Rectangle</source>
+        <translation>གྲུ་བཞི་ནར་མོ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/rectangle/rectangletool.cpp" line="42"/>
+        <source>Set the Rectangle as the paint tool</source>
+        <translation>གྲུ་བཞི་ནར་མོ་དེ་རི་མོ་འབྲི་བའི་ཡོ་བྱད་དུ་གཏན་འཁེལ་བྱས།</translation>
+    </message>
+</context>
+<context>
+    <name>RedoTool</name>
+    <message>
+        <location filename="../src/tools/redo/redotool.cpp" line="34"/>
+        <source>Redo</source>
+        <translation>ཡང་བསྐྱར་ཐེངས་གཅིག་ལ་བསྐྱར</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/redo/redotool.cpp" line="46"/>
+        <source>Redo the next modification</source>
+        <translation>ཐེངས་རྗེས་མའི་བཟོ་བཅོས་བསྐྱར་དུ་བཟོ་བཅོས་རྒྱག་པ།</translation>
+    </message>
+</context>
+<context>
+    <name>SaveOption</name>
+    <message>
+        <source>选项</source>
+        <translatorcomment>选项</translatorcomment>
+        <translation type="vanished">རྣམ་གྲངས་འདེམས་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/saveoption.cpp" line="42"/>
+        <source>Option</source>
+        <translation>བསལ་འདེམས་ཀྱི་དབང</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/saveoption.cpp" line="50"/>
+        <source>Save options</source>
+        <translatorcomment>保存选项</translatorcomment>
+        <translation>བསལ་འདེམས་གྲོན་ཆུང་བྱ་དགོས།</translation>
+    </message>
+</context>
+<context>
+    <name>SaveTool</name>
+    <message>
+        <location filename="../src/tools/save/savetool.cpp" line="36"/>
+        <source>Save</source>
+        <translation>གྲོན་ཆུང་བྱེད་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/save/savetool.cpp" line="44"/>
+        <source>Save the capture</source>
+        <translation>འཛིན་བཟུང་བྱས་པའི་དངོས་པོ་</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenGrabber</name>
+    <message>
+        <location filename="../src/utils/screengrabber.cpp" line="76"/>
+        <source>Unable to capture screen</source>
+        <translation>བརྙན་ཤེལ་འཛིན་མི་ཐུབ་པ།</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenshotSaver</name>
+    <message>
+        <source>Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)</source>
+        <translation type="vanished">ལག་འཁྱེར་ཁ་པར་གྱི་དྲ་རྒྱའི་རི་མོའི་ཡིག་ཆ་(PNG)(*.png); BMP ཡིག་ཆ་(*.bmp); JPEG ཡིག་ཆ་(*.jpg)</translation>
+    </message>
+</context>
+<context>
+    <name>SelectionTool</name>
+    <message>
+        <location filename="../src/tools/selection/selectiontool.cpp" line="38"/>
+        <source>Rectangular Selection</source>
+        <translation>ད་དུང་མིག་ཤེལ་གྱི་གདམ་ག</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/selection/selectiontool.cpp" line="46"/>
+        <source>Set Selection as the paint tool</source>
+        <translation>འདེམས་སྒྲུག་བྱ་རྒྱུ་དེ་རི་མོ་འབྲི་བའི་ཡོ་བྱད་</translation>
+    </message>
+</context>
+<context>
+    <name>SidePanelWidget</name>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
+        <source>Active thickness:</source>
+        <translation>འགུལ་སྐྱོད་ཀྱི་མཐུག་ཚད་ནི།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
+        <source>Active color:</source>
+        <translation>འཁྲུག་ཆ་དོད་པའི་ཁ་དོག་ནི།</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="187"/>
+        <source>Press ESC to cancel</source>
+        <translation>ཨེ་ཤེ་ཡ་དང་ཞི་བདེ་རྒྱ་རྒྱ་ཆེ་མོ་ཁུལ</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="189"/>
+        <source>Grab Color</source>
+        <translation>ཁ་དོག་དམ་འཛིན་བྱེད་པ</translation>
+    </message>
+</context>
+<context>
+    <name>SizeIndicatorTool</name>
+    <message>
+        <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="35"/>
+        <source>Selection Size Indicator</source>
+        <translation>འདེམས་སྒྲུག་ཆེ་ཆུང་གི་དམིགས་ཚད</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="47"/>
+        <source>Show the dimensions of the selection (X Y)</source>
+        <translation>གདམ་གསེས་ཀྱི་ཚད་གཞི་མངོན་པར་བྱས་ཡོད། (X Y)</translation>
+    </message>
+</context>
+<context>
+    <name>StrftimeChooserWidget</name>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="47"/>
+        <source>Century (00-99)</source>
+        <translation>དུས་རབས་(00-99)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="48"/>
+        <source>Year (00-99)</source>
+        <translation>ལོ་(00-99)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="49"/>
+        <source>Year (2000)</source>
+        <translation>ལོ་(2000)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="50"/>
+        <source>Month Name (jan)</source>
+        <translation>ཟླ་བའི་མིང་། (jan)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="51"/>
+        <source>Month Name (january)</source>
+        <translation>ཟླ་བའི་མིང་། (ཟླ་བ་དང་པོ། )</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="52"/>
+        <source>Month (01-12)</source>
+        <translation>ཟླ་བ་(01-12)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="53"/>
+        <source>Week Day (1-7)</source>
+        <translation>གཟའ་འཁོར་གཅིག་གི་ཉིན་མོ།(1-7)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="54"/>
+        <source>Week (01-53)</source>
+        <translation>གཟའ་འཁོར་གཅིག་(01-53)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="55"/>
+        <source>Day Name (mon)</source>
+        <translation>ཉིན་མོའི་མིང་། (mon)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="56"/>
+        <source>Day Name (monday)</source>
+        <translation>ཉིན་མོའི་མིང་(གཟའ་ཟླ་བའི་ཉིན་)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="57"/>
+        <source>Day (01-31)</source>
+        <translation>ཉིན(01-31)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="58"/>
+        <source>Day of Month (1-31)</source>
+        <translation>ཟླ་བའི་ཚེས་གྲངས།(1-31)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="59"/>
+        <source>Day (001-366)</source>
+        <translation>ཉིན(001-366)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
+        <source>Time (%H-%M-%S)</source>
+        <translation>དུས་ཚོད(%H-%M-%S)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
+        <source>Time (%H-%M)</source>
+        <translation>དུས་ཚོད་(%H-%M)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
+        <source>Hour (00-23)</source>
+        <translation>ཆུ་ཚོད་(00-23)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="63"/>
+        <source>Hour (01-12)</source>
+        <translation>ཆུ་ཚོད་(01-12)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="64"/>
+        <source>Minute (00-59)</source>
+        <translation>སྐར་མ་(00-59)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="65"/>
+        <source>Second (00-59)</source>
+        <translation>གཉིས་པ། (00-59)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="66"/>
+        <source>Full Date (%m/%d/%y)</source>
+        <translation>དུས་ཚོད་ཧྲིལ་པོ་(%m/%d/%y)</translation>
+    </message>
+    <message>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="67"/>
+        <source>Full Date (%Y-%m-%d)</source>
+        <translation>དུས་ཚོད་ཧྲིལ་པོ་(%Y-%m-%d)</translation>
+    </message>
+</context>
+<context>
+    <name>SubToolBar</name>
+    <message>
+        <source>Copy to clipboard</source>
+        <translation type="obsolete">འདྲ་བཤུས་བྱས་ནས་པང་ལེབ་ཏུ་ཕབ</translation>
+    </message>
+</context>
+<context>
+    <name>SystemNotification</name>
+    <message>
+        <location filename="../src/utils/systemnotification.cpp" line="29"/>
+        <source>Flameshot Info</source>
+        <translation>མེ་ལྕེའི་ཆ་འཕྲིན།</translation>
+    </message>
+</context>
+<context>
+    <name>TextButton</name>
+    <message>
+        <location filename="../src/tools/text/textbutton.h" line="36"/>
+        <source>small</source>
+        <translatorcomment>小</translatorcomment>
+        <translation>ཆུང་བ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textbutton.h" line="37"/>
+        <source>medium</source>
+        <translatorcomment>中</translatorcomment>
+        <translation>འབྲིང་བ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textbutton.h" line="38"/>
+        <source>large</source>
+        <translatorcomment>大</translatorcomment>
+        <translation>ཆེ་བ།</translation>
+    </message>
+</context>
+<context>
+    <name>TextConfig</name>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="53"/>
+        <source>StrikeOut</source>
+        <translation>ལས་མཚམས་འཇོག་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="62"/>
+        <source>Underline</source>
+        <translation>གསལ་བཤད་བྱེད་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="69"/>
+        <source>Bold</source>
+        <translation>སྤོབས་པ་ཆེ་བ།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="78"/>
+        <source>Italic</source>
+        <translation>དབྱི་སི་ལན་ཆོས་ཁང་།</translation>
+    </message>
+</context>
+<context>
+    <name>TextTool</name>
+    <message>
+        <location filename="../src/tools/text/texttool.cpp" line="50"/>
+        <source>Text</source>
+        <translation>ཡི་གེ</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/texttool.cpp" line="62"/>
+        <source>Add text to your capture</source>
+        <translation>འཛིན་བཟུང་བྱས་པའི་ཁྲོད་དུ་ཡི་གེ་ཁ་སྣོན་</translation>
+    </message>
+</context>
+<context>
+    <name>UIcolorEditor</name>
+    <message>
+        <location filename="../src/config/uicoloreditor.cpp" line="31"/>
+        <source>UI Color Editor</source>
+        <translation>UI ཁ་དོག་རྩོམ་སྒྲིག་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/uicoloreditor.cpp" line="96"/>
+        <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
+        <translation>ཁ་དོག་གིས་གདམ་གསེས་བྱེད་མཁན་ལ་འགུལ་སྐྱོད་བྱེད་པ་དང་སྔོན་བརྡའི་སྒྲོག་གུ་ལ་འགྱུར་ལྡོག་བྱུང་བ་མཐོང་ཐུབ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/uicoloreditor.cpp" line="106"/>
+        <source>Select a Button to modify it</source>
+        <translation>སྒྲོག་གུ་ཞིག་བདམས་ནས་བཟོ་བཅོས་རྒྱག་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/uicoloreditor.cpp" line="115"/>
+        <source>Main Color</source>
+        <translation>ཁ་དོག་གཙོ་བོ།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/uicoloreditor.cpp" line="119"/>
+        <source>Click on this button to set the edition mode of the main color.</source>
+        <translation>མཐེབ་གཅུས་འདི་མནན་ནས་ཁ་དོག་གཙོ་བོའི་པར་གཞི་གཏན་འཁེལ་བྱས།</translation>
+    </message>
+    <message>
+        <location filename="../src/config/uicoloreditor.cpp" line="130"/>
+        <source>Contrast Color</source>
+        <translation>བསྡུར་ཚད་ཀྱི་ཁ་དོག</translation>
+    </message>
+    <message>
+        <location filename="../src/config/uicoloreditor.cpp" line="135"/>
+        <source>Click on this button to set the edition mode of the contrast color.</source>
+        <translation>མཐེབ་གཅུས་འདི་མནན་ནས་བསྡུར་གཞི་ཡོད་པའི་ཁ་དོག་གི་པར་གཞི་གཏན་འཁེལ་བྱས།</translation>
+    </message>
+</context>
+<context>
+    <name>UndoTool</name>
+    <message>
+        <location filename="../src/tools/undo/undotool.cpp" line="34"/>
+        <source>Undo</source>
+        <translation>ཁ་ཕྱིར་འཐེན་བྱ་དགོས།</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/undo/undotool.cpp" line="42"/>
+        <source>Undo the last modification</source>
+        <translation>ཆེས་མཐའ་མཇུག་གི་བཟོ་བཅོས་རྒྱག་དགོས།</translation>
+    </message>
+</context>
+<context>
+    <name>VisualsEditor</name>
+    <message>
+        <location filename="../src/config/visualseditor.cpp" line="53"/>
+        <source>Opacity of area outside selection:</source>
+        <translation>ཕྱི་རོལ་དུ་གདམ་གསེས་བྱས་པའི་ས་ཁོངས་ཀྱི་གསལ་ཆ་མེད་པ</translation>
+    </message>
+    <message>
+        <location filename="../src/config/visualseditor.cpp" line="77"/>
+        <source>Button Selection</source>
+        <translation>སྒྲོག་གུ་འདེམས་སྒྲུག</translation>
+    </message>
+    <message>
+        <location filename="../src/config/visualseditor.cpp" line="83"/>
+        <source>Select All</source>
+        <translation>ཚང་མ་བདམས་པ་</translation>
+    </message>
+</context>
+</TS>
