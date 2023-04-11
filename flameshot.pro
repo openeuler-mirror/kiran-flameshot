@@ -80,6 +80,11 @@ TRANSLATIONS = translations/Internationalization_es.ts \
     translations/Internationalization_uk.ts \
     translations/Internationalization_de_DE.ts \
     translations/Internationalization_sk.ts \
+    translations/Internationalization_bo_CN.ts \
+    translations/Internationalization_kk_KG.ts \
+    translations/Internationalization_kk_KZ.ts \
+    translations/Internationalization_mn_MN.ts \
+    translations/Internationalization_ug_CN.ts \
 
 # Generate translations in build
 TRANSLATIONS_FILES =
