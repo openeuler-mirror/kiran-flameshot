@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 win32:LIBS += -luser32 -lshell32
+QMAKE_CXXFLAGS  += -Wno-deprecated-declarations
 
 TAG_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 isEmpty(TAG_VERSION){
@@ -16,12 +17,15 @@ DEFINES += WNCK_I_KNOW_THIS_IS_UNSTABLE
 CONFIG += console
 
 QT  += core gui widgets network svg
+QT  += x11extras
 
 unix:!macx {
     QT  += dbus
 }
 
 CONFIG += c++11 link_pkgconfig
+
+PKGCONFIG += x11
 PKGCONFIG += klog-qt5
 PKGCONFIG += kiran-style-helper
 

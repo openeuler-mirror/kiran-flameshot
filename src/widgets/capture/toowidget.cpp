@@ -127,6 +127,7 @@ QVector<QRect> Toowidget::handleMask() const {
     for (int i = 0; i < m_colorList.size(); ++i) {
         QRect *rect = new QRect(102 + i * 22, 9, 12, 12);
         areas.append(*rect);
+        delete rect;
     }
     return areas;
 }
