@@ -240,7 +240,6 @@ void CaptureWidget::initOriginUI()
 
     m_zoomIndicator = new ZoomIndicator(this);
     m_zoomIndicator->hide();
-
     m_isFirstReleaseButton = false;
 }
 
@@ -406,7 +405,8 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         QString helpTxt = tr("Press Enter to capture the screen."
                              "\nUse the Mouse Wheel to change the thickness of your tool."
                              "\nUse ctrl+c to save the picture to the clipboard."
-                             "\nUse ctrl+s to save the picture to the set location.");
+                             "\nUse ctrl+s to save the picture to the set location."
+                             "\nUse ctrl+d open capture window mode.");
 
         // We draw the white contrasting background for the text, using the
         //same text and options to get the boundingRect that the text will have.
@@ -566,7 +566,35 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         //QRect m_backgroundRect = m_selection->geometry();
         QPoint topLeft = m_backgroundRect.topLeft() * devicePixelRatioF();
 
-        if(curPos.x() + INDICATOR_WIDTH > m_context.desktop->screenGeometry().width() - 120)
+        //Active windows select mode
+        if (activeWindowSelectMode) 
+        {
+            // new rect for active window
+            int minWith = INT_MAX;
+            int minHeight = INT_MAX;
+            int windowX = 0;
+            int windowY = 0;
+
+            for (auto win : m_wnds)
+            {
+                if (win.contains(curPos))
+                {
+                    if (minWith > win.width() && minHeight > win.height())
+                    {
+                        minWith = win.width();
+                        minHeight = win.height();
+                        windowX = win.x();
+                        windowY = win.y();
+                    }
+                    //new m_selection
+                }
+                m_selection->setVisible(true);
+                m_selection->setGeometry(QRect(windowX, windowY, minWith, minHeight).normalized());
+                update();
+            }
+        }
+
+        if (curPos.x() + INDICATOR_WIDTH > m_context.desktop->screenGeometry().width() - 120)
         {
             tmpPos.setX(curPos.x() - INDICATOR_WIDTH);
         }
@@ -971,6 +999,8 @@ void CaptureWidget::initSelection() {
     });
     m_selection->setVisible(false);
     m_selection->setGeometry(QRect());
+    // 初始化要捕获的窗口
+    getActiveWindow();
 }
 
 void CaptureWidget::setState(CaptureButton *b) {
@@ -1187,6 +1217,7 @@ void CaptureWidget::initShortcuts() {
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(saveScreenshot()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_C), this, SLOT(copyScreenshot()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Z), this, SLOT(undo()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_D), this, SLOT(setActiveWindowSelectMode()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Z), this, SLOT(redo()));
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Right), this, SLOT(rightResize()));
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Left), this, SLOT(leftResize()));
@@ -1418,4 +1449,65 @@ void CaptureWidget::setDrawLineStyle(const int &l)
 void CaptureWidget::saveFullScreen()
 {
     saveScreenshot();
+}
+
+void CaptureWidget::setActiveWindowSelectMode()
+{
+    activeWindowSelectMode = true;
+    m_showInitialMsg = false;
+    update();
+}
+
+void CaptureWidget::getActiveWindow()
+{
+    auto display = XOpenDisplay(nullptr);
+    // todo: 只获取了默认的屏幕，在多屏幕下无法获取到其他屏幕的窗口
+    auto root_window = DefaultRootWindow(display);
+
+    Window root_return, parent_return;
+    Window* child_list = nullptr;
+    unsigned int child_num = 0;
+    // 按z-order顺序获取根屏幕的所有子屏幕，也就是所有的窗口
+    XQueryTree(display, root_window, &root_return, &parent_return, &child_list, &child_num);
+    // 绝大部分窗口可以排除，也许可以给出一个常量，比如20（20个需要关注的可见窗口）
+    m_wnds.reserve(child_num);
+    for (auto i = child_num; (int)i >= 0; i--)
+    {
+        XWindowAttributes attrs;
+        // 获取窗口相关数据
+        XGetWindowAttributes(display, child_list[i], &attrs);
+        int screenX = 0;
+        int screenY = 0;
+        Window childWin;
+        // 坐标系转换
+        XTranslateCoordinates(display, child_list[i], root_window, 0, 0, &screenX, &screenY, &childWin);
+        // 过滤掉不可见的窗口
+        if (attrs.map_state != IsViewable)
+        {
+            continue;
+        }
+        auto cur_wnd = QRect(screenX, screenY, attrs.width, attrs.height);
+        auto is_coverd = false;
+        // 只能判断是否被一个窗口遮挡，如果被两个窗口拼接遮挡则判断不了
+        if (m_wnds.isEmpty())
+        {
+            m_wnds.append(cur_wnd);
+        }
+        for (auto wnd : m_wnds)
+        {
+            if (wnd.contains(cur_wnd, true))
+            {
+                is_coverd = true;
+                break;
+            }
+        }
+        if (is_coverd)
+        {
+            is_coverd = false;
+            continue;
+        }
+        m_wnds.append(cur_wnd);
+    }
+    XFree(display);
+    XFree(child_list);
 }

@@ -156,7 +156,8 @@
         <source>Press Enter to capture the screen.
 Use the Mouse Wheel to change the thickness of your tool.
 Use ctrl+c to save the picture to the clipboard.
-Use ctrl+s to save the picture to the set location.</source>
+Use ctrl+s to save the picture to the set location.
+Use ctrl+d open capture window mode.</source>
         <translatorcomment>按 Enter 键捕捉屏幕。
 使用鼠标滚轮来改变绘画工具的宽度。
 使用ctrl+c将图片保存到剪贴板。
@@ -164,7 +165,8 @@ Use ctrl+s to save the picture to the set location.</source>
         <translation>按 Enter 键捕捉屏幕。
 使用鼠标滚轮来改变绘画工具的宽度。
 使用ctrl+c将图片保存到剪贴板。
-使用ctrl+s将图片保存至设定位置。</translation>
+使用ctrl+s将图片保存至设定位置。
+使用ctrl+d打开窗口捕获模式。</translation>
     </message>
     <message>
         <location filename="../src/widgets/capture/capturewidget.cpp" line="1009"/>
