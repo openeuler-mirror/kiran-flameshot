@@ -123,6 +123,7 @@ private slots:
     void setDrawThickness(const int &t);
     void setDrawRectStyle(const int &s);
     void setDrawLineStyle(const int &l);
+    void setActiveWindowSelectMode();
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -156,6 +157,10 @@ protected:
     bool m_adjustmentButtonPressed;
     bool m_inselection = true;
     bool m_flag = false;
+    bool activeWindowSelectMode = false;    //select active window
+
+    // save active window
+    QVector<QRect> m_wnds;
 
 private:
     void initSecondUI();
@@ -169,6 +174,7 @@ private:
     void pushToolToStack();
     void makeChild(QWidget *w);
     void updateToolBar(QString toolName);
+    void getActiveWindow();
 
     QRect extendedSelection() const;
     QRect extendedRect(QRect *r) const;
