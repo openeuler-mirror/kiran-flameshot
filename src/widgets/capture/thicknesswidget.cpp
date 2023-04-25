@@ -97,6 +97,7 @@ QVector<QRect> ThicknessWidget::handleMask() const {
         spacing += i*4;
         QRect *rect = new QRect(8 + i * 10 + spacing , 13 - i * 2  , (i+1)*4, (i+1)*4);
         areas.append(*rect);
+        delete rect;
     }
     return areas;
 }
