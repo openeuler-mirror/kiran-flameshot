@@ -254,7 +254,7 @@ void Controller::enableTrayIcon() {
     m_trayIcon = new QSystemTrayIcon();
     m_trayIcon->setToolTip(tr("click to take screenshot"));
     m_trayIcon->setContextMenu(trayIconMenu);
-    QIcon trayicon = QIcon::fromTheme("flameshot-tray", QIcon(":img/app/kiran128x128.png"));
+    QIcon trayicon = QIcon(":img/app/kiran128x128.png");
     m_trayIcon->setIcon(trayicon);
 
     connect(m_trayIcon,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
