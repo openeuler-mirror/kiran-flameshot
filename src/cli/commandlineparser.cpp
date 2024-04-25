@@ -132,7 +132,7 @@ bool CommandLineParser::processOptions(const QStringList &args,
     ok =  isDoubleDashed ? arg.length() > 3 :
                 arg.length() == 2;
     if (!ok) {
-        out << QStringLiteral("the option %1 has a wrong format.").arg(arg);
+        out << QStringLiteral("The option %1 has a wrong format.").arg(arg);
         return ok;
     }
     arg = isDoubleDashed ?
@@ -152,7 +152,7 @@ bool CommandLineParser::processOptions(const QStringList &args,
         if (argName.isEmpty()) {
             argName = qApp->applicationName();
         }
-        out << QStringLiteral("the option '%1' is not a valid option "
+        out << QStringLiteral("The option '%1' is not a valid option "
                          "for the argument '%2'.").arg(arg)
                 .arg(argName);
         ok = false;
@@ -162,7 +162,7 @@ bool CommandLineParser::processOptions(const QStringList &args,
     CommandOption option = *optionIt;
     bool requiresValue = !(option.valueName().isEmpty());
     if (!requiresValue && equalsPos != -1) {
-        out << QStringLiteral("the option '%1' contains a '=' and it doesn't "
+        out << QStringLiteral("The option '%1' contains a '=' and it doesn't "
                          "require a value.").arg(arg);
         ok = false;
         return ok;
