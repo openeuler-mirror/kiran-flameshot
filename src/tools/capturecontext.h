@@ -37,7 +37,7 @@ struct CaptureContext {
     QColor color;
     // Path where the content has to be saved
     QString savePath;
-    // Ofset of the capture widget based on the system's screen (top-left)
+    // Offset of the capture widget based on the system's screen (top-left)
     QPoint widgetOffset;
     // Mouse position inside the widget
     QPoint mousePos;
