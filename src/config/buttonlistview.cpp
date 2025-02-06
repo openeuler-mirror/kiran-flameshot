@@ -15,12 +15,13 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "buttonlistview.h"
-#include "src/tools/toolfactory.h"
-#include "src/utils/confighandler.h"
 #include <QListWidgetItem>
 #include <algorithm>
 #include <qt5-log-i.h>
+
+#include "buttonlistview.h"
+#include "src/tools/toolfactory.h"
+#include "src/utils/confighandler.h"
 
 ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
     setMouseTracking(true);
@@ -30,7 +31,6 @@ ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
 //    connect(this, &QListWidget::itemClicked, this,
 //            &ButtonListView::reverseItemCheck);
     connect(this, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(reverseItemCheck(QListWidgetItem*)));
-    connect(Kiran::StylePalette::instance(),&Kiran::StylePalette::themeChanged,this,&ButtonListView::handleThemeChanged);
 }
 
 //初始化按键列表
@@ -60,11 +60,6 @@ void ButtonListView::initButtonList() {
         m_buttonItem->setToolTip(tool->description());
         tool->deleteLater();
     }
-}
-
-void ButtonListView::handleThemeChanged(Kiran::PaletteType paletteType)
-{
-
 }
 
 //更新按钮配置

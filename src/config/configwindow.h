@@ -18,7 +18,6 @@
 #pragma once
 
 #include <QTabWidget>
-#include <style-palette.h>
 
 class FileNameEditor;
 class GeneneralConf;
@@ -31,7 +30,7 @@ public:
     explicit ConfigWindow(QWidget *parent = nullptr);
 
 public slots:
-    void handleThemeChanged(Kiran::PaletteType paletteType);
+    void handleThemeChanged();
 signals:
     void updateChildren();
 

@@ -27,7 +27,7 @@ CONFIG += c++11 link_pkgconfig
 
 PKGCONFIG += x11
 PKGCONFIG += klog-qt5
-PKGCONFIG += kiran-style-helper
+PKGCONFIG += kiran-integration-theme
 
 #CONFIG += packaging   # Enables "make install" for packaging paths
 #LIBS += /usr/lib64/glibmm-2.4
