@@ -15,6 +15,15 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <QIcon>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QKeyEvent>
+#include <QFileSystemWatcher>
+#include <qt5-log-i.h>
+#include <style-helper.h>
+#include <palette.h>
+
 #include "configwindow.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/confighandler.h"
@@ -25,13 +34,7 @@
 #include "src/config/strftimechooserwidget.h"
 #include "src/config/visualseditor.h"
 #include "src/utils/globalvalues.h"
-#include <QIcon>
-#include <QVBoxLayout>
-#include <QLabel>
-#include <QKeyEvent>
-#include <QFileSystemWatcher>
 
-#include <qt5-log-i.h>
 // ConfigWindow contains the menus where you can configure the application
 
 ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
@@ -79,12 +82,14 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     connect(this, SIGNAL(updateChildren()), m_visuals, SLOT(updateComponents()));
     connect(this, SIGNAL(updateChildren()), m_generalConfig, SLOT(updateComponents()));
 
-    connect(Kiran::StylePalette::instance(),&Kiran::StylePalette::themeChanged,this,&ConfigWindow::handleThemeChanged);
+    auto palette = Kiran::Theme::Palette::getDefault();
+    connect(palette, &Kiran::Theme::Palette::baseColorsChanged, this, &ConfigWindow::handleThemeChanged);
 }
 
-void ConfigWindow::handleThemeChanged(Kiran::PaletteType paletteType)
+void ConfigWindow::handleThemeChanged()
 {
-    bool isDark = (paletteType == Kiran::PALETTE_DARK) ?  true : false;
+    auto style = Kiran::Theme::StyleHelper::getDefault();
+    bool isDark = (style->paletteType() == Kiran::Theme::PALETTE_DARK) ?  true : false;
     KLOG_DEBUG()  << "isDark:" << isDark;
     QString modifier = isDark ? PathInfo::whiteIconPath() :
                                 PathInfo::blackIconPath();
