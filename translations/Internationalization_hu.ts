@@ -130,7 +130,7 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <translation>Másol</translation>
     </message>
     <message>
-        <source>Copies the selecion into the clipboard</source>
+        <source>Copies the selection into the clipboard</source>
         <translation>Másolja a kiválasztott területet</translation>
     </message>
 </context>

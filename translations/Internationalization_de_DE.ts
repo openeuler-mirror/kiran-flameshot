@@ -711,7 +711,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="46"/>
         <source>Pin image on the desktop</source>
-        <translation>Pinne Bild auf den Dekstop</translation>
+        <translation>Pinne Bild auf den Desktop</translation>
     </message>
 </context>
 <context>
