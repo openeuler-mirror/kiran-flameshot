@@ -60,7 +60,7 @@ MenuController::MenuController(QObject *parent)
     QAction* pathtip = new QAction(tr("存储到"));
     QAction* pathtip = new QAction(tr("存储到"));*/
 
-    formattip = new QAction(tr("保存格式"));
+    formattip = new QAction(tr("Save format"));
     jpgtip = new QAction(tr("JPG"));
     pngtip = new QAction(tr("PNG"));
     bmptip = new QAction(tr("BMP"));
