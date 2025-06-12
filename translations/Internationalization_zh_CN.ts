@@ -703,7 +703,7 @@ Use ctrl+d open capture window mode.</source>
     </message>
     <message>
         <location filename="../src/widgets/capture/menucontroller.cpp" line="63"/>
-        <source>保存格式</source>
+        <source>Save format</source>
         <translatorcomment>保存格式</translatorcomment>
         <translation>保存格式</translation>
     </message>
