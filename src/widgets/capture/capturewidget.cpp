@@ -1010,7 +1010,7 @@ void CaptureWidget::setState(CaptureButton *b) {
 
     if (m_toolWidget) {
         m_toolWidget->deleteLater();
-        if (m_activeTool->isValid()) {
+        if (m_activeTool && m_activeTool->isValid()) {
             pushToolToStack();
         }
     }
