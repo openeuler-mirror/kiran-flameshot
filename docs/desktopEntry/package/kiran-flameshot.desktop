@@ -38,7 +38,7 @@ Name[ja]=設定
 Name[ru]=Настройки
 Name[sr]=Подешавања
 Name[uk]=Налаштувати
-Exec=flameshot config
+Exec=kiran-flameshot config
 
 [Desktop Action Capture]
 Name=Take screenshot
@@ -49,4 +49,4 @@ Name[ja]=スクリーンショットを撮る
 Name[ru]=Сделать скриншот
 Name[sr]=Сними екран
 Name[uk]=Зробити знімок
-Exec=flameshot gui --delay 500
+Exec=kiran-flameshot gui --delay 500
