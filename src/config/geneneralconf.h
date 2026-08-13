@@ -37,6 +37,7 @@ private slots:
    void showTrayIconChanged(bool checked);
    void autostartChanged(bool checked);
    void closeAfterCaptureChanged(bool checked);
+   void includeCursorChanged(bool checked);
    void importConfiguration();
    void exportFileConfiguration();
    void resetConfiguration();
@@ -48,6 +49,7 @@ private:
     QCheckBox *m_helpMessage;
     QCheckBox *m_autostart;
     QCheckBox *m_closeAfterCapture;
+    QCheckBox *m_includeCursor;
     QCheckBox *m_copyAndCloseAfterUpload;
     QPushButton *m_importButton;
     QPushButton *m_exportButton;
@@ -59,5 +61,6 @@ private:
     void initConfingButtons();
     void initAutostart();
     void initCloseAfterCapture();
+    void initIncludeCursor();
     void initCopyAndCloseAfterUpload();
 };
