@@ -79,6 +79,12 @@ void Controller::enableExports() {
             this, &Controller::handleCaptureFailed);
 }
 
+// 是否合成鼠标指针：只读全局配置（INI / 设置页），忽略 CLI/D-Bus 请求级覆盖
+bool Controller::resolveIncludeCursor(const uint id) const {
+    Q_UNUSED(id);
+    return ConfigHandler().includeCursorValue();
+}
+
 void Controller::requestCapture(const CaptureRequest &request) {
     uint id = request.id();
     m_requestMap.insert(id, request);
@@ -119,7 +125,8 @@ void Controller::startVisualCapture(const uint id, const QString &forcedSavePath
             }
         } while (modalWidget);
 
-        m_captureWindow = new CaptureWidget(id, forcedSavePath);
+        bool includeCursor = resolveIncludeCursor(id);
+        m_captureWindow = new CaptureWidget(id, forcedSavePath, true, includeCursor);
         //m_captureWindow = new CaptureWidget(id, forcedSavePath, false); // debug
 //        connect(m_captureWindow, &CaptureWidget::captureFailed,
 //                this, &Controller::captureFailed);
@@ -147,7 +154,8 @@ void Controller::startScreenGrab(const uint id, const int screenNumber) {
         QPoint globalCursorPos = QCursor::pos();
         n = qApp->desktop()->screenNumber(globalCursorPos);
     }
-    QPixmap p(ScreenGrabber().grabScreen(n, ok));
+    bool includeCursor = resolveIncludeCursor(id);
+    QPixmap p(ScreenGrabber().grabScreen(n, ok, includeCursor));
     if (ok) {
         emit captureTaken(id, p);
     } else {
@@ -173,7 +181,8 @@ void Controller::startFullscreenCapture(const uint id) {
             }
         } while (modalWidget);
 
-        m_fullcaptureWindow = new CaptureWidget(id);
+        m_fullcaptureWindow = new CaptureWidget(id, QString(), true,
+                                                resolveIncludeCursor(id));
         //m_captureWindow = new CaptureWidget(id, forcedSavePath, false); // debug
 //        connect(m_fullcaptureWindow, &CaptureWidget::captureFailed,
 //                this, &Controller::captureFailed);

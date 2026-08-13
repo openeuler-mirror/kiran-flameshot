@@ -74,10 +74,12 @@ const int BAR_HEIGHT = 30;
 
 // enableSaveWIndow
 CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
-                             bool fullScreen, QWidget *parent) :
+                             bool fullScreen, bool includeCursor,
+                             QWidget *parent) :
     QWidget(parent), m_mouseIsClicked(false), m_rightClick(false),
     m_newSelection(false), m_grabbing(false), m_captureDone(false),
-    m_previewEnabled(true), m_adjustmentButtonPressed(false), m_activeButton(nullptr),
+    m_previewEnabled(true), m_adjustmentButtonPressed(false),
+    m_includeCursor(includeCursor), m_activeButton(nullptr),
     m_activeTool(nullptr), m_toolWidget(nullptr),
     m_mouseOverHandle(SelectionWidget::NO_SIDE), m_id(id)
 {
@@ -110,7 +112,7 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
         // Grab Screenshot
         bool ok = true;
 
-        m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
+        m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok, m_includeCursor);
         if(!ok) {
             SystemNotification().sendMessage(tr("Unable to capture screen"));
             this->close();
