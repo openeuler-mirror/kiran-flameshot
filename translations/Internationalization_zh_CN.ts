@@ -451,6 +451,16 @@ Use ctrl+d open capture window mode.</source>
         <translation>获取屏幕截图后关闭</translation>
     </message>
     <message>
+        <location filename="../src/config/geneneralconf.cpp" line="235"/>
+        <source>Include mouse cursor in screenshots</source>
+        <translation>截图时包含鼠标指针</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="239"/>
+        <source>Include the mouse pointer cursor in captured screenshots</source>
+        <translation>在截取的画面中包含鼠标指针</translation>
+    </message>
+    <message>
         <location filename="../src/config/geneneralconf.cpp" line="230"/>
         <source>Copy URL after upload</source>
         <translatorcomment>上传后拷贝URL</translatorcomment>

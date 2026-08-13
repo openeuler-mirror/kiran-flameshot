@@ -37,6 +37,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     initShowTrayIcon();
     initAutostart();
     initCloseAfterCapture();
+    initIncludeCursor();
     initCopyAndCloseAfterUpload();
 
     // this has to be at the end
@@ -50,6 +51,7 @@ void GeneneralConf::updateComponents() {
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
     m_closeAfterCapture->setChecked(config.closeAfterScreenshotValue());
+    m_includeCursor->setChecked(config.includeCursorValue());
     m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUploadEnabled());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
@@ -80,6 +82,10 @@ void GeneneralConf::autostartChanged(bool checked) {
 
 void GeneneralConf::closeAfterCaptureChanged(bool checked) {
     ConfigHandler().setCloseAfterScreenshot(checked);
+}
+
+void GeneneralConf::includeCursorChanged(bool checked) {
+    ConfigHandler().setIncludeCursor(checked);
 }
 
 void GeneneralConf::importConfiguration() {
@@ -223,6 +229,18 @@ void GeneneralConf::initCloseAfterCapture() {
 
     connect(m_closeAfterCapture, &QCheckBox::clicked, this,
             &GeneneralConf::closeAfterCaptureChanged);
+}
+
+void GeneneralConf::initIncludeCursor() {
+    m_includeCursor = new QCheckBox(tr("Include mouse cursor in screenshots"), this);
+    ConfigHandler config;
+    bool checked = config.includeCursorValue();
+    m_includeCursor->setChecked(checked);
+    m_includeCursor->setToolTip(tr("Include the mouse pointer cursor in captured screenshots"));
+    m_layout->addWidget(m_includeCursor);
+
+    connect(m_includeCursor, &QCheckBox::clicked, this,
+            &GeneneralConf::includeCursorChanged);
 }
 
 void GeneneralConf::initCopyAndCloseAfterUpload()

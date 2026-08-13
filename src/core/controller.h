@@ -82,6 +82,9 @@ private:
     // the actual target Qt version is 5.3
     void doLater(int msec, QObject *receiver, lambda func);
 
+    // 只读全局配置，判断本次捕获是否合成鼠标指针（id 保留以兼容调用点）
+    bool resolveIncludeCursor(const uint id) const;
+
     QMap<uint, CaptureRequest> m_requestMap;
     QPointer<CaptureWidget> m_captureWindow;
     QPointer<CaptureWidget> m_fullcaptureWindow;
