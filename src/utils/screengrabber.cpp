@@ -115,36 +115,52 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok, bool includeCursor) {
 }
 
 QPixmap ScreenGrabber::grabScreen(int screenNumber, bool &ok, bool includeCursor) {
-    QPixmap p;
-    bool isVirtual = QApplication::desktop()->isVirtualDesktop();
-    if (isVirtual || m_info.waylandDectected()) {
-        p = grabEntireDesktop(ok, includeCursor);
-        if (ok) {
-            QPoint topLeft(0, 0);
-#ifdef Q_OS_WIN
-            for (QScreen *const screen : QGuiApplication::screens()) {
-                QPoint topLeftScreen = screen->geometry().topLeft();
-                if (topLeft.x() > topLeftScreen.x() ||
-                        topLeft.y() > topLeftScreen.y()) {
-                    topLeft = topLeftScreen;
-                }
-            }
-#endif
-            QRect geometry = QApplication::desktop()->
-                    screenGeometry(screenNumber);
-            geometry.moveTo(geometry.topLeft() - topLeft);
-            p = p.copy(geometry);
-        }
-    } else {
-        p = QApplication::desktop()->screen(screenNumber)->grab();
-        ok = true;
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-        if (includeCursor) {
-            QRect screenGeom = QApplication::desktop()->screenGeometry(screenNumber);
-            paintCursorOnPixmap(p, screenGeom);
-        }
-#endif
+    // 勿用 desktop()->screen(n)->grab()（QWidget::grab）。
+    // 该路径对不可见 QDesktopScreenWidget 自绘，得到 QPalette::Window 灰图，并非读屏。
+    // 灰图根因与弃用路径：f54538ee / PR #1387；详见 notes/06e-kiran-flameshot缺陷.md。
+    // 勿在整桌 pixmap 上用逻辑 screenGeometry 做 copy：HiDPI 下 pixmap 常为设备像素，
+    // 逻辑矩形裁剪会错位（P1）。X11 对齐上游 v12 / PR #2076：对该屏 grabWindow。
+    // Wayland 仍整桌抓取后再裁（单屏 grabWindow 不可靠）。
+    // window=0 时 x/y 相对该 QScreen，勿传全局 screenGeometry 的 x/y（副屏会错屏/黑边）。
+
+    if (screenNumber < 0 || screenNumber >= QGuiApplication::screens().size()) {
+        ok = false;
+        return QPixmap();
     }
+
+    QScreen *screen = QGuiApplication::screens()[screenNumber];
+    QRect geometry = QApplication::desktop()->screenGeometry(screenNumber);
+    if (geometry.isEmpty()) {
+        ok = false;
+        return QPixmap();
+    }
+
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    if (m_info.waylandDectected()) {
+        QPixmap p = grabEntireDesktop(ok, includeCursor);
+        if (!ok) {
+            return QPixmap();
+        }
+        // 光标已在 grabEntireDesktop 内处理；裁剪后勿再 paint
+        return p.copy(geometry);
+    }
+#endif
+
+    // X11 / 非 Wayland：单屏读屏（禁止 QWidget::grab）；grabWindow(0) 用屏内原点
+    ok = true;
+    QPixmap p = screen->grabWindow(0);
+    if (p.isNull()) {
+        ok = false;
+        return QPixmap();
+    }
+    p.setDevicePixelRatio(screen->devicePixelRatio());
+
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    if (includeCursor) {
+        // 在该屏逻辑几何上合成，勿对已 crop 结果二次整桌合成
+        paintCursorOnPixmap(p, geometry);
+    }
+#endif
     return p;
 }
 
