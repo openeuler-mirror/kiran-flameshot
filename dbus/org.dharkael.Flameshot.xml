@@ -20,9 +20,12 @@
 
     <!--
         fullScreen:
-        @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
+        @path: the path where the screenshot will be saved. Empty + !toClipboard + !isRaw resolves the default save directory.
+               （空 path 且非剪贴板、非 raw 时解析默认落盘目录）
         @toClipboard: Whether to copy the screenshot to clipboard or not.
         @delay: delay time in milliseconds, both return the @id defined in the call of this method.
+        @isRaw: When true, empty path is not resolved and no filesystem save is implied (CLI -r).
+                （对应 CLI -r：空 path 不 resolve、不隐式落盘）
         @id: identificator of the call.
 
         Takes a screenshot of the whole screen and sends a captureTaken signal with the raw image or a captureFailed signal.
@@ -31,6 +34,7 @@
       <arg name="path" type="s" direction="in"/>
       <arg name="toClipboard" type="b" direction="in"/>
       <arg name="delay" type="i" direction="in"/>
+      <arg name="isRaw" type="b" direction="in"/>
       <arg name="id" type="u" direction="in"/>
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>
@@ -47,9 +51,12 @@
     <!--
         captureScreen:
         @number: number of the screen to be captured.
-        @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
+        @path: the path where the screenshot will be saved. Empty + !toClipboard + !isRaw resolves the default save directory.
+               （空 path 且非剪贴板、非 raw 时解析默认落盘目录）
         @toClipboard: Whether to copy the screenshot to clipboard or not.
         @delay: delay time in milliseconds, both return the @id defined in the call of this method.
+        @isRaw: When true, empty path is not resolved and no filesystem save is implied (CLI -r).
+                （对应 CLI -r：空 path 不 resolve、不隐式落盘）
         @id: identificator of the call.
 
         Takes a screenshot of the whole screen and sends a captureTaken signal with the raw image or a captureFailed signal.
@@ -59,6 +66,7 @@
       <arg name="path" type="s" direction="in"/>
       <arg name="toClipboard" type="b" direction="in"/>
       <arg name="delay" type="i" direction="in"/>
+      <arg name="isRaw" type="b" direction="in"/>
       <arg name="id" type="u" direction="in"/>
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>

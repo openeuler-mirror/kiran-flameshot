@@ -164,40 +164,12 @@ void Controller::startScreenGrab(const uint id, const int screenNumber) {
 }
 
 void Controller::startFullscreenCapture(const uint id) {
-    /*bool ok = true;
-    QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
+    // full 为非交互抓取：静默 grabEntireDesktop 后走 export，不再开 CaptureWidget
+    bool ok = true;
+    bool includeCursor = resolveIncludeCursor(id);
+    QPixmap p(ScreenGrabber().grabEntireDesktop(ok, includeCursor));
     if (ok) {
         emit captureTaken(id, p);
-    } else {
-        emit captureFailed(id);
-    }*/
-    if (!m_fullcaptureWindow) {
-        QWidget *modalWidget = nullptr;
-        do {
-            modalWidget = qApp->activeModalWidget();
-            if (modalWidget) {
-                modalWidget->close();
-                modalWidget->deleteLater();
-            }
-        } while (modalWidget);
-
-        m_fullcaptureWindow = new CaptureWidget(id, QString(), true,
-                                                resolveIncludeCursor(id));
-        //m_captureWindow = new CaptureWidget(id, forcedSavePath, false); // debug
-//        connect(m_fullcaptureWindow, &CaptureWidget::captureFailed,
-//                this, &Controller::captureFailed);
-//        connect(m_fullcaptureWindow, &CaptureWidget::captureTaken,
-//                this, &Controller::captureTaken);
-        connect(m_fullcaptureWindow, SIGNAL(captureFailed(uint)), this, SLOT(handleCaptureFailed(uint)));
-        connect(m_fullcaptureWindow, SIGNAL(captureTaken(uint, QPixmap)), this, SLOT(handleCaptureTaken(uint,QPixmap)));
-
-#ifdef Q_OS_WIN
-        m_captureWindow->show();
-#else
-        m_fullcaptureWindow->showFullScreen();
-        m_fullcaptureWindow->saveFullScreen();
-        //m_captureWindow->show(); // Debug
-#endif
     } else {
         emit captureFailed(id);
     }

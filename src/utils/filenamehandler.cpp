@@ -21,6 +21,7 @@
 #include <locale>
 #include <QStandardPaths>
 #include <QDir>
+#include <QFileInfo>
 #include <QTime>
 #include <QDebug>
 
@@ -64,12 +65,45 @@ void FileNameHandler::setPattern(const QString &pattern) {
     ConfigHandler().setFilenamePattern(pattern);
 }
 
-QString FileNameHandler::absoluteSavePath(QString &directory, QString &filename) {
-    ConfigHandler config;
-    directory = config.savePathValue();
-    if (directory.isEmpty() || !QDir(directory).exists() || !QFileInfo(directory).isWritable()) {
-        directory = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+QString FileNameHandler::resolveDefaultSaveDirectory(bool create) {
+    // 仅「已存在且可写」才算可用；不存在留给后续 mkpath，避免误判
+    auto usableExisting = [](const QString &dir) -> bool {
+        return !dir.isEmpty()
+                && QDir(dir).exists()
+                && QFileInfo(dir).isWritable();
+    };
+
+    QString directory = ConfigHandler().savePathValue();
+    if (!usableExisting(directory)) {
+        directory = QStandardPaths::writableLocation(
+                    QStandardPaths::PicturesLocation);
     }
+    // 空路径、或已存在但不可写 → Home；尚不存在则保留，交给下方 mkpath
+    // （exists&&!writable：避免把不可写目录当落盘目标，又别把「待创建」误跳过）
+    if (directory.isEmpty()
+            || (QDir(directory).exists() && !QFileInfo(directory).isWritable())) {
+        directory = QStandardPaths::writableLocation(
+                    QStandardPaths::HomeLocation);
+    }
+
+    if (directory.isEmpty()) {
+        return QString();
+    }
+
+    if (create) {
+        if (!QDir().mkpath(directory) || !QFileInfo(directory).isWritable()) {
+            qWarning() << "Failed to create or use save directory:" << directory;
+            return QString();
+        }
+    } else if (!usableExisting(directory)) {
+        return QString();
+    }
+
+    return directory;
+}
+
+QString FileNameHandler::absoluteSavePath(QString &directory, QString &filename) {
+    directory = resolveDefaultSaveDirectory(true);
     filename = parsedPattern();
     fixPath(directory, filename);
     return directory + filename;
