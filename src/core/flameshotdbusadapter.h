@@ -34,8 +34,9 @@ signals:
 
 public slots:
     Q_NOREPLY void graphicCapture(QString path, int delay, uint id);
-    Q_NOREPLY void fullScreen(QString path, bool toClipboard, int delay, uint id);
-    Q_NOREPLY void captureScreen(int number, QString path, bool toClipboard, int delay, uint id);
+    // isRaw：对应 CLI -r；为 true 时空 path 不 resolve、不隐式落盘
+    Q_NOREPLY void fullScreen(QString path, bool toClipboard, int delay, bool isRaw, uint id);
+    Q_NOREPLY void captureScreen(int number, QString path, bool toClipboard, int delay, bool isRaw, uint id);
     Q_NOREPLY void openLauncher();
     Q_NOREPLY void openConfig();
     Q_NOREPLY void trayIconEnabled(bool enabled);
