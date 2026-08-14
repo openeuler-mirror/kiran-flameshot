@@ -835,6 +835,14 @@ Use ctrl+d open capture window mode.</source>
         <translatorcomment>复制链接到剪贴板。</translatorcomment>
         <translation>复制链接到剪贴板。</translation>
     </message>
+    <message>
+        <location filename="../src/core/flameshotdbusadapter.cpp" line="62"/>
+        <location filename="../src/core/flameshotdbusadapter.cpp" line="93"/>
+        <location filename="../src/main.cpp" line="274"/>
+        <location filename="../src/main.cpp" line="323"/>
+        <source>Failed to resolve default save directory</source>
+        <translation>无法确定默认保存目录</translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>

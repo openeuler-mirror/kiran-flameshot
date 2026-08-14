@@ -31,12 +31,35 @@
 #include <QDir>
 #include <QDebug>
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-#include "src/core/flameshotdbusadapter.h"
 #include "src/utils/dbusutils.h"
 #include <QDBusMessage>
 #include <QDBusConnection>
+
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#include "src/core/flameshotdbusadapter.h"
 #endif
+
+// raw 模式兜底超时（毫秒）
+static const int RAW_WAIT_TIMEOUT_MS = 2000;
+static const int RAW_GUI_WAIT_TIMEOUT_MS = 1000 * 60 * 15; // 15 minutes
+
+// 等待 raw 捕获结果：订阅 DBus 信号 + 超时兜底 + 进入事件循环
+// 返回 app.exec() 的退出码（0=成功, 1=失败或连接断开）
+static int waitForRawCapture(QCoreApplication &app,
+                             DBusUtils &dbusUtils,
+                             QDBusConnection &sessionBus,
+                             uint id,
+                             int delay,
+                             int timeoutExtra)
+{
+    dbusUtils.connectPrintCapture(sessionBus, id);
+    QTimer timer;
+    timer.setInterval(delay + timeoutExtra);
+    QObject::connect(&timer, &QTimer::timeout, &app,
+                     &QCoreApplication::quit);
+    timer.start();
+    return app.exec();
+}
 
 #include <qt5-log-i.h>
 int main(int argc, char *argv[]) {
@@ -248,14 +271,8 @@ int main(int argc, char *argv[]) {
         sessionBus.call(m);
 
         if (isRaw) {
-            dbusUtils.connectPrintCapture(sessionBus, id);
-            QTimer t;
-            t.setInterval(delay + 1000 * 60 * 15); // 15 minutes timeout
-            QObject::connect(&t, &QTimer::timeout, qApp,
-                             &QCoreApplication::quit);
-            t.start();
-            // wait
-            return app.exec();
+            return waitForRawCapture(app, dbusUtils, sessionBus, id, delay,
+                                     RAW_GUI_WAIT_TIMEOUT_MS);
         }
     }
     else if (parser.isSet(fullArgument)) { // FULL
@@ -263,16 +280,17 @@ int main(int argc, char *argv[]) {
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
-        // Not a valid command
+        // 原先无 -p/-c/-r 直接报错；快捷键常发裸 full，需放宽为默认目录落盘
+        // 无 -p/-c/-r：resolve 默认目录；仅 -c/-r：不强制落盘；有 -p：用该路径
         if (!isRaw && !toClipboard && pathValue.isEmpty()) {
-            QTextStream out(stdout);
-            out << "Invalid format, set where to save the content with one of "
-                << "the following flags:\n "
-                << pathOption.dashedNames().join(QStringLiteral(", ")) << "\n "
-                << rawImageOption.dashedNames().join(QStringLiteral(", ")) << "\n "
-                << clipboardOption.dashedNames().join(QStringLiteral(", ")) << "\n\n";
-            parser.parse(QStringList() << argv[0] << QStringLiteral("full") << QStringLiteral("-h"));
-            goto finish;
+            pathValue = FileNameHandler().resolveDefaultSaveDirectory();
+            if (pathValue.isEmpty()) {
+                QTextStream out(stdout);
+                out << "Failed to resolve default save directory\n";
+                SystemNotification().sendMessage(
+                            QObject::tr("Failed to resolve default save directory"));
+                goto finish;
+            }
         }
 
         CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay, pathValue);
@@ -285,24 +303,17 @@ int main(int argc, char *argv[]) {
         uint id = req.id();
         DBusUtils dbusUtils;
 
-        // Send message
+        // path, toClipboard, delay, isRaw, id
         QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
                                                QStringLiteral("/"), QLatin1String(""), QStringLiteral("fullScreen"));
-        m << pathValue << toClipboard << delay << id;
+        m << pathValue << toClipboard << delay << isRaw << id;
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
 
         if (isRaw) {
-            dbusUtils.connectPrintCapture(sessionBus, id);
-            // timeout just in case
-            QTimer t;
-            t.setInterval(delay + 2000);
-            QObject::connect(&t, &QTimer::timeout, qApp,
-                             &QCoreApplication::quit);
-            t.start();
-            // wait
-            return app.exec();
+            return waitForRawCapture(app, dbusUtils, sessionBus, id, delay,
+                                     RAW_WAIT_TIMEOUT_MS);
         }
     }
     else if (parser.isSet(screenArgument)) { // SCREEN
@@ -312,16 +323,16 @@ int main(int argc, char *argv[]) {
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
-        // Not a valid command
+        // 与 full 对称：放宽门禁，无 -p/-c/-r 时 resolve 默认目录落盘
         if (!isRaw && !toClipboard && pathValue.isEmpty()) {
-            QTextStream out(stdout);
-            out << "Invalid format, set where to save the content with one of "
-                << "the following flags:\n "
-                << pathOption.dashedNames().join(QStringLiteral(", ")) << "\n "
-                << rawImageOption.dashedNames().join(QStringLiteral(", ")) << "\n "
-                << clipboardOption.dashedNames().join(QStringLiteral(", ")) << "\n\n";
-            parser.parse(QStringList() << argv[0] << QStringLiteral("screen") << QStringLiteral("-h"));
-            goto finish;
+            pathValue = FileNameHandler().resolveDefaultSaveDirectory();
+            if (pathValue.isEmpty()) {
+                QTextStream out(stdout);
+                out << "Failed to resolve default save directory\n";
+                SystemNotification().sendMessage(
+                            QObject::tr("Failed to resolve default save directory"));
+                goto finish;
+            }
         }
 
         CaptureRequest req(CaptureRequest::SCREEN_MODE,
@@ -335,24 +346,17 @@ int main(int argc, char *argv[]) {
         uint id = req.id();
         DBusUtils dbusUtils;
 
-        // Send message
+        // number, path, toClipboard, delay, isRaw, id
         QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
                                                QStringLiteral("/"), QLatin1String(""), QStringLiteral("captureScreen"));
-        m << number << pathValue << toClipboard << delay << id;
+        m << number << pathValue << toClipboard << delay << isRaw << id;
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
 
         if (isRaw) {
-            dbusUtils.connectPrintCapture(sessionBus, id);
-            // timeout just in case
-            QTimer t;
-            t.setInterval(delay + 2000);
-            QObject::connect(&t, &QTimer::timeout, qApp,
-                             &QCoreApplication::quit);
-            t.start();
-            // wait
-            return app.exec();
+            return waitForRawCapture(app, dbusUtils, sessionBus, id, delay,
+                                     RAW_WAIT_TIMEOUT_MS);
         }
     }
     else if (parser.isSet(configArgument)) { // CONFIG
