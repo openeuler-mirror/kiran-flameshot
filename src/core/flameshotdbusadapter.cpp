@@ -71,6 +71,30 @@ void FlameshotDBusAdapter::fullScreen(
     Controller::getInstance()->requestCapture(req);
 }
 
+void FlameshotDBusAdapter::captureWindow(
+        QString path, bool toClipboard, int delay, bool isRaw, uint id)
+{
+    // 空 path 规则同 fullScreen；光标只读全局 ConfigHandler
+    if (!toClipboard && !isRaw && path.isEmpty()) {
+        path = FileNameHandler().resolveDefaultSaveDirectory();
+        if (path.isEmpty()) {
+            SystemNotification().sendMessage(
+                        QObject::tr("Failed to resolve default save directory"));
+            emit captureFailed(id);
+            return;
+        }
+    }
+    CaptureRequest req(CaptureRequest::WINDOW_MODE, delay, path);
+    if (toClipboard) {
+        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+    }
+    if (!path.isEmpty()) {
+        req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+    }
+    req.setStaticID(id);
+    Controller::getInstance()->requestCapture(req);
+}
+
 void FlameshotDBusAdapter::openLauncher() {
     Controller::getInstance()->openLauncherWindow();
 }

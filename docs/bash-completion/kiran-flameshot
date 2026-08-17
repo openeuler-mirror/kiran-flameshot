@@ -2,15 +2,16 @@
 # To be installed in "/usr/share/bash-completion/completions/flameshot"
 
 _flameshot() {
-	local prev cur cmd gui_opts full_opts config_opts
+	local prev cur cmd gui_opts full_opts window_opts config_opts
 	COMPREPLY=()
 
 	prev="${COMP_WORDS[COMP_CWORD-1]}"
 	cur="${COMP_WORDS[COMP_CWORD]}"
-	cmd="gui full config launcher screen"
+	cmd="gui full config launcher screen window"
 	screen_opts="--number --path --delay --raw -p -d -r -n"
 	gui_opts="--path --delay --raw -p -d -r"
 	full_opts="--path --delay --clipboard --raw -p -d -c -r"
+	window_opts="--path --delay --clipboard --raw -p -d -c -r"
 	config_opts="--contrastcolor --filename --maincolor --showhelp --trayicon --autostart -k -f -m -s -t -a"
 
 	case "${prev}" in
@@ -27,6 +28,10 @@ _flameshot() {
 			;;
 		full)
 			COMPREPLY=( $(compgen -W "$full_opts --help -h" -- ${cur}) )
+			return 0
+			;;
+		window)
+			COMPREPLY=( $(compgen -W "$window_opts --help -h" -- ${cur}) )
 			return 0
 			;;
 		config)

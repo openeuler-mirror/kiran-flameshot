@@ -95,6 +95,11 @@ void Controller::requestCapture(const CaptureRequest &request) {
             this->startFullscreenCapture(id);
         });
         break;
+    case CaptureRequest::WINDOW_MODE:
+        doLater(request.delay(), this, [this, id](){
+            this->startWindowCapture(id);
+        });
+        break;
     case CaptureRequest::SCREEN_MODE: {
         int &&number = request.data().toInt();
         doLater(request.delay(), this, [this, id, number](){
@@ -168,6 +173,18 @@ void Controller::startFullscreenCapture(const uint id) {
     bool ok = true;
     bool includeCursor = resolveIncludeCursor(id);
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok, includeCursor));
+    if (ok) {
+        emit captureTaken(id, p);
+    } else {
+        emit captureFailed(id);
+    }
+}
+
+void Controller::startWindowCapture(const uint id) {
+    // window 对齐 full：静默 grabActiveWindow，不弹 CaptureWidget（避免抢焦）
+    bool ok = true;
+    bool includeCursor = resolveIncludeCursor(id);
+    QPixmap p(ScreenGrabber().grabActiveWindow(ok, includeCursor));
     if (ok) {
         emit captureTaken(id, p);
     } else {
