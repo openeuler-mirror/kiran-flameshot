@@ -126,6 +126,7 @@ int main(int argc, char *argv[]) {
     parser.setGeneralErrorMessage(QStringLiteral("See 'kiran-flameshot --help'."));
     // Arguments
     CommandArgument fullArgument(QStringLiteral("full"), QStringLiteral("Capture the entire desktop."));
+    CommandArgument windowArgument(QStringLiteral("window"), QStringLiteral("Capture the active window."));
     CommandArgument launcherArgument(QStringLiteral("launcher"), QStringLiteral("Open the capture launcher."));
     CommandArgument guiArgument(QStringLiteral("gui"), QStringLiteral("Start a manual capture in GUI mode."));
     CommandArgument configArgument(QStringLiteral("config"), QStringLiteral("Configure flameshot."));
@@ -222,6 +223,7 @@ int main(int argc, char *argv[]) {
     parser.AddArgument(guiArgument);
     parser.AddArgument(screenArgument);
     parser.AddArgument(fullArgument);
+    parser.AddArgument(windowArgument);
     parser.AddArgument(launcherArgument);
     parser.AddArgument(configArgument);
     auto helpOption = parser.addHelpOption();
@@ -232,6 +234,8 @@ int main(int argc, char *argv[]) {
                       screenArgument);
     parser.AddOptions({ pathOption, clipboardOption, delayOption, rawImageOption },
                       fullArgument);
+    parser.AddOptions({ pathOption, clipboardOption, delayOption, rawImageOption },
+                      windowArgument);
     parser.AddOptions({ autostartOption, filenameOption, trayOption,
                         showHelpOption, mainColorOption, contrastColorOption },
                       configArgument);
@@ -306,6 +310,46 @@ int main(int argc, char *argv[]) {
         // path, toClipboard, delay, isRaw, id
         QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
                                                QStringLiteral("/"), QLatin1String(""), QStringLiteral("fullScreen"));
+        m << pathValue << toClipboard << delay << isRaw << id;
+        QDBusConnection sessionBus = QDBusConnection::sessionBus();
+        dbusUtils.checkDBusConnection(sessionBus);
+        sessionBus.call(m);
+
+        if (isRaw) {
+            return waitForRawCapture(app, dbusUtils, sessionBus, id, delay,
+                                     RAW_WAIT_TIMEOUT_MS);
+        }
+    }
+    else if (parser.isSet(windowArgument)) { // WINDOW（激活窗；落盘对称 full）
+        QString pathValue = parser.value(pathOption);
+        int delay = parser.value(delayOption).toInt();
+        bool toClipboard = parser.isSet(clipboardOption);
+        bool isRaw = parser.isSet(rawImageOption);
+        // 与 full 对称：无 -p/-c/-r 时 resolve 默认目录落盘
+        if (!isRaw && !toClipboard && pathValue.isEmpty()) {
+            pathValue = FileNameHandler().resolveDefaultSaveDirectory();
+            if (pathValue.isEmpty()) {
+                QTextStream out(stdout);
+                out << "Failed to resolve default save directory\n";
+                SystemNotification().sendMessage(
+                            QObject::tr("Failed to resolve default save directory"));
+                goto finish;
+            }
+        }
+
+        CaptureRequest req(CaptureRequest::WINDOW_MODE, delay, pathValue);
+        if (toClipboard) {
+            req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+        }
+        if (!pathValue.isEmpty()) {
+            req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+        }
+        uint id = req.id();
+        DBusUtils dbusUtils;
+
+        // path, toClipboard, delay, isRaw, id；光标只读全局配置
+        QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
+                                               QStringLiteral("/"), QLatin1String(""), QStringLiteral("captureWindow"));
         m << pathValue << toClipboard << delay << isRaw << id;
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);

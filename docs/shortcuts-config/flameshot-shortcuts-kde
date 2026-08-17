@@ -3,7 +3,7 @@ DataCount=1
 
 [Data_1]
 Comment=Shortcuts for taking screenshots with Flameshot
-DataCount=4
+DataCount=5
 Enabled=true
 Name=Flameshot
 SystemGroup=0
@@ -128,6 +128,35 @@ TriggersCount=1
 Key=Ctrl+Shift+Print
 Type=SHORTCUT
 Uuid={a724b514-0cb6-40f0-bf14-c08db726b320}
+
+[Data_1_5]
+Comment=Take an active-window screenshot and save it
+Enabled=true
+Name=Take active-window screenshot and save
+Type=SIMPLE_ACTION_DATA
+
+[Data_1_5Actions]
+ActionsCount=1
+
+[Data_1_5Actions0]
+Arguments='Pictures/Screenshots' false 0 false 0
+Call=captureWindow
+RemoteApp=org.dharkael.Flameshot
+RemoteObj=/
+Type=DBUS
+
+[Data_1_5Conditions]
+Comment=
+ConditionsCount=0
+
+[Data_1_5Triggers]
+Comment=Simple_action
+TriggersCount=1
+
+[Data_1_5Triggers0]
+Key=Alt+Print
+Type=SHORTCUT
+Uuid={b8e1c902-4d7a-4f11-9c2e-1a5f8e0d3c71}
 
 [Main]
 AllowMerge=false

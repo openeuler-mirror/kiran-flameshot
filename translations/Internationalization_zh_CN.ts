@@ -909,6 +909,11 @@ Use ctrl+d open capture window mode.</source>
         <source>Unable to capture screen</source>
         <translation>无法捕获屏幕</translation>
     </message>
+    <message>
+        <location filename="../src/utils/screengrabber.cpp" line="356"/>
+        <source>Unable to capture active window</source>
+        <translation>无法截取激活窗口</translation>
+    </message>
 </context>
 <context>
     <name>ScreenshotSaver</name>

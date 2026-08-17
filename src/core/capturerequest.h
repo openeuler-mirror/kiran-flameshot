@@ -27,6 +27,7 @@ public:
         FULLSCREEN_MODE,
         GRAPHICAL_MODE,
         SCREEN_MODE,
+        WINDOW_MODE,
     };
 
     enum ExportTask {

@@ -67,6 +67,7 @@ public slots:
 
 private slots:
     void startFullscreenCapture(const uint id = 0);
+    void startWindowCapture(const uint id = 0);
     void startVisualCapture(const uint id = 0,
                              const QString &forcedSavePath = QString());
     void startScreenGrab(const uint id = 0, const int screenNumber = -1);
