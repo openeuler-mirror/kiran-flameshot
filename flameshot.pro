@@ -26,6 +26,7 @@ unix:!macx {
 CONFIG += c++11 link_pkgconfig
 
 PKGCONFIG += x11
+PKGCONFIG += xfixes
 PKGCONFIG += klog-qt5
 PKGCONFIG += kiran-integration-theme
 

@@ -67,6 +67,7 @@ public slots:
 
 private slots:
     void startFullscreenCapture(const uint id = 0);
+    void startWindowCapture(const uint id = 0);
     void startVisualCapture(const uint id = 0,
                              const QString &forcedSavePath = QString());
     void startScreenGrab(const uint id = 0, const int screenNumber = -1);
@@ -81,6 +82,9 @@ private:
     // replace QTimer::singleShot introduced in Qt 5.4
     // the actual target Qt version is 5.3
     void doLater(int msec, QObject *receiver, lambda func);
+
+    // 只读全局配置，判断本次捕获是否合成鼠标指针（id 保留以兼容调用点）
+    bool resolveIncludeCursor(const uint id) const;
 
     QMap<uint, CaptureRequest> m_requestMap;
     QPointer<CaptureWidget> m_captureWindow;

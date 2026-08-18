@@ -24,9 +24,17 @@ class ScreenGrabber : public QObject {
     Q_OBJECT
 public:
     explicit ScreenGrabber(QObject *parent = nullptr);
-    QPixmap grabEntireDesktop(bool &ok);
-    QPixmap grabScreen(int screenNumber, bool &ok);
+    QPixmap grabEntireDesktop(bool &ok, bool includeCursor = false);
+    QPixmap grabScreen(int screenNumber, bool &ok, bool includeCursor = false);
+    // 静默截取当前激活窗口（X11；含装饰边框；失败时 ok=false 并通知）
+    QPixmap grabActiveWindow(bool &ok, bool includeCursor = false);
 
 private:
     DesktopInfo m_info;
+
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    // 在设备像素坐标系下把光标合成到 pixmap 上
+    // captureGeometry: 捕获区域在全局逻辑坐标系中的矩形
+    void paintCursorOnPixmap(QPixmap &pixmap, const QRect &captureGeometry);
+#endif
 };
