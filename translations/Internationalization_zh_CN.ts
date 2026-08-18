@@ -113,32 +113,37 @@
         <translation>全屏（所有显示器）</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="75"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="70"/>
+        <source>Active Window</source>
+        <translation>激活窗口</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="77"/>
         <source>No Delay</source>
         <translation>无延迟</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="82"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="84"/>
         <source> second</source>
         <translation> 秒</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="82"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="84"/>
         <source> seconds</source>
         <translation> 秒</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="86"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="88"/>
         <source>Take new screenshot</source>
         <translation>获取新屏幕截图</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="93"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="95"/>
         <source>Area:</source>
         <translation>区域：</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="94"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="96"/>
         <source>Delay:</source>
         <translation>延迟：</translation>
     </message>
@@ -230,32 +235,37 @@ Use ctrl+d open capture window mode.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="227"/>
+        <location filename="../src/core/controller.cpp" line="225"/>
         <source>&amp;Take Screenshot</source>
         <translation>进行截图(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="232"/>
+        <location filename="../src/core/controller.cpp" line="230"/>
+        <source>Capture &amp;Active Window</source>
+        <translation>截取激活窗口(&amp;A)</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="242"/>
         <source>&amp;Open Launcher</source>
         <translation>打开启动器(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="235"/>
+        <location filename="../src/core/controller.cpp" line="245"/>
         <source>&amp;Configuration</source>
         <translation>配置文件(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="238"/>
+        <location filename="../src/core/controller.cpp" line="248"/>
         <source>&amp;Information</source>
         <translation>信息(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="241"/>
+        <location filename="../src/core/controller.cpp" line="251"/>
         <source>&amp;Quit</source>
         <translation>退出(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="255"/>
+        <location filename="../src/core/controller.cpp" line="266"/>
         <source>click to take screenshot</source>
         <translatorcomment>点击进行截图</translatorcomment>
         <translation>点击进行截图</translation>
