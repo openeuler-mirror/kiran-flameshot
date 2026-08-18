@@ -227,6 +227,18 @@ void Controller::enableTrayIcon() {
         // Wait 400 ms to hide the QMenu
         doLater(400, this, [this](){ this->startVisualCapture(); });
     });
+    QAction *windowAction = new QAction(tr("Capture &Active Window"), this);
+    connect(windowAction, &QAction::triggered, this, [this](){
+        // QMenu 为 override-redirect，不夺 _NET_ACTIVE_WINDOW，故无需等焦点还原；
+        // 但 grabWindow 抓的是合成后内容，需等菜单像素消失，取值大于 gui 的 400ms
+        doLater(600, this, [this](){
+            // 托盘为 GUI 入口：path 留空 → exportCapture 走 saveToGUI 弹另存为，
+            // 与 CLI/D-Bus window 的静默默认目录落盘按入口天然分离
+            CaptureRequest req(CaptureRequest::WINDOW_MODE);
+            req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+            this->requestCapture(req);
+        });
+    });
     QAction *launcherAction = new QAction(tr("&Open Launcher"), this);
     connect(launcherAction, &QAction::triggered, this,
             &Controller::openLauncherWindow);
@@ -242,6 +254,7 @@ void Controller::enableTrayIcon() {
 
     QMenu *trayIconMenu = new QMenu();
     trayIconMenu->addAction(captureAction);
+    trayIconMenu->addAction(windowAction);
     trayIconMenu->addAction(launcherAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(configAction);

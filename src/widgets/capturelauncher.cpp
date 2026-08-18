@@ -66,6 +66,8 @@ CaptureLauncher::CaptureLauncher(QWidget *parent) :
     // TODO remember number
     m_captureType->insertItem(1, tr("Rectangular Region"), CaptureRequest::GRAPHICAL_MODE);
     m_captureType->insertItem(2, tr("Full Screen (All Monitors)"), CaptureRequest::FULLSCREEN_MODE);
+    // 抓到谁由 WM 在 hide() 后的转焦决定，不做焦点记录；失败则由 grabActiveWindow 提示
+    m_captureType->insertItem(3, tr("Active Window"), CaptureRequest::WINDOW_MODE);
     //m_captureType->insertItem(3, tr("Single Screen"), CaptureRequest::SCREEN_MODE);
 
     m_delaySpinBox = new QSpinBox();
