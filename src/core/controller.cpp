@@ -79,6 +79,12 @@ void Controller::enableExports() {
             this, &Controller::handleCaptureFailed);
 }
 
+// 是否合成鼠标指针：只读全局配置（INI / 设置页），忽略 CLI/D-Bus 请求级覆盖
+bool Controller::resolveIncludeCursor(const uint id) const {
+    Q_UNUSED(id);
+    return ConfigHandler().includeCursorValue();
+}
+
 void Controller::requestCapture(const CaptureRequest &request) {
     uint id = request.id();
     m_requestMap.insert(id, request);
@@ -87,6 +93,11 @@ void Controller::requestCapture(const CaptureRequest &request) {
     case CaptureRequest::FULLSCREEN_MODE:
         doLater(request.delay(), this, [this, id](){
             this->startFullscreenCapture(id);
+        });
+        break;
+    case CaptureRequest::WINDOW_MODE:
+        doLater(request.delay(), this, [this, id](){
+            this->startWindowCapture(id);
         });
         break;
     case CaptureRequest::SCREEN_MODE: {
@@ -119,7 +130,8 @@ void Controller::startVisualCapture(const uint id, const QString &forcedSavePath
             }
         } while (modalWidget);
 
-        m_captureWindow = new CaptureWidget(id, forcedSavePath);
+        bool includeCursor = resolveIncludeCursor(id);
+        m_captureWindow = new CaptureWidget(id, forcedSavePath, true, includeCursor);
         //m_captureWindow = new CaptureWidget(id, forcedSavePath, false); // debug
 //        connect(m_captureWindow, &CaptureWidget::captureFailed,
 //                this, &Controller::captureFailed);
@@ -147,7 +159,8 @@ void Controller::startScreenGrab(const uint id, const int screenNumber) {
         QPoint globalCursorPos = QCursor::pos();
         n = qApp->desktop()->screenNumber(globalCursorPos);
     }
-    QPixmap p(ScreenGrabber().grabScreen(n, ok));
+    bool includeCursor = resolveIncludeCursor(id);
+    QPixmap p(ScreenGrabber().grabScreen(n, ok, includeCursor));
     if (ok) {
         emit captureTaken(id, p);
     } else {
@@ -156,39 +169,24 @@ void Controller::startScreenGrab(const uint id, const int screenNumber) {
 }
 
 void Controller::startFullscreenCapture(const uint id) {
-    /*bool ok = true;
-    QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
+    // full 为非交互抓取：静默 grabEntireDesktop 后走 export，不再开 CaptureWidget
+    bool ok = true;
+    bool includeCursor = resolveIncludeCursor(id);
+    QPixmap p(ScreenGrabber().grabEntireDesktop(ok, includeCursor));
     if (ok) {
         emit captureTaken(id, p);
     } else {
         emit captureFailed(id);
-    }*/
-    if (!m_fullcaptureWindow) {
-        QWidget *modalWidget = nullptr;
-        do {
-            modalWidget = qApp->activeModalWidget();
-            if (modalWidget) {
-                modalWidget->close();
-                modalWidget->deleteLater();
-            }
-        } while (modalWidget);
+    }
+}
 
-        m_fullcaptureWindow = new CaptureWidget(id);
-        //m_captureWindow = new CaptureWidget(id, forcedSavePath, false); // debug
-//        connect(m_fullcaptureWindow, &CaptureWidget::captureFailed,
-//                this, &Controller::captureFailed);
-//        connect(m_fullcaptureWindow, &CaptureWidget::captureTaken,
-//                this, &Controller::captureTaken);
-        connect(m_fullcaptureWindow, SIGNAL(captureFailed(uint)), this, SLOT(handleCaptureFailed(uint)));
-        connect(m_fullcaptureWindow, SIGNAL(captureTaken(uint, QPixmap)), this, SLOT(handleCaptureTaken(uint,QPixmap)));
-
-#ifdef Q_OS_WIN
-        m_captureWindow->show();
-#else
-        m_fullcaptureWindow->showFullScreen();
-        m_fullcaptureWindow->saveFullScreen();
-        //m_captureWindow->show(); // Debug
-#endif
+void Controller::startWindowCapture(const uint id) {
+    // window 对齐 full：静默 grabActiveWindow，不弹 CaptureWidget（避免抢焦）
+    bool ok = true;
+    bool includeCursor = resolveIncludeCursor(id);
+    QPixmap p(ScreenGrabber().grabActiveWindow(ok, includeCursor));
+    if (ok) {
+        emit captureTaken(id, p);
     } else {
         emit captureFailed(id);
     }
@@ -229,6 +227,18 @@ void Controller::enableTrayIcon() {
         // Wait 400 ms to hide the QMenu
         doLater(400, this, [this](){ this->startVisualCapture(); });
     });
+    QAction *windowAction = new QAction(tr("Capture &Active Window"), this);
+    connect(windowAction, &QAction::triggered, this, [this](){
+        // QMenu 为 override-redirect，不夺 _NET_ACTIVE_WINDOW，故无需等焦点还原；
+        // 但 grabWindow 抓的是合成后内容，需等菜单像素消失，取值大于 gui 的 400ms
+        doLater(600, this, [this](){
+            // 托盘为 GUI 入口：path 留空 → exportCapture 走 saveToGUI 弹另存为，
+            // 与 CLI/D-Bus window 的静默默认目录落盘按入口天然分离
+            CaptureRequest req(CaptureRequest::WINDOW_MODE);
+            req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+            this->requestCapture(req);
+        });
+    });
     QAction *launcherAction = new QAction(tr("&Open Launcher"), this);
     connect(launcherAction, &QAction::triggered, this,
             &Controller::openLauncherWindow);
@@ -244,6 +254,7 @@ void Controller::enableTrayIcon() {
 
     QMenu *trayIconMenu = new QMenu();
     trayIconMenu->addAction(captureAction);
+    trayIconMenu->addAction(windowAction);
     trayIconMenu->addAction(launcherAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(configAction);

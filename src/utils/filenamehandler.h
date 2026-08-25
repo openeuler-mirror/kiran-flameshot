@@ -29,7 +29,9 @@ public:
     QString generateAbsolutePath(const QString &path);
     QString absoluteSavePath(QString &directory, QString &filename);
     QString absoluteSavePath();
-
+    // 裸 full/screen 等无 -p 时的默认落盘目录：savePath → Pictures → Home；
+    // create 时 mkpath，失败返回空串
+    QString resolveDefaultSaveDirectory(bool create = true);
 
     static const int MAX_CHARACTERS = 70;
 

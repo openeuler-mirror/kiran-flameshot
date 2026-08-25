@@ -17,6 +17,7 @@
 
 #include "flameshotdbusadapter.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/filenamehandler.h"
 #include "src/utils/screengrabber.h"
 #include "src/core/controller.h"
 #include "src/utils/screenshotsaver.h"
@@ -46,9 +47,44 @@ void FlameshotDBusAdapter::graphicCapture(QString path, int delay, uint id) {
 }
 
 void FlameshotDBusAdapter::fullScreen(
-        QString path, bool toClipboard, int delay, uint id)
+        QString path, bool toClipboard, int delay, bool isRaw, uint id)
 {
+    // 直调 D-Bus 也可能传空 path；仅 !toClipboard && !isRaw 时 resolve，
+    // 避免 CLI -r（空 path + isRaw）被静默落盘
+    if (!toClipboard && !isRaw && path.isEmpty()) {
+        path = FileNameHandler().resolveDefaultSaveDirectory();
+        if (path.isEmpty()) {
+            SystemNotification().sendMessage(
+                        QObject::tr("Failed to resolve default save directory"));
+            emit captureFailed(id);
+            return;
+        }
+    }
     CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay, path);
+    if (toClipboard) {
+        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+    }
+    if (!path.isEmpty()) {
+        req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+    }
+    req.setStaticID(id);
+    Controller::getInstance()->requestCapture(req);
+}
+
+void FlameshotDBusAdapter::captureWindow(
+        QString path, bool toClipboard, int delay, bool isRaw, uint id)
+{
+    // 空 path 规则同 fullScreen；光标只读全局 ConfigHandler
+    if (!toClipboard && !isRaw && path.isEmpty()) {
+        path = FileNameHandler().resolveDefaultSaveDirectory();
+        if (path.isEmpty()) {
+            SystemNotification().sendMessage(
+                        QObject::tr("Failed to resolve default save directory"));
+            emit captureFailed(id);
+            return;
+        }
+    }
+    CaptureRequest req(CaptureRequest::WINDOW_MODE, delay, path);
     if (toClipboard) {
         req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
     }
@@ -64,8 +100,19 @@ void FlameshotDBusAdapter::openLauncher() {
 }
 
 void FlameshotDBusAdapter::captureScreen(int number, QString path,
-                                         bool toClipboard, int delay, uint id)
+                                         bool toClipboard, int delay,
+                                         bool isRaw, uint id)
 {
+    // 与 fullScreen 相同：空 path 仅在非剪贴板且非 raw 时 resolve
+    if (!toClipboard && !isRaw && path.isEmpty()) {
+        path = FileNameHandler().resolveDefaultSaveDirectory();
+        if (path.isEmpty()) {
+            SystemNotification().sendMessage(
+                        QObject::tr("Failed to resolve default save directory"));
+            emit captureFailed(id);
+            return;
+        }
+    }
     CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, path, number);
     if (toClipboard) {
         req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
