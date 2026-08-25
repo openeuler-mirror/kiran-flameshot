@@ -72,6 +72,7 @@ public:
     explicit CaptureWidget(const uint id = 0,
                            const QString &savePath = QString(),
                            bool fullScreen = true,
+                           bool includeCursor = false,
                            QWidget *parent = nullptr);
     ~CaptureWidget();
 
@@ -155,6 +156,7 @@ protected:
     bool m_captureDone;
     bool m_previewEnabled;
     bool m_adjustmentButtonPressed;
+    bool m_includeCursor;
     bool m_inselection = true;
     bool m_flag = false;
     bool activeWindowSelectMode = false;    //select active window

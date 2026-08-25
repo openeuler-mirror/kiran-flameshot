@@ -330,6 +330,14 @@ void ConfigHandler::setCloseAfterScreenshot(const bool close) {
     m_settings.setValue(QStringLiteral("closeAfterScreenshot"), close);
 }
 
+bool ConfigHandler::includeCursorValue() {
+    return m_settings.value(QStringLiteral("includeCursor"), false).toBool();
+}
+
+void ConfigHandler::setIncludeCursor(const bool include) {
+    m_settings.setValue(QStringLiteral("includeCursor"), include);
+}
+
 bool ConfigHandler::copyAndCloseAfterUploadEnabled() {
     return m_settings.value(QStringLiteral("copyAndCloseAfterUpload")).toBool();
 }
