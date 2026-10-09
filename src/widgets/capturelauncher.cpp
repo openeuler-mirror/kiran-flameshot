@@ -115,6 +115,12 @@ void CaptureLauncher::startCapture() {
     auto mode = static_cast<CaptureRequest::CaptureMode>(
                 m_captureType->currentData().toInt());
     CaptureRequest req(mode, 600 + m_delaySpinBox->value() * 1000);
+    // 非交互模式（全屏/激活窗口）默认落盘：path 留空，exportCapture 会弹另存为让用户选位置；
+    // 方形区域仍进编辑器，由编辑器内保存。
+    if (mode == CaptureRequest::FULLSCREEN_MODE ||
+            mode == CaptureRequest::WINDOW_MODE) {
+        req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+    }
     m_id = req.id();
     Controller::getInstance()->requestCapture(req);
 }
