@@ -365,14 +365,12 @@ QPixmap ScreenGrabber::grabActiveWindow(bool &ok, bool includeCursor) {
 
     Window root = static_cast<Window>(QX11Info::appRootWindow());
     Window active = readNetActiveWindow(dpy, root);
-    if (active == None) {
-        SystemNotification().sendMessage(tr("Unable to capture active window"));
-        return QPixmap();
-    }
-
-    if (!isValidCaptureTarget(dpy, active)) {
-        SystemNotification().sendMessage(tr("Unable to capture active window"));
-        return QPixmap();
+    // 没有可截取的激活窗口（无 active、桌面/DOCK、隐藏或不可见）时退化为整屏，
+    // 避免用户点了「截取激活窗口」却只得到一句失败提示
+    if (active == None || !isValidCaptureTarget(dpy, active)) {
+        SystemNotification().sendMessage(
+                    tr("No active window, capturing the entire desktop"));
+        return grabEntireDesktop(ok, includeCursor);
     }
 
     Window rootRet = None;
