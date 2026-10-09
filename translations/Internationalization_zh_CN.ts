@@ -924,6 +924,11 @@ Use ctrl+d open capture window mode.</source>
         <source>Unable to capture active window</source>
         <translation>无法截取激活窗口</translation>
     </message>
+    <message>
+        <location filename="../src/utils/screengrabber.cpp" line="367"/>
+        <source>No active window, capturing the entire desktop</source>
+        <translation>未找到可截取的激活窗口，已改为全屏截图</translation>
+    </message>
 </context>
 <context>
     <name>ScreenshotSaver</name>
