@@ -353,27 +353,6 @@
 //    return newRect;
 //}
 
-//template <typename... ArgTypes, typename... ArgTypes2>
-//static inline unsigned int XcbCallVoid(xcb_void_cookie_t (*func)(xcb_connection_t *, ArgTypes...), ArgTypes2... args...)
-//{
-//    return func(QX11Info::connection(), args...).sequence;
-//}
-
-//void MWindowManager::setWindowBlur(int wid, QVector<uint32_t> &data)
-//{
-//    xcb_atom_t atom = getAtom("_NET_WM_DEEPIN_BLUR_REGION_ROUNDED");
-//    XcbCallVoid(
-//        xcb_change_property,
-//        XCB_PROP_MODE_REPLACE,
-//        wid,
-//        atom,
-//        XCB_ATOM_CARDINAL,
-//        32,
-//        data.size(),
-//        data.constData());
-//    xcb_flush(conn);
-//}
-
 //int MWindowManager::getWindowPid(xcb_window_t window)
 //{
 //    xcb_get_property_reply_t *reply = getProperty(window, "_NET_WM_PID", XCB_ATOM_CARDINAL);

@@ -54,9 +54,7 @@ void GeneneralConf::updateComponents() {
     m_includeCursor->setChecked(config.includeCursorValue());
     m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUploadEnabled());
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
-#endif
 }
 
 void GeneneralConf::showHelpChanged(bool checked) {
@@ -169,7 +167,6 @@ void GeneneralConf::initShowDesktopNotification() {
 }
 
 void GeneneralConf::initShowTrayIcon() {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray = new QCheckBox(tr("Show tray icon"), this);
     ConfigHandler config;
     bool checked = !config.disabledTrayIconValue();
@@ -179,7 +176,6 @@ void GeneneralConf::initShowTrayIcon() {
 
     connect(m_showTray, &QCheckBox::stateChanged, this,
             &GeneneralConf::showTrayIconChanged);
-#endif
 }
 
 void GeneneralConf::initConfingButtons() {

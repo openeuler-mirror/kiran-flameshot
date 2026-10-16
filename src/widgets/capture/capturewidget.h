@@ -24,13 +24,13 @@
 #pragma once
 
 
-#include "toptips.h"
+#include "selectionhintlabel.h"
 #include "formtip.h"
-#include "zoomIndicator.h"
+#include "zoommagnifier.h"
 #include "capturewidget.h"
 
-#include "menucontroller.h"
-#include "src/utils/baseutils.h"
+#include "savemenucontroller.h"
+#include "src/utils/captureutils.h"
 #include "src/widgets/panel/buttonpanel.h"
 #include "capturebutton.h"
 #include "src/tools/capturecontext.h"
@@ -202,8 +202,8 @@ private:
     uint m_id;
 
 
-    ZoomIndicator* m_zoomIndicator;
-    TopTips* m_toptips;
+    ZoomMagnifier* m_zoomMagnifier;
+    SelectionHintLabel* m_selectionHint;
 
     QRect m_backgroundRect;
     QPixmap m_resultPixmap;
@@ -212,7 +212,7 @@ private:
     bool m_isFirstReleaseButton;
     bool isReverse=false;
 
-    MenuController* m_menuController;
+    SaveMenuController* m_saveMenuController;
 
     //ToolBar* m_toolBar;
 

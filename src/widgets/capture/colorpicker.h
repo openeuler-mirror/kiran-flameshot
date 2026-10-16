@@ -23,7 +23,7 @@
 #include <QHBoxLayout>
 #include "src/tools/rectbutton.h"
 #include "src/tools/toolbutton.h"
-#include "src/tools/text/textbutton.h"
+#include "src/tools/text/textsizebutton.h"
 #include "toowidget.h"
 #include "thicknesswidget.h"
 
@@ -90,7 +90,7 @@ private:
     ToolButton* fineLine;
     ToolButton* mediumLine;
     ToolButton* thickLine;
-    TextButton* textButton;
+    TextSizeButton* textButton;
 
     QLabel *label;
     QLabel *m_textLabel;

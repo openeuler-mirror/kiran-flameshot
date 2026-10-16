@@ -1,3 +1,0 @@
-ZoomIndicator {
-    border-image: url(:/img/action/magnifier.png);
-}

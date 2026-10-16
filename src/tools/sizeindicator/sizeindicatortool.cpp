@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "sizeindicatortool.h"
-#include "src/widgets/capture/menucontroller.h"
+#include "src/widgets/capture/savemenucontroller.h"
 #include <QPainter>
 
 SizeIndicatorTool::SizeIndicatorTool(QObject *parent) : AbstractActionTool(parent) {

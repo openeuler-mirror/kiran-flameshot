@@ -23,8 +23,8 @@
 
 
 #include "src/widgets/panel/buttonpanel.h"
-#include "zoomIndicator.h"
-#include "src/utils/baseutils.h"
+#include "zoommagnifier.h"
+#include "src/utils/captureutils.h"
 
 #include <QDir>
 #include "capturewidget.h"
@@ -104,10 +104,6 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     initContext(savePath, fullScreen);
     initShortcuts();
 
-#ifdef Q_OS_WIN
-    // Top left of the whole set of screens
-    QPoint topLeft(0,0);
-#endif
     if (fullScreen) {
         // Grab Screenshot
         bool ok = true;
@@ -119,30 +115,15 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
         }
         m_context.origScreenshot = m_context.screenshot;
 
-#ifdef Q_OS_WIN
-        setWindowFlags(Qt::WindowStaysOnTopHint
-                       | Qt::FramelessWindowHint
-                       | Qt::Popup);
-
-        for (QScreen *const screen : QGuiApplication::screens()) {
-            QPoint topLeftScreen = screen->geometry().topLeft();
-            if (topLeft.x() > topLeftScreen.x() ||
-                    topLeft.y() > topLeftScreen.y()) {
-                topLeft = topLeftScreen;
-            }
-        }
-        move(topLeft);
-#else
         setWindowFlags(Qt::BypassWindowManagerHint
                        | Qt::WindowStaysOnTopHint
                        | Qt::FramelessWindowHint
                        | Qt::Tool);
-#endif
         resize(pixmap().size());
     }
     //Create toptips
-    m_toptips = new TopTips(this);
-    m_toptips->hide();
+    m_selectionHint = new SelectionHintLabel(this);
+    m_selectionHint->hide();
 
     // Create buttons
     m_buttonHandler = new ButtonHandler(this);
@@ -151,9 +132,6 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     if (m_context.fullscreen) {
         for (QScreen *const screen : QGuiApplication::screens()) {
             QRect r = screen->geometry();
-#ifdef Q_OS_WIN
-            r.moveTo(r.topLeft() - topLeft);
-#endif
             areas.append(r);
         }
     } else {
@@ -240,18 +218,16 @@ void CaptureWidget::initOriginUI()
    //this->setFixedSize(m_backgroundRect.size());
    initBackground();
 
-    m_zoomIndicator = new ZoomIndicator(this);
-    m_zoomIndicator->hide();
+    m_zoomMagnifier = new ZoomMagnifier(this);
+    m_zoomMagnifier->hide();
     m_isFirstReleaseButton = false;
 }
 
 
 void CaptureWidget::initSecondUI()
 {
-    //m_menuController = new MenuController(this);
-        return;
-    /*m_toolBar = new ToolBar(this);
-    m_toolBar->hide();*/
+    // 旧实现里的工具栏与保存菜单已不再创建，保留调用点以维持既有初始化顺序。
+    return;
 }
 
 QPixmap CaptureWidget::getPixmapofRect(const QRect &rect)
@@ -308,17 +284,17 @@ void CaptureWidget::updateButtons() {
             rectLayout->addSpacing(9);
             rectLayout->addWidget(SeparatorLine);
 
-            m_menuController =  new MenuController(this);
-            QMenu* m_menu = m_menuController->getMenu();
+            m_saveMenuController =  new SaveMenuController(this);
+            QMenu* m_menu = m_saveMenuController->getMenu();
 
             b->setMenu(m_menu);
 
-            m_menuController->setDefaultCheck(m_context.savetip);
-            m_menuController->setDefaultFormat(m_context.picture_format);
+            m_saveMenuController->setDefaultCheck(m_context.savetip);
+            m_saveMenuController->setDefaultFormat(m_context.picture_format);
 
-            connect(m_menuController, &MenuController::setPformat, this, &CaptureWidget::setPformat);
-            connect(m_menuController, &MenuController::setSaveTip, this, &CaptureWidget::setSaveTip);
-            connect(m_menuController, &MenuController::menuHide, this, &CaptureWidget::menuHide);
+            connect(m_saveMenuController, &SaveMenuController::setPformat, this, &CaptureWidget::setPformat);
+            connect(m_saveMenuController, &SaveMenuController::setSaveTip, this, &CaptureWidget::setSaveTip);
+            connect(m_saveMenuController, &SaveMenuController::menuHide, this, &CaptureWidget::menuHide);
         }
         //vlayout->addWidget(b);
         rectLayout->addSpacing(9);
@@ -542,7 +518,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
 
     if(QGuiApplication::keyboardModifiers() == Qt::ALT)
     {
-        m_zoomIndicator->hide();
+        m_zoomMagnifier->hide();
         /*for(int i = 0; i < test.length();i++)
         {
             qDebug() << test;
@@ -555,9 +531,9 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
 
     //if (m_selection->width() > 0 && m_selection->height >0 && !m_needSaveScreenshot && this->isVisible()) {
     if (m_selection->width() > 0 && m_selection->height() >0 && this->isVisible()) {
-        m_toptips->updateTips(QPoint(m_selection->x(), m_selection->y()),
+        m_selectionHint->updateTips(QPoint(m_selection->x(), m_selection->y()),
                                                      QString("%1X%2").arg(m_selection->width()).arg(m_selection->height()));
-        m_zoomIndicator->hide();
+        m_zoomMagnifier->hide();
     }
 
    // if(!m_buttonHandler->isVisible()&&m_isFirstReleaseButton)
@@ -619,7 +595,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
            tmpPos.setY(curPos.y() + CURSOR_HEIGHT);
         }
 
-        m_zoomIndicator->showMagnifier(QPoint(
+        m_zoomMagnifier->showMagnifier(QPoint(
            std::max(tmpPos.x() - topLeft.x(), 0),
            std::max(tmpPos.y() - topLeft.y(), 0)));
     }
@@ -813,7 +789,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
             m_activeTool = nullptr;
         }
     }
-    m_zoomIndicator->hide();
+    m_zoomMagnifier->hide();
 
     // Show the buttons after the resize of the selection or the creation
     // of a new one.
@@ -1040,7 +1016,7 @@ void CaptureWidget::setState(CaptureButton *b) {
 
             if(b->tool()->name() == tr("Option"))
             {
-                m_menuController->showMenu(b->pos());
+                m_saveMenuController->showMenu(b->pos());
                 m_colorPicker->hide();
                 m_formtip->hide();
             }
@@ -1053,7 +1029,6 @@ void CaptureWidget::setState(CaptureButton *b) {
             {
                 updateToolBar(b->tool()->name());
             }
-            //m_menuController->showMenu(m_selection->getPoint());
         } else if (m_activeButton) {
             m_panel->clearToolWidget();
             m_activeButton->setColor(m_uiColor);

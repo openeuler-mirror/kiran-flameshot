@@ -35,9 +35,7 @@
 #include <QDBusMessage>
 #include <QDBusConnection>
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "src/core/flameshotdbusadapter.h"
-#endif
 
 // raw 模式兜底超时（毫秒）
 static const int RAW_WAIT_TIMEOUT_MS = 2000;
@@ -95,7 +93,6 @@ int main(int argc, char *argv[]) {
         app.setOrganizationName(QStringLiteral("Dharkael"));
 
         auto c = Controller::getInstance();
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
         new FlameshotDBusAdapter(c);
         QDBusConnection dbus = QDBusConnection::sessionBus();
         if (!dbus.isConnected()) {
@@ -104,14 +101,12 @@ int main(int argc, char *argv[]) {
         }
         dbus.registerObject(QStringLiteral("/"), c);
         dbus.registerService(QStringLiteral("org.dharkael.Flameshot"));
-#endif
         // Exporting captures must be connected after the dbus interface
         // or the dbus signal gets blocked until we end the exports.
         c->enableExports();
         return app.exec();
     }
 
-#ifndef Q_OS_WIN
     /*--------------|
      * CLI parsing  |
      * ------------*/
@@ -483,7 +478,5 @@ int main(int argc, char *argv[]) {
         }
     }
 finish:
-
-#endif
     return 0;
 }

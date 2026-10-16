@@ -676,7 +676,7 @@ Use ctrl+d open capture window mode.</source>
     </message>
 </context>
 <context>
-    <name>MenuController</name>
+    <name>SaveMenuController</name>
     <message>
         <source>存储到</source>
         <translatorcomment>存储到</translatorcomment>
@@ -1110,7 +1110,7 @@ Use ctrl+d open capture window mode.</source>
     </message>
 </context>
 <context>
-    <name>TextButton</name>
+    <name>TextSizeButton</name>
     <message>
         <location filename="../src/tools/text/textbutton.h" line="36"/>
         <source>small</source>

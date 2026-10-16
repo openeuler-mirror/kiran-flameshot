@@ -25,7 +25,6 @@
 #include <QDesktopWidget>
 #include <QCursor>
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDir>
@@ -35,13 +34,11 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <X11/extensions/Xfixes.h>
-#endif
 
 ScreenGrabber::ScreenGrabber(QObject *parent) : QObject(parent) {
 
 }
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 namespace {
 
 // 读窗口属性；失败或类型/format 不符时返回 false（成功时调用方 XFree data）
@@ -222,11 +219,9 @@ bool isValidCaptureTarget(Display *dpy, Window win)
 }
 
 } // namespace
-#endif
 
 QPixmap ScreenGrabber::grabEntireDesktop(bool &ok, bool includeCursor) {
     ok = true;
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if(m_info.waylandDectected()) {
         QPixmap res;
         // handle screenshot based on DE
@@ -272,7 +267,6 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok, bool includeCursor) {
         }
         return res;
     }
-#endif
 
     QRect geometry;
     for (QScreen *const screen : QGuiApplication::screens()) {
@@ -290,11 +284,9 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok, bool includeCursor) {
     QScreen *screen = QApplication::screens()[screenNumber];
     p.setDevicePixelRatio(screen->devicePixelRatio());
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (includeCursor) {
         paintCursorOnPixmap(p, geometry);
     }
-#endif
     return p;
 }
 
@@ -319,7 +311,6 @@ QPixmap ScreenGrabber::grabScreen(int screenNumber, bool &ok, bool includeCursor
         return QPixmap();
     }
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (m_info.waylandDectected()) {
         QPixmap p = grabEntireDesktop(ok, includeCursor);
         if (!ok) {
@@ -328,7 +319,6 @@ QPixmap ScreenGrabber::grabScreen(int screenNumber, bool &ok, bool includeCursor
         // 光标已在 grabEntireDesktop 内处理；裁剪后勿再 paint
         return p.copy(geometry);
     }
-#endif
 
     // X11 / 非 Wayland：单屏读屏（禁止 QWidget::grab）；grabWindow(0) 用屏内原点
     ok = true;
@@ -339,19 +329,16 @@ QPixmap ScreenGrabber::grabScreen(int screenNumber, bool &ok, bool includeCursor
     }
     p.setDevicePixelRatio(screen->devicePixelRatio());
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (includeCursor) {
         // 在该屏逻辑几何上合成，勿对已 crop 结果二次整桌合成
         paintCursorOnPixmap(p, geometry);
     }
-#endif
     return p;
 }
 
 QPixmap ScreenGrabber::grabActiveWindow(bool &ok, bool includeCursor) {
     // X11 only；root/desktop()->winId() + 全局逻辑坐标；禁止 grabWindow(0)
     ok = false;
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (!QX11Info::isPlatformX11()) {
         SystemNotification().sendMessage(tr("Unable to capture active window"));
         return QPixmap();
@@ -450,14 +437,8 @@ QPixmap ScreenGrabber::grabActiveWindow(bool &ok, bool includeCursor) {
     }
     ok = true;
     return p;
-#else
-    Q_UNUSED(includeCursor);
-    SystemNotification().sendMessage(tr("Unable to capture active window"));
-    return QPixmap();
-#endif
 }
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 void ScreenGrabber::paintCursorOnPixmap(QPixmap &pixmap, const QRect &captureGeometry)
 {
     if (!QX11Info::isPlatformX11()) {
@@ -508,4 +489,3 @@ void ScreenGrabber::paintCursorOnPixmap(QPixmap &pixmap, const QRect &captureGeo
 
     XFree(cursor);
 }
-#endif

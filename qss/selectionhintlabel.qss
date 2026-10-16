@@ -1,0 +1,7 @@
+SelectionHintLabel {
+    background-color: transparent;
+    border-image: url(:/img/action/sizetip.png) no-repeat;
+    color: #ffffff;
+    font: NotoSansCJKsc-Light;
+    font-size: 12px;
+}

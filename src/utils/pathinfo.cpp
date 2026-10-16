@@ -32,14 +32,9 @@ QStringList PathInfo::translationsPaths() {
     QString binaryPath = QFileInfo(qApp->applicationDirPath())
             .absoluteFilePath();
     QString trPath = QDir::toNativeSeparators(binaryPath + "/translations") ;
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     return QStringList()
             << QStringLiteral(APP_PREFIX) + "/share/kiran-flameshot/translations"
             << trPath
             << QStringLiteral("/usr/share/kiran-flameshot/translations")
             << QStringLiteral("/usr/local/share/kiran-flameshot/translations");
-#elif defined(Q_OS_WIN)
-    return QStringList()
-            << trPath;
-#endif
 }

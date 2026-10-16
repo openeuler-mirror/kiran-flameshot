@@ -22,7 +22,7 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QDesktopWidget>
-#include "src/utils/baseutils.h"
+#include "src/utils/captureutils.h"
 
 struct CaptureContext {
     // screenshot with modifications
@@ -47,8 +47,8 @@ struct CaptureContext {
     // Mode of the capture widget
     bool fullscreen;
 
-    int graphic_style = RECT_ANGLE;
-    int line_style = LINE;
+    int graphic_style = captureutils::ShapeRectAngle;
+    int line_style = captureutils::LineSolid;
 
     QString picture_format;
     QString savetip;

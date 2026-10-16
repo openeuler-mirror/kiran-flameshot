@@ -355,12 +355,12 @@
         <file>qss/colorbtn.qss</file>
         <file>qss/fontsizewidget.qss</file>
         <file>qss/majtoolbar.qss</file>
-        <file>qss/savetips.qss</file>
+        <file>qss/selectionhintlabel.qss</file>
         <file>qss/subtoolbar.qss</file>
         <file>qss/textbutton.qss</file>
         <file>qss/thicknessbutton.qss</file>
         <file>qss/toolbar.qss</file>
         <file>qss/toolsavebutton.qss</file>
-        <file>qss/zoomindicator.qss</file>
+        <file>qss/zoommagnifier.qss</file>
     </qresource>
 </RCC>

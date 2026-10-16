@@ -652,7 +652,7 @@ ctrl+sབཀོལ་ནས་རི་མོ་དེ་གཏན་ཁེལ�
     </message>
 </context>
 <context>
-    <name>MenuController</name>
+    <name>SaveMenuController</name>
     <message>
         <source>存储到</source>
         <translatorcomment>存储到</translatorcomment>
@@ -1068,7 +1068,7 @@ ctrl+sབཀོལ་ནས་རི་མོ་དེ་གཏན་ཁེལ�
     </message>
 </context>
 <context>
-    <name>TextButton</name>
+    <name>TextSizeButton</name>
     <message>
         <location filename="../src/tools/text/textbutton.h" line="36"/>
         <source>small</source>

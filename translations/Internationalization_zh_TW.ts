@@ -621,7 +621,7 @@ Use ctrl+s to save the picture to the set location.</source>
     </message>
 </context>
 <context>
-    <name>MenuController</name>
+    <name>SaveMenuController</name>
     <message>
         <location filename="../src/widgets/capture/menucontroller.cpp" line="49"/>
         <source>save to</source>
@@ -995,7 +995,7 @@ Use ctrl+s to save the picture to the set location.</source>
     </message>
 </context>
 <context>
-    <name>TextButton</name>
+    <name>TextSizeButton</name>
     <message>
         <location filename="../src/tools/text/textbutton.h" line="36"/>
         <source>small</source>
