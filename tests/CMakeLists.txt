@@ -8,6 +8,14 @@ add_test(NAME cmake.cli-smoke
         -DKFS_EXECUTABLE=$<TARGET_FILE:kiran-flameshot>
         -P ${CMAKE_CURRENT_SOURCE_DIR}/integration/cmake/cli-smoke.cmake)
 
+# D-Bus 契约静态对照：接口 XML 与 FlameshotDBusAdapter 的槽签名必须一致。
+# 生成代理只覆盖「CLI 调用 ↔ XML」，这条覆盖「XML ↔ 真实实现」。
+add_test(NAME cmake.dbus-contract
+    COMMAND ${CMAKE_COMMAND}
+        -DKFS_XML=${PROJECT_SOURCE_DIR}/dbus/org.dharkael.Flameshot.xml
+        -DKFS_ADAPTER_HEADER=${PROJECT_SOURCE_DIR}/src/core/flameshotdbusadapter.h
+        -P ${CMAKE_CURRENT_SOURCE_DIR}/integration/cmake/dbus-contract.cmake)
+
 # staging 安装到构建树内部，测试因此自包含，也不会触碰主机上的安装。
 set(KFS_INSTALL_STAGE "${CMAKE_BINARY_DIR}/stage/install-layout")
 add_test(NAME cmake.install-layout
