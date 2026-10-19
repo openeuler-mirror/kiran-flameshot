@@ -310,10 +310,17 @@ void Controller::handleCaptureFailed(uint id) {
     }
 }
 
-void Controller::doLater(int msec, QObject *receiver, lambda func)  {
+void Controller::doLater(int msec, QObject *receiver, lambda func)
+{
     QTimer *timer = new QTimer(receiver);
     QObject::connect(timer, &QTimer::timeout, receiver,
-                     [timer, func](){ func(); timer->deleteLater(); });
+                     [timer, func]()
+                     {
+                         // 回调可能打开嵌套事件循环，先停止零间隔定时器，避免主线程空转。
+                         timer->stop();
+                         func();
+                         timer->deleteLater();
+                     });
     timer->setInterval(msec);
     timer->start();
 }
