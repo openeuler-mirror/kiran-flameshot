@@ -16,12 +16,22 @@ endforeach()
 set(KIRAN_FLAMESHOT_IMGUR_CLIENT_ID "313baf0c7b4d3ff"
     CACHE STRING "Imgur client id used by the legacy uploader")
 
+# D-Bus 客户端代理由接口 XML 生成：方法名与参数顺序因此获得编译期校验，CLI 端不再
+# 手写 QDBusMessage。生成的 .cpp/.h/.moc 随应用目标一起编译（宏已处理 moc 依赖）。
+qt5_add_dbus_interface(KFS_DBUS_PROXY_SRCS
+    "${PROJECT_SOURCE_DIR}/dbus/org.dharkael.Flameshot.xml"
+    org_dharkael_flameshot)
+
 add_executable(kiran-flameshot
     ${KFS_APP_SOURCES}
     ${KFS_APP_MOC_HEADERS}
+    ${KFS_DBUS_PROXY_SRCS}
     ../graphics.qrc)
 
-target_include_directories(kiran-flameshot PRIVATE ${PROJECT_SOURCE_DIR})
+target_include_directories(kiran-flameshot PRIVATE
+    ${PROJECT_SOURCE_DIR}
+    # 生成的 org_dharkael_flameshot.h 所在目录
+    ${CMAKE_CURRENT_BINARY_DIR})
 
 target_compile_definitions(kiran-flameshot PRIVATE
     APP_VERSION="${KIRAN_FLAMESHOT_VERSION}"
