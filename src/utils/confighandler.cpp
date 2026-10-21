@@ -261,21 +261,12 @@ bool ConfigHandler::startupLaunchValue() {
 bool ConfigHandler::verifyLaunchFile() {
     bool res = false;
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     QString path = QDir::homePath() + "/.config/autostart/Flameshot.desktop";
     res = QFile(path).exists();
-#elif defined(Q_OS_WIN)
-    QSettings bootUpSettings(
-                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
-                QSettings::NativeFormat);
-    res = bootUpSettings.value("Flameshot").toString() ==
-            QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
-#endif
     return res;
 }
 
 void ConfigHandler::setStartupLaunch(const bool start) {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     QString path = QDir::homePath() + "/.config/autostart/";
     QDir autostartDir(path);
     if (!autostartDir.exists()) {
@@ -293,18 +284,6 @@ void ConfigHandler::setStartupLaunch(const bool start) {
     } else {
         file.remove();
     }
-#elif defined(Q_OS_WIN)
-    QSettings bootUpSettings(
-                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
-                QSettings::NativeFormat);
-    if (start) {
-        QString app_path =
-                QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
-        bootUpSettings.setValue("Flameshot", app_path);
-    } else {
-        bootUpSettings.remove("Flameshot");
-    }
-#endif
     m_settings.setValue(QStringLiteral("startupLaunch"), start);
 }
 

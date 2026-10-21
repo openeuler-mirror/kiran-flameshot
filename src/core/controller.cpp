@@ -33,10 +33,6 @@
 
 #include <qt5-log-i.h>
 
-#ifdef Q_OS_WIN
-#include "src/core/globalshortcutfilter.h"
-#endif
-
 // Controller is the core component of Flameshot, creates the trayIcon and
 // launches the capture widget
 
@@ -44,20 +40,9 @@ Controller::Controller() : m_captureWindow(nullptr) {
     qApp->setQuitOnLastWindowClosed(false);
 
     // init tray icon
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (!ConfigHandler().disabledTrayIconValue()) {
         enableTrayIcon();
     }
-#elif defined(Q_OS_WIN)
-    enableTrayIcon();
-
-    GlobalShortcutFilter *nativeFilter = new GlobalShortcutFilter(this);
-    qApp->installNativeEventFilter(nativeFilter);
-    connect(nativeFilter, &GlobalShortcutFilter::printPressed,
-            this, [this](){
-        this->requestCapture(CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
-    });
-#endif
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
 //    qApp->setStyleSheet(StyleSheet);
@@ -140,12 +125,8 @@ void Controller::startVisualCapture(const uint id, const QString &forcedSavePath
         connect(m_captureWindow, SIGNAL(captureFailed(uint)), this, SLOT(handleCaptureFailed(uint)));
         connect(m_captureWindow, SIGNAL(captureTaken(uint, QPixmap)), this, SLOT(handleCaptureTaken(uint,QPixmap)));
 
-#ifdef Q_OS_WIN
-        m_captureWindow->show();
-#else
         m_captureWindow->showFullScreen();
         //m_captureWindow->show(); // Debug
-#endif
     } else {
         emit captureFailed(id);
     }
@@ -229,8 +210,9 @@ void Controller::enableTrayIcon() {
     });
     QAction *windowAction = new QAction(tr("Capture &Active Window"), this);
     connect(windowAction, &QAction::triggered, this, [this](){
-        // QMenu 为 override-redirect，不夺 _NET_ACTIVE_WINDOW，故无需等焦点还原；
-        // 但 grabWindow 抓的是合成后内容，需等菜单像素消失，取值大于 gui 的 400ms
+        // 托盘图标位于面板上，点托盘会把 _NET_ACTIVE_WINDOW 交给面板(DOCK)；
+        // 抓取侧对这种不可截取的目标退化为整屏抓取，故无需等焦点还原。此处等待
+        // 是为了让菜单像素从合成结果里消失，取值大于 gui 的 400ms。
         doLater(600, this, [this](){
             // 托盘为 GUI 入口：path 留空 → exportCapture 走 saveToGUI 弹另存为，
             // 与 CLI/D-Bus window 的静默默认目录落盘按入口天然分离
@@ -281,12 +263,10 @@ void Controller::trayIconActivated(QSystemTrayIcon::ActivationReason r)
 }
 
 void Controller::disableTrayIcon() {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (m_trayIcon) {
         m_trayIcon->deleteLater();
     }
     ConfigHandler().setDisabledTrayIcon(true);
-#endif
 }
 
 /*void Controller::trayIconActivated(QSystemTrayIcon::ActivationReason r){
@@ -330,10 +310,17 @@ void Controller::handleCaptureFailed(uint id) {
     }
 }
 
-void Controller::doLater(int msec, QObject *receiver, lambda func)  {
+void Controller::doLater(int msec, QObject *receiver, lambda func)
+{
     QTimer *timer = new QTimer(receiver);
     QObject::connect(timer, &QTimer::timeout, receiver,
-                     [timer, func](){ func(); timer->deleteLater(); });
+                     [timer, func]()
+                     {
+                         // 回调可能打开嵌套事件循环，先停止零间隔定时器，避免主线程空转。
+                         timer->stop();
+                         func();
+                         timer->deleteLater();
+                     });
     timer->setInterval(msec);
     timer->start();
 }

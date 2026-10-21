@@ -1,7 +1,7 @@
 #ifndef FONTWIDGET_H
 #define FONTWIDGET_H
 
-#include "textbutton.h"
+#include "textsizebutton.h"
 #include <QWidget>
 
 class FontWidget : public QWidget
@@ -32,7 +32,7 @@ private:
 
     QWidget* m_textLabel;
 
-    TextButton *textButton;
+    TextSizeButton *textButton;
 };
 
 #endif // FONTWIDGET_H

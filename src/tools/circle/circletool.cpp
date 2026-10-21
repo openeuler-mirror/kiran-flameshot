@@ -55,7 +55,7 @@ void CircleTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUn
         updateBackup(pixmap);
     }
     painter.setPen(QPen(m_color, m_thickness));
-    if(m_style == BLUR)
+    if(m_style == captureutils::ShapeBlur)
         painter.setBrush(QBrush(m_color));
     painter.drawEllipse(QRect(m_points.first, m_points.second));
 }

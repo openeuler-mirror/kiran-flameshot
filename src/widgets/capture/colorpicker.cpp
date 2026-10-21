@@ -16,9 +16,9 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "colorpicker.h"
-#include "src/tools/text/textbutton.h"
+#include "src/tools/text/textsizebutton.h"
 
-#include "src/utils/baseutils.h"
+#include "src/utils/captureutils.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 #include "src/tools/toolbutton.h"
@@ -63,7 +63,7 @@ ColorPicker::ColorPicker(int thickness,QColor m_color, QWidget *parent) : QWidge
     m_drawColor = config.drawColorValue();
     m_thickness = thickness;
 
-    setStyleSheet(getFileContent(":/qss/subtoolbar.qss"));
+    setStyleSheet(captureutils::getFileContent(":/qss/subtoolbar.qss"));
     setFixedSize(TOOLBAR_WIDTH, TOOLBAR_HEIGHT);
     setStyleSheet("QWidget{border-radius:4px;background-color:white;}");
 
@@ -82,18 +82,16 @@ ColorPicker::ColorPicker(int thickness,QColor m_color, QWidget *parent) : QWidge
     connect(thicknessWidget, &ThicknessWidget::thicknessSelected, this, &ColorPicker::updateThickness_tool);
     connect(this,&ColorPicker::thicknessCh_tool, thicknessWidget, &ThicknessWidget::updateThickness);
     thicknessWidget->setFixedSize(66,30);
-    //thicknessWidget->setStyleSheet(getFileContent(":/resources/qss/textbutton.qss"));
     thicknessWidget->hide();
 
     m_textLabel = new QLabel();
     m_textLabel->resize(100,30);
 
-    textButton = new TextButton(m_thickness);
+    textButton = new TextSizeButton(m_thickness);
     textButton->setFixedSize(44,18);
     textButton->setStyleSheet("QComboBox{border-radius:3px;padding:2px 4px;background-color:#e9e9e9;color: black}");
-    connect(textButton, &TextButton::updateThickness,
+    connect(textButton, &TextSizeButton::updateThickness,
             this, &ColorPicker::updateThickness_font);
-    //textButton->setStyleSheet(getFileContent(":/textbutton.qss"));
 
     QHBoxLayout* rectLayout = new QHBoxLayout();
     rectLayout->setMargin(0);
@@ -170,15 +168,15 @@ void ColorPicker::hide() {
 
 void ColorPicker::thicknessCh_font(int thickness)
 {
-    if(m_thickness == SMALL_SIZE)
+    if(m_thickness == captureutils::TextSizeSmall)
     {
         textButton->setCurrentIndex(0);
     }
-    else if(m_thickness == MEDIUM_SIZE)
+    else if(m_thickness == captureutils::TextSizeMedium)
     {
         textButton->setCurrentIndex(1);
     }
-    else if(m_thickness == LARGE_SIZE)
+    else if(m_thickness == captureutils::TextSizeLarge)
     {
         textButton->setCurrentIndex(2);
     }

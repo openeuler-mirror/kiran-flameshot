@@ -186,6 +186,29 @@ Steps for using the configuration:
 
 To build the application in your system, you'll need to install the dependencies needed for it and Package names might be different for each distribution, see [Dependencies](#dependencies) below for more information.
 
+### Build
+
+This project builds with CMake:
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j"$(nproc)"
+```
+
+Build and run the test suite (optional, needs Qt5 Test):
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
+cmake --build build -j"$(nproc)"
+ctest --test-dir build --output-on-failure
+```
+
+Install (the prefix defaults to `/usr`, override it with `-DCMAKE_INSTALL_PREFIX=...`):
+
+```bash
+cmake --install build
+```
+
 ### Dependencies
 
 #### Compile-time

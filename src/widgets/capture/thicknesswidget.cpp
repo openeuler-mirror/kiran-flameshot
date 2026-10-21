@@ -1,7 +1,7 @@
 #include "thicknesswidget.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
-#include "src/utils/baseutils.h"
+#include "src/utils/captureutils.h"
 
 #include <QDebug>
 #include <QPainter>
@@ -20,7 +20,7 @@ ThicknessWidget::ThicknessWidget(int thickness,QWidget *parent) : QWidget(parent
    this->setMouseTracking(true);
 
    ConfigHandler config;
-   m_thinknessList = {SMALL_SIZE,MEDIUM_SIZE,LARGE_SIZE};
+   m_thinknessList = {captureutils::TextSizeSmall,captureutils::TextSizeMedium,captureutils::TextSizeLarge};
    //m_colorAreaSize = GlobalValues::buttonBaseSize() * 0.6;
    m_thinknessAreaList = handleMask();
    m_selectThinkness = thickness;

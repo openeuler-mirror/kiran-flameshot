@@ -55,7 +55,7 @@ void RectangleTool::process(QPainter &painter, const QPixmap &pixmap, bool recor
         updateBackup(pixmap);
     }
     painter.setPen(QPen(m_color, m_thickness));
-    if(m_style == BLUR)
+    if(m_style == captureutils::ShapeBlur)
         painter.setBrush(QBrush(m_color));
     painter.drawRect(QRect(m_points.first, m_points.second));
 }
