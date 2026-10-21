@@ -26,15 +26,17 @@ enum SaveAction : unsigned int;
 //
 // 它只维护菜单状态并对外发信号，不执行任何保存动作——落盘由编辑器窗口负责，
 // 这与旧行为一致。菜单结构与可见文案保持不变。
+//
+// 菜单由调用方创建并决定生命周期（通常 parent 为保存按钮）；本类不拥有 menu。
+// 菜单项 QAction 以 menu 为 parent，随菜单销毁。
 class SaveMenuController : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit SaveMenuController(QObject *parent = 0);
+    // menu 必须非空；调用方负责 menu 的创建与销毁（推荐 parent = 所属按钮）。
+    explicit SaveMenuController(QMenu *menu, QObject *parent = 0);
     ~SaveMenuController();
-
-    QMenu *getMenu();
 
 signals:
     void shapePressed(QString currentShape);

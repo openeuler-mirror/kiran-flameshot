@@ -284,10 +284,10 @@ void CaptureWidget::updateButtons() {
             rectLayout->addSpacing(9);
             rectLayout->addWidget(SeparatorLine);
 
-            m_saveMenuController =  new SaveMenuController(this);
-            QMenu* m_menu = m_saveMenuController->getMenu();
-
-            b->setMenu(m_menu);
+            // 菜单生命周期与按钮绑定；控制器只填充项并转发信号。
+            QMenu *menu = new QMenu(b);
+            m_saveMenuController = new SaveMenuController(menu, this);
+            b->setMenu(menu);
 
             m_saveMenuController->setDefaultCheck(m_context.savetip);
             m_saveMenuController->setDefaultFormat(m_context.picture_format);

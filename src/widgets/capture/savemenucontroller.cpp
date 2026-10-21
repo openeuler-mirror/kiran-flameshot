@@ -60,20 +60,21 @@ QAction *optionWithValue(const QList<QAction *> &options, const QString &value)
 
 }  // namespace
 
-SaveMenuController::SaveMenuController(QObject *parent)
+SaveMenuController::SaveMenuController(QMenu *menu, QObject *parent)
     : QObject(parent),
-      m_menu(new QMenu),
-      m_pathHeader(new QAction(tr("save to"))),
-      m_desktopOption(new QAction(tr("desktop"))),
-      m_clipboardOption(new QAction(tr("cilickborad"))),
-      m_customOption(new QAction(tr("Custom save location"))),
-      m_formatHeader(new QAction(tr("Save format"))),
-      m_jpgOption(new QAction(tr("JPG"))),
-      m_pngOption(new QAction(tr("PNG"))),
-      m_bmpOption(new QAction(tr("BMP")))
+      m_menu(menu),
+      m_pathHeader(new QAction(tr("save to"), menu)),
+      m_desktopOption(new QAction(tr("desktop"), menu)),
+      m_clipboardOption(new QAction(tr("cilickborad"), menu)),
+      m_customOption(new QAction(tr("Custom save location"), menu)),
+      m_formatHeader(new QAction(tr("Save format"), menu)),
+      m_jpgOption(new QAction(tr("JPG"), menu)),
+      m_pngOption(new QAction(tr("PNG"), menu)),
+      m_bmpOption(new QAction(tr("BMP"), menu))
 {
+    Q_ASSERT(m_menu != 0);
+
     m_menu->setFocusPolicy(Qt::StrongFocus);
-    m_menu->setStyle(QStyleFactory::create(QStringLiteral("dlight")));
     m_menu->setStyleSheet(menuStyleSheet());
 
     m_desktopOption->setData(QString::fromLatin1(kDesktopTip));
@@ -129,11 +130,6 @@ QList<QAction *> SaveMenuController::pathOptions() const
 QList<QAction *> SaveMenuController::formatOptions() const
 {
     return QList<QAction *>() << m_jpgOption << m_pngOption << m_bmpOption;
-}
-
-QMenu *SaveMenuController::getMenu()
-{
-    return m_menu;
 }
 
 void SaveMenuController::showMenu(QPoint pos)

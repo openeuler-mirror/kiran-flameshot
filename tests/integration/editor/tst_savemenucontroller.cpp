@@ -22,6 +22,8 @@
 
 #include <QAction>
 #include <QMenu>
+#include <QPointer>
+#include <QWidget>
 
 #include "src/widgets/capture/savemenucontroller.h"
 
@@ -37,6 +39,17 @@ const int kJpgIndex = 5;
 const int kPngIndex = 6;
 const int kBmpIndex = 7;
 
+// 菜单生命周期挂在 host 上，模拟「按钮拥有菜单」。
+struct MenuFixture {
+    QWidget host;
+    QMenu *menu;
+
+    MenuFixture()
+        : menu(new QMenu(&host))
+    {
+    }
+};
+
 }  // namespace
 
 class TestSaveMenuController : public QObject
@@ -49,12 +62,14 @@ private slots:
     void formatOptionEmitsPformatAndMarksSingleChoice();
     void defaultSettersCheckMatchingEntry();
     void showAndHideDriveVisibilityAndSignal();
+    void actionsDieWithMenu();
 };
 
 void TestSaveMenuController::menuHasExpectedEntries()
 {
-    SaveMenuController controller;
-    QMenu *menu = controller.getMenu();
+    MenuFixture fixture;
+    SaveMenuController controller(fixture.menu);
+    QMenu *menu = fixture.menu;
 
     QVERIFY(menu != 0);
     QCOMPARE(menu->actions().size(), 8);
@@ -70,9 +85,10 @@ void TestSaveMenuController::menuHasExpectedEntries()
 
 void TestSaveMenuController::pathOptionEmitsSaveTipAndMarksSingleChoice()
 {
-    SaveMenuController controller;
+    MenuFixture fixture;
+    SaveMenuController controller(fixture.menu);
     QSignalSpy spy(&controller, &SaveMenuController::setSaveTip);
-    QMenu *menu = controller.getMenu();
+    QMenu *menu = fixture.menu;
 
     menu->actions().at(kDesktopIndex)->trigger();
     QCOMPARE(spy.count(), 1);
@@ -90,9 +106,10 @@ void TestSaveMenuController::pathOptionEmitsSaveTipAndMarksSingleChoice()
 
 void TestSaveMenuController::formatOptionEmitsPformatAndMarksSingleChoice()
 {
-    SaveMenuController controller;
+    MenuFixture fixture;
+    SaveMenuController controller(fixture.menu);
     QSignalSpy spy(&controller, &SaveMenuController::setPformat);
-    QMenu *menu = controller.getMenu();
+    QMenu *menu = fixture.menu;
 
     menu->actions().at(kJpgIndex)->trigger();
     QCOMPARE(spy.count(), 1);
@@ -109,8 +126,9 @@ void TestSaveMenuController::formatOptionEmitsPformatAndMarksSingleChoice()
 
 void TestSaveMenuController::defaultSettersCheckMatchingEntry()
 {
-    SaveMenuController controller;
-    QMenu *menu = controller.getMenu();
+    MenuFixture fixture;
+    SaveMenuController controller(fixture.menu);
+    QMenu *menu = fixture.menu;
 
     controller.setDefaultFormat(QStringLiteral("png"));
     QVERIFY(menu->actions().at(kPngIndex)->isChecked());
@@ -127,8 +145,9 @@ void TestSaveMenuController::defaultSettersCheckMatchingEntry()
 
 void TestSaveMenuController::showAndHideDriveVisibilityAndSignal()
 {
-    SaveMenuController controller;
-    QMenu *menu = controller.getMenu();
+    MenuFixture fixture;
+    SaveMenuController controller(fixture.menu);
+    QMenu *menu = fixture.menu;
     QSignalSpy hideSpy(&controller, &SaveMenuController::menuHide);
 
     controller.showMenu(QPoint(20, 20));
@@ -137,6 +156,22 @@ void TestSaveMenuController::showAndHideDriveVisibilityAndSignal()
     controller.hide();
     QVERIFY(!menu->isVisible());
     QCOMPARE(hideSpy.count(), 1);
+}
+
+void TestSaveMenuController::actionsDieWithMenu()
+{
+    QWidget host;
+    QMenu *menu = new QMenu(&host);
+    QPointer<QAction> probe;
+    {
+        SaveMenuController controller(menu);
+        probe = menu->actions().at(kDesktopIndex);
+        QVERIFY(!probe.isNull());
+    }
+    // 控制器析构后，菜单仍在 host 下，action 仍活着。
+    QVERIFY(!probe.isNull());
+    delete menu;
+    QVERIFY(probe.isNull());
 }
 
 QTEST_MAIN(TestSaveMenuController)
