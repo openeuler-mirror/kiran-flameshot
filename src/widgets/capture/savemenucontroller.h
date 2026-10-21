@@ -19,6 +19,7 @@
 #include <QMenu>
 #include <QObject>
 #include <QPoint>
+#include <QWidgetAction>
 
 enum SaveAction : unsigned int;
 
@@ -29,6 +30,7 @@ enum SaveAction : unsigned int;
 //
 // 菜单由调用方创建并决定生命周期（通常 parent 为保存按钮）；本类不拥有 menu。
 // 菜单项 QAction 以 menu 为 parent，随菜单销毁。
+// 两个分组标题用 QWidgetAction 承载不可交互的 QLabel，避免把标题伪装成禁用 QAction。
 class SaveMenuController : public QObject
 {
     Q_OBJECT
@@ -65,12 +67,12 @@ private:
 
     QMenu *m_menu;
 
-    QAction *m_pathHeader;
+    QWidgetAction *m_pathHeader;
     QAction *m_desktopOption;
     QAction *m_clipboardOption;
     QAction *m_customOption;
 
-    QAction *m_formatHeader;
+    QWidgetAction *m_formatHeader;
     QAction *m_jpgOption;
     QAction *m_pngOption;
     QAction *m_bmpOption;

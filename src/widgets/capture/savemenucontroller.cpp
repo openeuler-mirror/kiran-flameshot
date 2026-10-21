@@ -18,8 +18,9 @@
 #include "src/utils/saveutils.h"
 
 #include <QAction>
-#include <QStyleFactory>
+#include <QLabel>
 #include <QString>
+#include <QWidgetAction>
 
 namespace
 {
@@ -48,6 +49,24 @@ QString menuStyleSheet()
         "QMenu::item:selected { background-color: gray; }");
 }
 
+// 分组标题：用不可交互的 QLabel 承载，避免把标题伪装成禁用 QAction。
+// QWidgetAction 不参与键盘导航，也不会出现菜单项的高亮与禁用边框。
+QWidgetAction *createMenuHeader(const QString &text, QMenu *menu)
+{
+    QWidgetAction *action = new QWidgetAction(menu);
+    action->setText(text);
+
+    QLabel *label = new QLabel(text);
+    label->setEnabled(false);
+    label->setIndent(34);  // 对齐菜单项文字：margin 10px + padding-left 24px
+    label->setContentsMargins(0, 6, 0, 6);
+    label->setStyleSheet(QStringLiteral("QLabel { color: #888888; background: transparent; }"));
+
+    action->setDefaultWidget(label);
+    action->setEnabled(false);
+    return action;
+}
+
 QAction *optionWithValue(const QList<QAction *> &options, const QString &value)
 {
     for (int i = 0; i < options.size(); ++i) {
@@ -63,11 +82,11 @@ QAction *optionWithValue(const QList<QAction *> &options, const QString &value)
 SaveMenuController::SaveMenuController(QMenu *menu, QObject *parent)
     : QObject(parent),
       m_menu(menu),
-      m_pathHeader(new QAction(tr("save to"), menu)),
+      m_pathHeader(createMenuHeader(tr("save to"), menu)),
       m_desktopOption(new QAction(tr("desktop"), menu)),
-      m_clipboardOption(new QAction(tr("cilickborad"), menu)),
-      m_customOption(new QAction(tr("Custom save location"), menu)),
-      m_formatHeader(new QAction(tr("Save format"), menu)),
+      m_clipboardOption(new QAction(tr("clipboard"), menu)),
+      m_customOption(new QAction(tr("Custom save location…"), menu)),
+      m_formatHeader(createMenuHeader(tr("Save format"), menu)),
       m_jpgOption(new QAction(tr("JPG"), menu)),
       m_pngOption(new QAction(tr("PNG"), menu)),
       m_bmpOption(new QAction(tr("BMP"), menu))
@@ -92,10 +111,6 @@ SaveMenuController::SaveMenuController(QMenu *menu, QObject *parent)
     for (int i = 0; i < formats.size(); ++i) {
         formats.at(i)->setCheckable(true);
     }
-
-    // 两个分组标题只起说明作用，不可点击。
-    m_pathHeader->setEnabled(false);
-    m_formatHeader->setEnabled(false);
 
     m_menu->addAction(m_pathHeader);
     m_menu->addAction(m_desktopOption);

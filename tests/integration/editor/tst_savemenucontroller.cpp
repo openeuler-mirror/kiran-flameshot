@@ -24,6 +24,7 @@
 #include <QMenu>
 #include <QPointer>
 #include <QWidget>
+#include <QWidgetAction>
 
 #include "src/widgets/capture/savemenucontroller.h"
 
@@ -76,9 +77,16 @@ void TestSaveMenuController::menuHasExpectedEntries()
     QCOMPARE(menu->actions().at(kPathHeaderIndex)->text(), QStringLiteral("save to"));
     QCOMPARE(menu->actions().at(kFormatHeaderIndex)->text(), QStringLiteral("Save format"));
 
-    // 分组标题不可点击；其余六项都是可勾选的。
-    QVERIFY(!menu->actions().at(kPathHeaderIndex)->isEnabled());
-    QVERIFY(!menu->actions().at(kFormatHeaderIndex)->isEnabled());
+    // 分组标题是不可交互的 QWidgetAction（内部 QLabel 禁用），其余六项都可勾选。
+    QWidgetAction *pathHeader = qobject_cast<QWidgetAction *>(menu->actions().at(kPathHeaderIndex));
+    QVERIFY(pathHeader != 0);
+    QVERIFY(pathHeader->defaultWidget() != 0);
+    QVERIFY(!pathHeader->defaultWidget()->isEnabled());
+    QWidgetAction *formatHeader = qobject_cast<QWidgetAction *>(menu->actions().at(kFormatHeaderIndex));
+    QVERIFY(formatHeader != 0);
+    QVERIFY(!formatHeader->defaultWidget()->isEnabled());
+    QCOMPARE(menu->actions().at(kClipboardIndex)->text(), QStringLiteral("clipboard"));
+    QCOMPARE(menu->actions().at(kCustomIndex)->text(), QStringLiteral("Custom save location…"));
     QVERIFY(menu->actions().at(kDesktopIndex)->isCheckable());
     QVERIFY(menu->actions().at(kBmpIndex)->isCheckable());
 }

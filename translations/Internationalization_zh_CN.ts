@@ -711,15 +711,15 @@ Use ctrl+d open capture window mode.</source>
     </message>
     <message>
         <location filename="../src/widgets/capture/menucontroller.cpp" line="51"/>
-        <source>cilickborad</source>
+        <source>clipboard</source>
         <translatorcomment>剪切板</translatorcomment>
         <translation>剪切板</translation>
     </message>
     <message>
         <location filename="../src/widgets/capture/menucontroller.cpp" line="52"/>
-        <source>Custom save location</source>
+        <source>Custom save location…</source>
         <translatorcomment>自定义保存位置</translatorcomment>
-        <translation>自定义保存位置</translation>
+        <translation>自定义保存位置…</translation>
     </message>
     <message>
         <location filename="../src/widgets/capture/menucontroller.cpp" line="63"/>
