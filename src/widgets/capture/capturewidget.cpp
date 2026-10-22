@@ -53,8 +53,6 @@
 #include <QStackedWidget>
 #include <QDebug>
 
-//#include <window-manager.h>
-
 #include <X11/Xlib.h>
 
 namespace {
@@ -157,21 +155,8 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
             this, &CaptureWidget::setDrawColor);
     connect(m_colorPicker, &ColorPicker::thicknessSelected,
             this, &CaptureWidget::setDrawThickness);
-//    connect(m_colorPicker, &ColorPicker::styleSelected,
-//            this, &CaptureWidget::setDrawRectStyle);
-//    connect(m_colorPicker, &ColorPicker::lineSelected,
-//            this, &CaptureWidget::setDrawLineStyle);
     connect(this,&CaptureWidget::thicknessCh,
             m_colorPicker, &ColorPicker::thicknessChanged);
-    /*QLabel* m_hSeparatorLine = new QLabel(this);
-    m_hSeparatorLine->setObjectName("HorSeparatorLine");
-    m_hSeparatorLine->setFixedHeight(1);
-
-    QVBoxLayout* vLayout = new QVBoxLayout();
-    vLayout->setMargin(0);
-    vLayout->setSpacing(0);
-    vLayout->addWidget(m_colorPicker, 0, Qt::AlignVCenter);
-    setLayout(vLayout);*/
     makeChild(m_colorPicker);
     m_colorPicker->move(-500,-500);
     m_colorPicker->hide();
@@ -199,23 +184,12 @@ void CaptureWidget::initOriginUI()
     QPoint curPos = this->cursor().pos();
 
    const qreal ratio = devicePixelRatioF();
-   //m_swUtil = DScreenWindowsUtil::instance(curPos);
-   //m_screenNum =  m_swUtil->getScreenNum();
-   //m_backgroundRect = m_swUtil->backgroundRect();
 
    m_backgroundRect =  m_selection->getArea();
-  /* m_backgroundRect.setWidth(INDICATOR_WIDTH);
-   m_backgroundRect.setHeight(INDICATOR_WIDTH);*/
-/*
-   for(QScreen *const screen : QGuiApplication::screens()){
-       QRect r = screen->geometry();
-       m_backgroundRect = r;
-   }*/
 
    m_backgroundRect = QRect(m_backgroundRect.topLeft() / ratio, m_backgroundRect.size());
 
    move(m_backgroundRect.topLeft() * ratio);
-   //this->setFixedSize(m_backgroundRect.size());
    initBackground();
 
     m_zoomMagnifier = new ZoomMagnifier(this);
@@ -248,7 +222,6 @@ void CaptureWidget::initBackground()
 {
     m_backgroundPixmap = getPixmapofRect(m_backgroundRect);
     m_resultPixmap = m_backgroundPixmap;
-    //TempFile::instance()->setFullScreenPixmap(m_backgroundPixmap);
 }
 
 // redefineButtons retrieves the buttons configured to be shown with the
@@ -259,9 +232,6 @@ void CaptureWidget::updateButtons() {
 
     auto buttons = m_config.getButtons();
     QVector<CaptureButton*> vectorButtons;
-    /*QVBoxLayout* vlayout = new QVBoxLayout();
-    vlayout->setMargin(0);
-    vlayout->setSpacing(0);*/
 
     QHBoxLayout* rectLayout = new QHBoxLayout();
     rectLayout->setMargin(0);
@@ -303,11 +273,9 @@ void CaptureWidget::updateButtons() {
         b->setColor(m_uiColor);
         makeChild(b);
 
-//        connect(b, &CaptureButton::pressedButton, this, &CaptureWidget::setState);
-//        connect(b->tool(), &CaptureTool::requestAction,
-//                this, &CaptureWidget::handleButtonSignal);
-        connect(b , SIGNAL(pressedButton(CaptureButton*)), this, SLOT(setState(CaptureButton*)));
-        connect(b->tool(), SIGNAL(requestAction(CaptureTool::Request)), this, SLOT(handleButtonSignal(CaptureTool::Request)));
+        connect(b, &CaptureButton::pressedButton, this, &CaptureWidget::setState);
+        connect(b->tool(), &CaptureTool::requestAction,
+                this, &CaptureWidget::handleButtonSignal);
         vectorButtons << b;
     }
 
@@ -434,14 +402,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
 
     if (e->button() == Qt::RightButton) {
         m_rightClick = true;
-        /*if(m_selection->x() + m_selection->width() > m_context.desktop->screenGeometry().width() - 60)
-            m_colorPicker->move( m_selection->x() + m_selection->width() - 10 - m_colorPicker->width(),
-                                 m_selection->y() + m_selection->height()/2 - m_colorPicker->height()/2);
-        else
-            m_colorPicker->move( m_selection->x() + m_selection->width() + 10,
-                                 m_selection->y() + m_selection->height()/2 - m_colorPicker->height()/2);
-        m_colorPicker->show();*/
-
     } else if (e->button() == Qt::LeftButton) {
         m_showInitialMsg = false;
         m_mouseIsClicked = true;
@@ -461,23 +421,12 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
 
             m_activeTool = m_activeButton->tool()->copy(this);
 
-
-//            connect(this, &CaptureWidget::colorChanged,
-//                    m_activeTool, &CaptureTool::colorChanged);
-//            connect(this, &CaptureWidget::thicknessChanged,
-//                    m_activeTool, &CaptureTool::thicknessChanged);
-//            connect(m_activeTool, &CaptureTool::requestAction,
-//                    this, &CaptureWidget::handleButtonSignal);
-
-            connect(this, SIGNAL(colorChanged(const QColor)),
-                    m_activeTool, SLOT(colorChanged(const QColor)));
-
-            connect(this, SIGNAL(thicknessChanged(const int)),
-                    m_activeTool, SLOT(thicknessChanged(const int)));
-
-            connect(m_activeTool, SIGNAL(requestAction(CaptureTool::Request)),
-                    this, SLOT(handleButtonSignal(CaptureTool::Request)));
-
+            connect(this, &CaptureWidget::colorChanged,
+                    m_activeTool, &CaptureTool::colorChanged);
+            connect(this, &CaptureWidget::thicknessChanged,
+                    m_activeTool, &CaptureTool::thicknessChanged);
+            connect(m_activeTool, &CaptureTool::requestAction,
+                    this, &CaptureWidget::handleButtonSignal);
 
             m_activeTool->drawStart(m_context);
             return;
@@ -519,35 +468,23 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
     if(QGuiApplication::keyboardModifiers() == Qt::ALT)
     {
         m_zoomMagnifier->hide();
-        /*for(int i = 0; i < test.length();i++)
-        {
-            qDebug() << test;
-        }
-*/
-        /*m_selection->setVisible(true);
-        m_selection->setGeometry(
-                QRect(m_dragStartPoint, m_context.mousePos).normalized());*/
     }
 
-    //if (m_selection->width() > 0 && m_selection->height >0 && !m_needSaveScreenshot && this->isVisible()) {
     if (m_selection->width() > 0 && m_selection->height() >0 && this->isVisible()) {
         m_selectionHint->updateTips(QPoint(m_selection->x(), m_selection->y()),
                                                      QString("%1X%2").arg(m_selection->width()).arg(m_selection->height()));
         m_zoomMagnifier->hide();
     }
 
-   // if(!m_buttonHandler->isVisible()&&m_isFirstReleaseButton)
     if(!m_buttonHandler->isVisible())
     {
         QPoint curPos = this->cursor().pos();
         QPoint tmpPos;
-        //QRect m_backgroundRect = m_selection->geometry();
         QPoint topLeft = m_backgroundRect.topLeft() * devicePixelRatioF();
 
         //Active windows select mode
         if (activeWindowSelectMode) 
         {
-            // new rect for active window
             int minWith = INT_MAX;
             int minHeight = INT_MAX;
             int windowX = 0;
@@ -564,7 +501,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
                         windowX = win.x();
                         windowY = win.y();
                     }
-                    //new m_selection
                 }
                 m_selection->setVisible(true);
                 m_selection->setGeometry(QRect(windowX, windowY, minWith, minHeight).normalized());
@@ -750,17 +686,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
             }
         }
         update();
-        // Hides the buttons under the mouse. If the mouse leaves, it shows them.
-        if (m_buttonHandler->buttonsAreInside()) {
-            const bool containsMouse = m_buttonHandler->contains(m_context.mousePos);
-            if (containsMouse) {
-                //m_buttonHandler->hide();
-                //m_bar->hide();
-            } else {
-                //m_buttonHandler->show();
-                //m_bar->show();
-            }
-        }
     } else if (m_activeButton && m_activeButton->tool()->showMousePreview()) {
         update();
     } else {
@@ -940,7 +865,6 @@ void CaptureWidget::initContext(const QString &savePath, bool fullscreen) {
 //初始化panel和槽函数
 void CaptureWidget::initPanel() {
     m_panel = new UtilityPanel(this);
-    //b_panel = new ButtonPanel(this);
     makeChild(m_panel);
     QRect panelRect = rect();
     if (m_context.fullscreen) {
@@ -950,14 +874,10 @@ void CaptureWidget::initPanel() {
     panelRect.setWidth(m_colorPicker->width() * 3);
     m_panel->setGeometry(panelRect);
 
-   // b_panel->setGeometry(panelRect);
-
     SidePanelWidget *sidePanel =
             new SidePanelWidget(&m_context.screenshot);
     connect(sidePanel, &SidePanelWidget::colorChanged,
             this, &CaptureWidget::setDrawColor);
-    /*connect(sidePanel, &SidePanelWidget::thicknessChanged,
-            this, &CaptureWidget::setDrawThickness);*/
     connect(this, &CaptureWidget::colorChanged,
             sidePanel, &SidePanelWidget::updateColor);
     connect(this, &CaptureWidget::thicknessChanged,
@@ -1009,10 +929,7 @@ void CaptureWidget::setState(CaptureButton *b) {
                 m_activeButton->setColor(m_uiColor);
             }
             m_activeButton = b;
-            //按钮被点击，设置为天蓝色
-            //m_activeButton->setColor(QColor (87, 250 , 255, 255));
             m_activeButton->setColor(Qt::gray);
-           // qDebug() << b->tool()->name();
 
             if(b->tool()->name() == tr("Option"))
             {
@@ -1255,12 +1172,10 @@ void CaptureWidget::updateCursor() {
 void CaptureWidget::pushToolToStack() {
     auto mod = new ModificationCommand(
                 &m_context.screenshot, m_activeTool);
-//    disconnect(this, &CaptureWidget::colorChanged,
-//               m_activeTool, &CaptureTool::colorChanged);
-//    disconnect(this, &CaptureWidget::thicknessChanged,
-//               m_activeTool, &CaptureTool::thicknessChanged);
-    disconnect(this, SIGNAL(colorChanged(QColor)), m_activeTool, SLOT(colorChanged(QColor)));
-    disconnect(this, SIGNAL(thicknessChanged(int)), m_activeTool, SLOT(thicknessChanged(int)));
+    disconnect(this, &CaptureWidget::colorChanged,
+               m_activeTool, &CaptureTool::colorChanged);
+    disconnect(this, &CaptureWidget::thicknessChanged,
+               m_activeTool, &CaptureTool::thicknessChanged);
     if (m_panel->toolWidget()) {
         disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
     }
@@ -1350,7 +1265,6 @@ void CaptureWidget::setPformat(QString format)
 {
     m_context.picture_format = format;
     m_config.setPFormatValue(format);
-    //qDebug() << m_context.picture_format;
 }
 
 void CaptureWidget::setSaveTip(QString saveTip)
@@ -1358,28 +1272,6 @@ void CaptureWidget::setSaveTip(QString saveTip)
     m_context.savetip = saveTip;
     m_config.setSaveTip(saveTip);
 }
-
-/*
-void CaptureWidget::updateToolBarPos()
-{
-    QPoint toolbarPoint;
-    toolbarPoint = QPoint(m_selection->x() + m_selection->width() - m_toolBar->width(),
-                          std::max(m_selection->y() + m_selection->height() + TOOLBAR_Y_SPACING, 0));
-
-    if (m_toolBar->width() > m_selection->x() + m_selection->width()) {
-        toolbarPoint.setX(m_selection->x() + 8);
-    }
-    if (toolbarPoint.y()>= m_selection->y() + m_selection->height()
-            - m_toolBar->height() - 28) {
-        if (m_selection->y() > 28*2 + 10) {
-            toolbarPoint.setY(m_selection->y() - m_toolBar->height() - TOOLBAR_Y_SPACING);
-            qDebug("111");
-        } else {
-            toolbarPoint.setY(toolbarPoint.y());
-        //}
-    }
-    m_toolBar->showAt(toolbarPoint);
-}*/
 
 
 void CaptureWidget::menuHide()
@@ -1404,9 +1296,6 @@ void CaptureWidget::updateToolBar(QString toolName)
 
 
     m_flag = true;
-    //qDebug() << m_activeButton->mapToGlobal(*p);
-
-    //m_activeButton->getRect();
     m_formtip->show(QPoint(m_activeButton->x() + m_activeButton->width()/2,m_activeButton->y()),isReverse);
 
     m_colorPicker->show(toolName);

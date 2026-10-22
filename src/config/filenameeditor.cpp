@@ -65,27 +65,23 @@ void FileNameEditor::initWidgets() {
     pal.setColor(QPalette::Active, m_outputLabel->backgroundRole(), color);
     m_outputLabel->setPalette(pal);
 
-//    connect(m_nameEditor, &QLineEdit::textChanged, this,
-//            &FileNameEditor::showParsedPattern);
-    connect(m_nameEditor, SIGNAL(textChanged(QString)), this, SLOT(showParsedPattern(QString)));
+    connect(m_nameEditor, &QLineEdit::textChanged, this,
+            &FileNameEditor::showParsedPattern);
     updateComponents();
 
     // helper buttons
     m_helperButtons = new StrftimeChooserWidget(this);
-//    connect(m_helperButtons, &StrftimeChooserWidget::variableEmitted,
-//            this, &FileNameEditor::addToNameEditor);
-    connect(m_helperButtons, SIGNAL(variableEmitted(QString)), this, SLOT(addToNameEditor(QString)));
+    connect(m_helperButtons, &StrftimeChooserWidget::variableEmitted,
+            this, &FileNameEditor::addToNameEditor);
 
     // save
     m_saveButton = new QPushButton(tr("Save"), this);
-//    connect(m_saveButton, &QPushButton::clicked, this, &FileNameEditor::savePattern);
-    connect(m_saveButton, SIGNAL(clicked(bool)), this, SLOT(savePattern()));
+    connect(m_saveButton, &QPushButton::clicked, this, &FileNameEditor::savePattern);
     m_saveButton->setToolTip(tr("Saves the pattern"));
     // reset
     m_resetButton = new QPushButton(tr("Reset"), this);
-//    connect(m_resetButton, &QPushButton::clicked,
-//            this, &FileNameEditor::resetName);
-    connect(m_resetButton, SIGNAL(clicked(bool)), SLOT(resetName()));
+    connect(m_resetButton, &QPushButton::clicked,
+            this, &FileNameEditor::resetName);
     m_resetButton->setToolTip(tr("Restores the saved pattern"));
     // clear
     m_clearButton = new QPushButton(tr("Clear"), this);

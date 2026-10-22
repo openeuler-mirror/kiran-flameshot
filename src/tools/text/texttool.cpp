@@ -75,7 +75,7 @@ QWidget *TextTool::widget() {
 
 QWidget *TextTool::configurationWidget() {
     m_confW = new TextConfig();
-   /* connect(m_confW, &TextConfig::fontFamilyChanged,
+    connect(m_confW, &TextConfig::fontFamilyChanged,
             this, &TextTool::updateFamily);
     connect(m_confW, &TextConfig::fontItalicChanged,
             this, &TextTool::updateFontItalic);
@@ -84,18 +84,7 @@ QWidget *TextTool::configurationWidget() {
     connect(m_confW, &TextConfig::fontUnderlineChanged,
             this, &TextTool::updateFontUnderline);
     connect(m_confW, &TextConfig::fontWeightChanged,
-            this, &TextTool::updateFontWeight);*/
-
-    connect(m_confW, SIGNAL(fontFamilyChanged(const QString)),
-            this, SLOT(updateFamily(const QString)));
-    connect(m_confW, SIGNAL(fontItalicChanged(const bool)),
-            this, SLOT(updateFontItalic(const bool)));
-    connect(m_confW, SIGNAL(fontStrikeOutChanged(const bool)),
-            this, SLOT(updateFontStrikeOut(const bool)));
-    connect(m_confW, SIGNAL(fontUnderlineChanged(const bool)),
-            this, SLOT(updateFontUnderline(const bool)));
-    connect(m_confW, SIGNAL(fontWeightChanged(const QFont::Weight)),
-            this, SLOT(updateFontWeight(const QFont::Weight)));
+            this, &TextTool::updateFontWeight);
 
     m_confW->setItalic(m_font.italic());
     m_confW->setUnderline(m_font.underline());
@@ -106,7 +95,7 @@ QWidget *TextTool::configurationWidget() {
 
 CaptureTool *TextTool::copy(QObject *parent) {
     TextTool *tt = new TextTool(parent);
-    /*connect(m_confW, &TextConfig::fontFamilyChanged,
+    connect(m_confW, &TextConfig::fontFamilyChanged,
             tt, &TextTool::updateFamily);
     connect(m_confW, &TextConfig::fontItalicChanged,
             tt, &TextTool::updateFontItalic);
@@ -115,18 +104,7 @@ CaptureTool *TextTool::copy(QObject *parent) {
     connect(m_confW, &TextConfig::fontUnderlineChanged,
             tt, &TextTool::updateFontUnderline);
     connect(m_confW, &TextConfig::fontWeightChanged,
-            tt, &TextTool::updateFontWeight);*/
-
-    connect(m_confW, SIGNAL(fontFamilyChanged(const QString)),
-              tt, SLOT(updateFamily(const QString)));
-      connect(m_confW, SIGNAL(fontItalicChanged(const bool)),
-              tt, SLOT(updateFontItalic(const bool)));
-      connect(m_confW, SIGNAL(fontStrikeOutChanged(const bool)),
-              tt, SLOT(updateFontStrikeOut(const bool)));
-      connect(m_confW, SIGNAL(fontUnderlineChanged(const bool)),
-              tt, SLOT(updateFontUnderline(const bool)));
-      connect(m_confW, SIGNAL(fontWeightChanged(const QFont::Weight)),
-              tt, SLOT(updateFontWeight(const QFont::Weight)));
+            tt, &TextTool::updateFontWeight);
 
     tt->m_font = m_font;
     return tt;

@@ -35,7 +35,7 @@ bool SaveOption::isSelectable() const{
 
 QIcon SaveOption::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    //return QIcon(iconPath(background) + "content-save.svg");
+    Q_UNUSED(background);
     return QIcon();
 }
 QString SaveOption::name() const {

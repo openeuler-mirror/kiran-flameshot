@@ -95,7 +95,6 @@ void CaptureButton::initMenu() {
 
 void CaptureButton::updateIcon() {
     setIcon(icon());
-    //setIconSize(size()*0.6);
 }
 
 QVector<CaptureButton::ButtonType> CaptureButton::getIterableButtonTypes() {
@@ -171,8 +170,6 @@ CaptureTool *CaptureButton::tool() const {
 }
 
 void CaptureButton::setColor(const QColor &c) {
-  //  m_mainColor = Qt::white;
-    //m_mainColor = Qt::white;
     m_mainColor = c;
     setStyleSheet(styleSheet());
     updateIcon();

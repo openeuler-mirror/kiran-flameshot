@@ -74,11 +74,6 @@ private:
     QWidget* m_colorLabel;
     QWidget* m_thicknessLabel;
 
-    //QLabel* m_rectLabel;
-//    QWidget* m_arrowLabel;
-//    QWidget* m_lineLabel;
-   //QWidget* m_textLabel;
-    //QLabel* m_colorLabel;
     QWidget* m_saveLabel;
 
     QWidget *lastWidget;
