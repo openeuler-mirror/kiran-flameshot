@@ -22,9 +22,7 @@
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 #include "src/tools/toolbutton.h"
-#include "src/tools/colorbutton.h"
 #include "src/tools/rectbutton.h"
-#include "src/tools/linebutton.h"
 #include "src/widgets/capture/toowidget.h"
 #include "src/widgets/capture/thicknesswidget.h"
 
@@ -97,7 +95,6 @@ ColorPicker::ColorPicker(int thickness,QColor m_color, QWidget *parent) : QWidge
     rectLayout->setMargin(0);
     rectLayout->setSpacing(8);
     rectLayout->addWidget(textButton);
-    //rectLayout->addWidget(m_textLabel);
 
     rectLayout->addSpacing(8);
     thicknessWidget->setLayout(rectLayout);
@@ -119,7 +116,6 @@ void ColorPicker::updateThickness_tool(int thickness)
 {
     m_thickness = thickness;
     emit thicknessSelected(m_thickness);
-//    emit thicknessCh_font(m_thickness);
     thicknessCh_font(m_thickness);
 }
 

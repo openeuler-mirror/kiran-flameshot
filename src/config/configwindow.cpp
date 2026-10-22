@@ -53,10 +53,8 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     };
     m_configWatcher = new QFileSystemWatcher(this);
     m_configWatcher->addPath(ConfigHandler().configFilePath());
-//    connect(m_configWatcher, &QFileSystemWatcher::fileChanged,
-//            this, changedSlot);
-
-    connect(m_configWatcher, SIGNAL(fileChanged(QString)), this, SLOT(changedSlot));
+    connect(m_configWatcher, &QFileSystemWatcher::fileChanged,
+            this, changedSlot);
 
     QColor background = this->palette().background().color();
     bool isDark = ColorUtils::colorIsDark(background);
@@ -78,9 +76,12 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
            tr("General"));
 
     // connect update sigslots
-    connect(this, SIGNAL(updateChildren()), m_filenameEditor, SLOT(updateComponents()));
-    connect(this, SIGNAL(updateChildren()), m_visuals, SLOT(updateComponents()));
-    connect(this, SIGNAL(updateChildren()), m_generalConfig, SLOT(updateComponents()));
+    connect(this, &ConfigWindow::updateChildren,
+            m_filenameEditor, &FileNameEditor::updateComponents);
+    connect(this, &ConfigWindow::updateChildren,
+            m_visuals, &VisualsEditor::updateComponents);
+    connect(this, &ConfigWindow::updateChildren,
+            m_generalConfig, &GeneneralConf::updateComponents);
 
     auto palette = Kiran::Theme::Palette::getDefault();
     connect(palette, &Kiran::Theme::Palette::baseColorsChanged, this, &ConfigWindow::handleThemeChanged);

@@ -28,9 +28,8 @@ ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
     setFlow(QListWidget::TopToBottom);
     initButtonList();
     updateComponents();
-//    connect(this, &QListWidget::itemClicked, this,
-//            &ButtonListView::reverseItemCheck);
-    connect(this, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(reverseItemCheck(QListWidgetItem*)));
+    connect(this, &QListWidget::itemClicked, this,
+            &ButtonListView::reverseItemCheck);
 }
 
 //初始化按键列表

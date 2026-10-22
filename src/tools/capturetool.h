@@ -95,7 +95,6 @@ public:
 
 
     virtual QMenu* initMenu() = 0;
-    //virtual QStringList getoption() const = 0;
 
     // if the type is TYPE_WIDGET the widget is loaded in the main widget.
     // If the type is TYPE_EXTERNAL_WIDGET it is created outside as an

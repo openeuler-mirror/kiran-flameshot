@@ -230,6 +230,4 @@ private:
     QPainterPath path;
 
     FormTip *m_formtip;
-
-   // Kwindowmanager *test;
 };

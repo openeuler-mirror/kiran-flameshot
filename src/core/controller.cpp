@@ -20,7 +20,6 @@
 #include "src/utils/confighandler.h"
 #include "src/widgets/infowindow.h"
 #include "src/config/configwindow.h"
-#include "src/widgets/capture/capturebutton.h"
 #include "src/widgets/capturelauncher.h"
 #include "src/utils/systemnotification.h"
 #include "src/utils/screengrabber.h"
@@ -43,9 +42,6 @@ Controller::Controller() : m_captureWindow(nullptr) {
     if (!ConfigHandler().disabledTrayIconValue()) {
         enableTrayIcon();
     }
-
-    QString StyleSheet = CaptureButton::globalStyleSheet();
-//    qApp->setStyleSheet(StyleSheet);
 
     connect(qApp,&QApplication::paletteChanged,[this](const QPalette &pal){
         KLOG_DEBUG() << "QApplication::paletteChanged";
@@ -117,16 +113,12 @@ void Controller::startVisualCapture(const uint id, const QString &forcedSavePath
 
         bool includeCursor = resolveIncludeCursor(id);
         m_captureWindow = new CaptureWidget(id, forcedSavePath, true, includeCursor);
-        //m_captureWindow = new CaptureWidget(id, forcedSavePath, false); // debug
-//        connect(m_captureWindow, &CaptureWidget::captureFailed,
-//                this, &Controller::captureFailed);
-//        connect(m_captureWindow, &CaptureWidget::captureTaken,
-//                this, &Controller::captureTaken);
-        connect(m_captureWindow, SIGNAL(captureFailed(uint)), this, SLOT(handleCaptureFailed(uint)));
-        connect(m_captureWindow, SIGNAL(captureTaken(uint, QPixmap)), this, SLOT(handleCaptureTaken(uint,QPixmap)));
+        connect(m_captureWindow, &CaptureWidget::captureFailed,
+                this, &Controller::handleCaptureFailed);
+        connect(m_captureWindow, &CaptureWidget::captureTaken,
+                this, &Controller::handleCaptureTaken);
 
         m_captureWindow->showFullScreen();
-        //m_captureWindow->show(); // Debug
     } else {
         emit captureFailed(id);
     }
@@ -189,11 +181,6 @@ void Controller::openInfoWindow() {
 }
 
 void Controller::openLauncherWindow() {
-//    CaptureLauncher *w = new CaptureLauncher();
-//    KLOG_DEBUG()<<"w->styleSheet():" << w->styleSheet();
-//    KLOG_DEBUG()<<"w->style():" << w->style();
-//    w->show();
-
     m_captureLauncher = new CaptureLauncher();
     m_captureLauncher->show();
 }
@@ -250,8 +237,8 @@ void Controller::enableTrayIcon() {
     QIcon trayicon = QIcon(":img/app/kiran128x128.png");
     m_trayIcon->setIcon(trayicon);
 
-    connect(m_trayIcon,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
-    //connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
+    connect(m_trayIcon, &QSystemTrayIcon::activated,
+            this, &Controller::trayIconActivated);
     m_trayIcon->show();
 }
 
